@@ -12,7 +12,8 @@ def merge_sort(sequence: list, tmp: list = None, left_bound=None, right_bound=No
     merge_sort(tmp, sequence, left_bound, mid)
     merge_sort(tmp, sequence, mid, right_bound)
 
-    sequence, tmp = tmp, sequence
+    sequence, tmp = tmp, sequence  # What the heck?
+
     merge(sequence, tmp, left_bound, mid, right_bound)
 
 
