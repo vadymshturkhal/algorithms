@@ -1,5 +1,8 @@
 def binary_search(sequence: list) -> tuple:
-    return -1, 1
+    left_bound = 0
+    right_bound = len(sequence) - 1
+
+    return left_bound, right_bound
 
 
 if __name__ == '__main__':
