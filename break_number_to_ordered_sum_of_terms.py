@@ -1,4 +1,3 @@
-# FIXME use dynamic programming
 def break_number_to_ordered_sum_of_terms(number: int, terms=None, memoize=None):
     """
         Assume number >= 0.
