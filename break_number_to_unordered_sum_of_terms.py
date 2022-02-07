@@ -30,10 +30,26 @@ def break_number_to_unordered_sum_of_terms(number: int, terms=None):
 
 
 if __name__ == '__main__':
+    # For N = 3:
+    # (1, 1, 1)
+    # (1, 2)
+    # (3)
     N = 3
     quantity = break_number_to_unordered_sum_of_terms(N)
     print(quantity)
 
+    # For N = 6:
+    # (1, 1, 1, 1, 1, 1)
+    # (1, 1, 1, 1, 2)
+    # (1, 1, 1, 3)
+    # (1, 1, 4)
+    # (1, 5)
+    # (2, 2, 1, 1)
+    # (2, 2, 2)
+    # (2, 3, 1)
+    # (3, 3)
+    # (4, 2)
+    # (6)
     N = 6
     quantity = break_number_to_unordered_sum_of_terms(N)
     print(quantity)
