@@ -1,4 +1,4 @@
-def break_number_to_unordered_sum_of_terms(number: int, terms=None):
+def break_number_to_unordered_sum_of_terms(number: int, terms=None, memoize=None):
     """
         Assume number >= 0.
         Default terms from 1 to number.
@@ -21,12 +21,18 @@ def break_number_to_unordered_sum_of_terms(number: int, terms=None):
     if terms is None:
         terms = [_ for _ in range(1, number + 1)]
 
+    if memoize is None:
+        memoize = {}
+
     if len(terms) <= 0:
         return 0
 
+    if memoize.get(number) is not None:
+        return memoize.get(number)
+
     f = break_number_to_unordered_sum_of_terms
 
-    return f(number - terms[0], terms) + f(number, terms[1:])
+    return f(number - terms[0], terms, memoize) + f(number, terms[1:], memoize)
 
 
 if __name__ == '__main__':
@@ -53,3 +59,4 @@ if __name__ == '__main__':
     N = 6
     quantity = break_number_to_unordered_sum_of_terms(N)
     print(quantity)
+
