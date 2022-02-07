@@ -1,7 +1,7 @@
 def break_number_to_ordered_sum_of_terms(number: int, terms=None, memoize=None):
     """
         Assume number >= 0.
-        Default terms from 1 to number - 1.
+        Default terms from 1 to number.
         Returns quantity of ordered sum of terms from "terms".
     """
     if number == 0:
