@@ -1,4 +1,4 @@
-def break_number_to_unordered_sum_of_pairs(number: int, terms=None):
+def break_number_to_unordered_sum_of_terms(number: int, terms=None):
     """
         Assume number >= 0.
         Default terms from 1 to number.
@@ -13,14 +13,18 @@ def break_number_to_unordered_sum_of_pairs(number: int, terms=None):
             F(n: [n1, n2,...,nk]) ~ 1 / (4*n*sqrt(3)) * e**(pi*sqrt(2/3)*sqrt(n - 1/24)
     """
 
+    if number == 0:
+        return 1
+    if number < 0:
+        return 0
+
     if terms is None:
         terms = [_ for _ in range(1, number + 1)]
-
 
     return 0
 
 
 if __name__ == '__main__':
     N = 3
-    quantity = break_number_to_unordered_sum_of_pairs(N)
+    quantity = break_number_to_unordered_sum_of_terms(N)
     print(quantity)
