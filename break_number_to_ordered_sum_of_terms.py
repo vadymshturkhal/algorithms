@@ -10,7 +10,7 @@ def break_number_to_ordered_sum_of_terms(number: int, terms=None, memoize=None):
         return 0
 
     if terms is None:
-        terms = [_ for _ in range(1, number)]
+        terms = [_ for _ in range(1, number + 1)]
 
     if memoize is None:
         memoize = {}
@@ -34,6 +34,6 @@ if __name__ == '__main__':
     quantity = break_number_to_ordered_sum_of_terms(N)
     print(quantity)
 
-    N = 100
+    N = 5
     quantity = break_number_to_ordered_sum_of_terms(N)
     print(quantity)
