@@ -4,7 +4,9 @@ def break_number_to_unordered_sum_of_pairs(number: int, terms=None):
         Default terms from 1 to number.
         Returns quantity of unordered sum of terms from "terms".
         Theorem:
-            F(n: [n1, n2,...,nk]) = F(n - n1: [n1, n2,...,nk]) + F(n: [n2,...,nk])
+            F(n: [n1, n2,...,nk]) = F(n - n1: [n1, n2,...,nk]) + F(n: [n2,...,nk])/
+            F(0: [n1, n2,...,nk]) = 1.
+            F(-n: [n1, n2,...,nk]) = 0.
         Theorem:
             F(n: [n1, n2,...,nk]) = ?. Theorem doesn't exist.
         Theorem Hardy–Ramanujan:
@@ -13,6 +15,7 @@ def break_number_to_unordered_sum_of_pairs(number: int, terms=None):
 
     if terms is None:
         terms = [_ for _ in range(1, number + 1)]
+
 
     return 0
 
