@@ -3,6 +3,13 @@ def break_number_to_ordered_sum_of_terms(number: int, terms=None, memoize=None):
         Assume number >= 0.
         Default terms from 1 to number.
         Returns quantity of ordered sum of terms from "terms".
+        Theorem:
+            F(n: [n1, n2,...,nk]) = F(n - n1: [n1, n2,...,nk])
+            + F(n - n2: [n1, n2,...,nk])
+            + ...
+            + F(n - nk: [n1, n2,...,nk]).
+            F(0: [n1, n2,...,nk]) = 1.
+            F(-n: [n1, n2,...,nk]) = 0
     """
     if number == 0:
         return 1
