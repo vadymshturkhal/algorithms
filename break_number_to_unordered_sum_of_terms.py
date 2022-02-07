@@ -27,12 +27,15 @@ def break_number_to_unordered_sum_of_terms(number: int, terms=None, memoize=None
     if len(terms) <= 0:
         return 0
 
-    if memoize.get(number) is not None:
-        return memoize.get(number)
+    hash_terms = str(terms) + str(number)
+    if memoize.get(hash_terms) is not None:
+        return memoize.get(hash_terms)
 
     f = break_number_to_unordered_sum_of_terms
 
-    return f(number - terms[0], terms, memoize) + f(number, terms[1:], memoize)
+    unordered_sum_for_current_num_and_terms = f(number - terms[0], terms, memoize) + f(number, terms[1:], memoize)
+    memoize[hash_terms] = unordered_sum_for_current_num_and_terms
+    return unordered_sum_for_current_num_and_terms
 
 
 if __name__ == '__main__':
@@ -60,3 +63,6 @@ if __name__ == '__main__':
     quantity = break_number_to_unordered_sum_of_terms(N)
     print(quantity)
 
+    N = 100
+    quantity = break_number_to_unordered_sum_of_terms(N)
+    print(quantity)
