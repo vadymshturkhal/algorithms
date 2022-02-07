@@ -10,6 +10,8 @@ def break_number_to_ordered_sum_of_terms(number: int, terms=None, memoize=None):
             + F(n - nk: [n1, n2,...,nk]).
             F(0: [n1, n2,...,nk]) = 1.
             F(-n: [n1, n2,...,nk]) = 0
+        Theorem:
+            F(n: [n1, n2,...,nk]) = 2**(n - 1)
     """
     if number == 0:
         return 1
