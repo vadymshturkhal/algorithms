@@ -21,10 +21,19 @@ def break_number_to_unordered_sum_of_terms(number: int, terms=None):
     if terms is None:
         terms = [_ for _ in range(1, number + 1)]
 
-    return 0
+    if len(terms) <= 0:
+        return 0
+
+    f = break_number_to_unordered_sum_of_terms
+
+    return f(number - terms[0], terms) + f(number, terms[1:])
 
 
 if __name__ == '__main__':
     N = 3
+    quantity = break_number_to_unordered_sum_of_terms(N)
+    print(quantity)
+
+    N = 6
     quantity = break_number_to_unordered_sum_of_terms(N)
     print(quantity)
