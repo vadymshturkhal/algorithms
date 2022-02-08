@@ -12,9 +12,9 @@ def quick_sort(sequence: list, low: int = None, high: int = None):
     if high <= low:
         return
 
-    j = partition(sequence, low, high)
-    quick_sort(sequence, low, j - 1)
-    quick_sort(sequence, j + 1, high)
+    correct_position_index = partition(sequence, low, high)
+    quick_sort(sequence, low, correct_position_index - 1)
+    quick_sort(sequence, correct_position_index + 1, high)
 
 
 def partition(sequence: list, low: int, high: int):
