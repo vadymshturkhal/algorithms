@@ -1,9 +1,20 @@
 import random
 
 
-def quick_sort(sequence: list):
-    # Shuffle needed for performance guarantee
-    random.shuffle(sequence)
+def quick_sort(sequence: list, low: int = None, high: int = None):
+    if low is None and high is None:
+        low = 0
+        high = len(sequence) - 1
+
+        # Shuffle needed for performance guarantee
+        random.shuffle(sequence)
+
+    if high <= low:
+        return
+
+    j = partition(sequence, low, high)
+    quick_sort(sequence, low, j - 1)
+    quick_sort(sequence, j + 1, high)
 
 
 def partition(sequence: list, low: int, high: int):
@@ -30,6 +41,6 @@ def partition(sequence: list, low: int, high: int):
 
 
 if __name__ == '__main__':
-    a = [_ for _ in range(10, -1, -1)]
-    partition(a, 0, len(a) - 1)
+    a = [_ for _ in range(20, -1, -1)]
+    quick_sort(a, 0, len(a) - 1)
     print(a)
