@@ -18,4 +18,3 @@ for name, sort in SORTS.items():
     start_time = time.time()
     sort(array_to_sort)
     print(name, time.time() - start_time)
-    print()
