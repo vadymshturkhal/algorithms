@@ -4,27 +4,18 @@ from merge_sort_insertion import merge_sort_insertion
 from quick_sort import quick_sort
 from quick_sort_insertion import quick_sort_insertion
 
-N = 900
+ARRAY_LENGTH = 900
 
-a = [_ for _ in range(N, -1, -1)]
-x = time.time()
-merge_sort(a)
-print("merge_sort", time.time() - x)
-print()
+SORTS = {
+    'merge_sort          ': merge_sort,
+    'merge_sort_insertion': merge_sort_insertion,
+    'quick_sort          ': quick_sort,
+    'quick_sort_insertion': quick_sort_insertion,
+}
 
-a = [_ for _ in range(N, -1, -1)]
-x = time.time()
-merge_sort_insertion(a)
-print("merge_sort_insertion", time.time() - x)
-print()
-
-a = [_ for _ in range(N, -1, -1)]
-x = time.time()
-quick_sort(a)
-print("quick_sort", time.time() - x)
-print()
-
-a = [_ for _ in range(N, -1, -1)]
-x = time.time()
-quick_sort_insertion(a)
-print("quick_sort_insertion", time.time() - x)
+for name, sort in SORTS.items():
+    array_to_sort = [_ for _ in range(ARRAY_LENGTH, -1, -1)]
+    start_time = time.time()
+    sort(array_to_sort)
+    print(name, time.time() - start_time)
+    print()
