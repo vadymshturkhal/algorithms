@@ -7,6 +7,7 @@ from quick_sort_insertion import quick_sort_insertion
 ARRAY_LENGTH = 900
 
 SORTS = {
+    'Timsort             ': list.sort,
     'merge_sort          ': merge_sort,
     'merge_sort_insertion': merge_sort_insertion,
     'quick_sort          ': quick_sort,
