@@ -1,6 +1,6 @@
 # Use insertion sort for small arrays.
-# ・ Mergesort has too much overhead for tiny arrays.
-# ・ Cutoff to insertion sort for ≈ 7 item
+# Mergesort has too much overhead for tiny arrays.
+# Cutoff to insertion sort for ≈ 7 item
 
 CUTOFF = 5
 
