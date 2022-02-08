@@ -1,5 +1,9 @@
+import random
+
+
 def quick_sort(sequence: list):
-    pass
+    # Shuffle needed for performance guarantee
+    random.shuffle(sequence)
 
 
 def partition(sequence: list, low: int, high: int):
@@ -22,6 +26,7 @@ def partition(sequence: list, low: int, high: int):
         sequence[i], sequence[j] = sequence[j], sequence[i]
 
     sequence[low], sequence[j] = sequence[j], sequence[low]
+    return j
 
 
 if __name__ == '__main__':
