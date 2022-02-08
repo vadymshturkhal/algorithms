@@ -28,9 +28,6 @@ def merge_sort_insertion(sequence: list, tmp: list = None, left_bound=None, righ
         insertion_sort(sequence, left_bound, right_bound)
         return
 
-    if left_bound + CUTOFF <= right_bound:
-        insertion_sort(sequence)
-
     mid = (left_bound + right_bound) // 2
 
     merge_sort_insertion(tmp, sequence, left_bound, mid)
