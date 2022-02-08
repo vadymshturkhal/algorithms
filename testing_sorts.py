@@ -3,6 +3,7 @@ from merge_sort import merge_sort
 from merge_sort_insertion import merge_sort_insertion
 from quick_sort import quick_sort
 from quick_sort_insertion import quick_sort_insertion
+from insertion_sort import insertion_sort
 
 ARRAY_LENGTH = 900
 
@@ -12,6 +13,7 @@ SORTS = {
     'merge_sort_insertion': merge_sort_insertion,
     'quick_sort          ': quick_sort,
     'quick_sort_insertion': quick_sort_insertion,
+    'insertion_sort      ': insertion_sort,
 }
 
 for name, sort in SORTS.items():

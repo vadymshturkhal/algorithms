@@ -22,6 +22,7 @@ def partition(sequence: list, low: int, high: int):
     j = high
 
     while True:
+        print(1)
         while sequence[i] < sequence[low]:
             i += 1
             if i == high:
