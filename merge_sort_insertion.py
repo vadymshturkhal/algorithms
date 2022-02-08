@@ -18,7 +18,7 @@ def insertion_sort(sequence: list, left_bound=None, right_bound=None):
                 break
 
 
-def merge_sort(sequence: list, tmp: list = None, left_bound=None, right_bound=None):
+def merge_sort_insertion(sequence: list, tmp: list = None, left_bound=None, right_bound=None):
     if tmp is None:
         tmp = [sequence[i] for i in range(len(sequence))]
         left_bound = 0
@@ -33,8 +33,8 @@ def merge_sort(sequence: list, tmp: list = None, left_bound=None, right_bound=No
 
     mid = (left_bound + right_bound) // 2
 
-    merge_sort(tmp, sequence, left_bound, mid)
-    merge_sort(tmp, sequence, mid, right_bound)
+    merge_sort_insertion(tmp, sequence, left_bound, mid)
+    merge_sort_insertion(tmp, sequence, mid, right_bound)
 
     sequence, tmp = tmp, sequence
     merge(sequence, tmp, left_bound, mid, right_bound)
@@ -61,5 +61,5 @@ def merge(sequence: list, tmp: list, left_bound, mid, right_bound):
 
 if __name__ == '__main__':
     a = [i for i in range(100, 0, -1)]
-    merge_sort(a)
+    merge_sort_insertion(a)
     print(a)
