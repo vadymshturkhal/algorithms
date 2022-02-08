@@ -42,5 +42,5 @@ def partition(sequence: list, low: int, high: int):
 
 if __name__ == '__main__':
     a = [_ for _ in range(20, -1, -1)]
-    quick_sort(a, 0, len(a) - 1)
+    quick_sort(a)
     print(a)
