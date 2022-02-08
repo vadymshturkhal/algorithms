@@ -1,19 +1,7 @@
 import random
+from insertion_sort import insertion_sort
 
 CUTOFF = 5
-
-
-def insertion_sort(sequence: list, left_bound=None, right_bound=None):
-    if left_bound is None:
-        left_bound = 0
-        right_bound = len(sequence)
-
-    for i in range(left_bound, right_bound):
-        for j in range(i, 0, -1):
-            if sequence[j - 1] > sequence[j]:
-                sequence[j], sequence[j - 1] = sequence[j - 1], sequence[j]
-            else:
-                break
 
 
 def quick_sort_insertion(sequence: list, low: int = None, high: int = None):
