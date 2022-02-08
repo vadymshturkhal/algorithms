@@ -25,7 +25,6 @@ def merge_sort(sequence: list, tmp: list = None, left_bound=None, right_bound=No
         right_bound = len(sequence)
 
     if left_bound + CUTOFF - 1 >= right_bound:
-        print(right_bound - left_bound)
         insertion_sort(sequence, left_bound, right_bound)
         return
 
