@@ -2,7 +2,7 @@
 # ・ Mergesort has too much overhead for tiny arrays.
 # ・ Cutoff to insertion sort for ≈ 7 item
 
-CUTOFF = 7
+CUTOFF = 5
 
 
 def insertion_sort(sequence: list, left_bound=None, right_bound=None):
@@ -10,8 +10,8 @@ def insertion_sort(sequence: list, left_bound=None, right_bound=None):
         left_bound = 0
         right_bound = len(sequence)
 
-    for i in range(left_bound, right_bound):
-        for j in range(i, 0, -1):
+    for i in range(left_bound + 1, right_bound):
+        for j in range(i, left_bound, -1):
             if sequence[j - 1] > sequence[j]:
                 sequence[j], sequence[j - 1] = sequence[j - 1], sequence[j]
             else:
@@ -24,9 +24,12 @@ def merge_sort_insertion(sequence: list, tmp: list = None, left_bound=None, righ
         left_bound = 0
         right_bound = len(sequence)
 
-    if left_bound + CUTOFF - 1 >= right_bound:
+    if left_bound + CUTOFF >= right_bound:
         insertion_sort(sequence, left_bound, right_bound)
         return
+
+    # if left_bound + 1 == right_bound:
+    #     return
 
     mid = (left_bound + right_bound) // 2
 
@@ -57,6 +60,10 @@ def merge(sequence: list, tmp: list, left_bound, mid, right_bound):
 
 
 if __name__ == '__main__':
-    a = [i for i in range(100, 0, -1)]
+    a = [i for i in range(10, 0, -1)]
     merge_sort_insertion(a)
     print(a)
+
+    # a = [i for i in range(10, 0, -1)]
+    # insertion_sort(a)
+    # print(a)
