@@ -22,7 +22,7 @@ def quick_sort_insertion(sequence: list, low: int = None, high: int = None):
 
 
 def partition(sequence: list, low: int, high: int):
-    i = low
+    i = low + 1
     j = high
 
     while True:
