@@ -13,7 +13,7 @@ SORTS = {
     'merge_sort_insertion': merge_sort_insertion,
     'quick_sort          ': quick_sort,
     'quick_sort_insertion': quick_sort_insertion,
-    'insertion_sort      ': insertion_sort,
+    # 'insertion_sort      ': insertion_sort,
 }
 
 for name, sort in SORTS.items():

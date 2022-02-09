@@ -12,9 +12,9 @@ def quick_sort(sequence: list, low: int = None, high: int = None):
     if high <= low:
         return
 
-    correct_position_index = partition(sequence, low, high)
-    quick_sort(sequence, low, correct_position_index - 1)
-    quick_sort(sequence, correct_position_index + 1, high)
+    left_bound, right_bound = dijkstra_three_way_partitioning(sequence, low, high)
+    quick_sort(sequence, low, left_bound - 1)
+    quick_sort(sequence, right_bound + 1, high)
 
 
 def partition(sequence: list, low: int, high: int):
@@ -41,7 +41,23 @@ def partition(sequence: list, low: int, high: int):
 
 
 def dijkstra_three_way_partitioning(sequence: list, low: int, high: int):
-    pass
+    i = low
+
+    left_bound = low
+    right_bound = high
+
+    while i <= right_bound:
+        if sequence[i] < sequence[left_bound]:
+            sequence[i], sequence[left_bound] = sequence[left_bound], sequence[i]
+            i += 1
+            left_bound += 1
+        elif sequence[i] > sequence[left_bound]:
+            sequence[i], sequence[right_bound] = sequence[right_bound], sequence[i]
+            right_bound -= 1
+        else:
+            i += 1
+
+    return left_bound, right_bound
 
 
 if __name__ == '__main__':
@@ -49,6 +65,6 @@ if __name__ == '__main__':
     quick_sort(a)
     print(a)
 
-    # a = [5, 5, 5, 5, 8, 99, 77, 106, 8, 8, 33, 143, 33]
-    # quick_sort(a)
-    # print(a)
+    a = [5, 5, 5, 5, 8, 99, 77, 106, 8, 8, 33, 143, 33]
+    quick_sort(a)
+    print(a)
