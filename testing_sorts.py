@@ -5,7 +5,7 @@ from quick_sort import quick_sort
 from quick_sort_insertion import quick_sort_insertion
 from insertion_sort import insertion_sort
 
-ARRAY_LENGTH = 900
+ARRAY_LENGTH = 5000
 
 SORTS = {
     'Timsort             ': list.sort,
@@ -16,9 +16,8 @@ SORTS = {
     'insertion_sort      ': insertion_sort,
 }
 
-for i in range(100):
-    for name, sort in SORTS.items():
-        array_to_sort = [_ for _ in range(ARRAY_LENGTH, 0, -1)]
-        start_time = time.time()
-        sort(array_to_sort)
-        print(name, time.time() - start_time)
+for name, sort in SORTS.items():
+    array_to_sort = [_ for _ in range(ARRAY_LENGTH, 0, -1)]
+    start_time = time.time()
+    sort(array_to_sort)
+    print(name, time.time() - start_time)
