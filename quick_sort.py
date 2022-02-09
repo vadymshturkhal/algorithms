@@ -24,12 +24,12 @@ def partition(sequence: list, low: int, high: int):
     while True:
         while sequence[i] < sequence[low]:
             i += 1
-            if i == high:
+            if i >= high:
                 break
 
         while sequence[low] < sequence[j]:
             j -= 1
-            if j == low:
+            if j <= low:
                 break
 
         if i >= j:

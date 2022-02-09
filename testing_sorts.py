@@ -16,8 +16,9 @@ SORTS = {
     'insertion_sort      ': insertion_sort,
 }
 
-for name, sort in SORTS.items():
-    array_to_sort = [_ for _ in range(ARRAY_LENGTH, 0, -1)]
-    start_time = time.time()
-    sort(array_to_sort)
-    print(name, time.time() - start_time)
+for i in range(100):
+    for name, sort in SORTS.items():
+        array_to_sort = [_ for _ in range(ARRAY_LENGTH, 0, -1)]
+        start_time = time.time()
+        sort(array_to_sort)
+        print(name, time.time() - start_time)
