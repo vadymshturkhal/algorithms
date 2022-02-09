@@ -17,7 +17,7 @@ SORTS = {
 }
 
 for name, sort in SORTS.items():
-    array_to_sort = [_ for _ in range(ARRAY_LENGTH, 0, -1)]
+    array_to_sort = [_ for _ in range(ARRAY_LENGTH, 0, -1)] + [1] * ARRAY_LENGTH + [0] * ARRAY_LENGTH
     start_time = time.time()
     sort(array_to_sort)
     print(name, time.time() - start_time)
