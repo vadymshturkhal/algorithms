@@ -40,6 +40,10 @@ def partition(sequence: list, low: int, high: int):
     return j
 
 
+def dijkstra_three_way_partitioning(sequence: list, low: int, high: int):
+    pass
+
+
 if __name__ == '__main__':
     a = [_ for _ in range(20, -1, -1)]
     quick_sort(a)
