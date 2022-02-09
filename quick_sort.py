@@ -17,29 +17,6 @@ def quick_sort(sequence: list, low: int = None, high: int = None):
     quick_sort(sequence, right_bound + 1, high)
 
 
-def partition(sequence: list, low: int, high: int):
-    i = low + 1
-    j = high
-
-    while True:
-        while sequence[i] < sequence[low]:
-            i += 1
-            if i >= high:
-                break
-
-        while sequence[low] < sequence[j]:
-            j -= 1
-            if j <= low:
-                break
-
-        if i >= j:
-            break
-        sequence[i], sequence[j] = sequence[j], sequence[i]
-
-    sequence[low], sequence[j] = sequence[j], sequence[low]
-    return j
-
-
 def dijkstra_three_way_partitioning(sequence: list, low: int, high: int):
     i = low
 
