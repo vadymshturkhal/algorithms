@@ -22,7 +22,6 @@ def partition(sequence: list, low: int, high: int):
     j = high
 
     while True:
-        print(1)
         while sequence[i] < sequence[low]:
             i += 1
             if i == high:
@@ -45,3 +44,7 @@ if __name__ == '__main__':
     a = [_ for _ in range(20, -1, -1)]
     quick_sort(a)
     print(a)
+
+    # a = [5, 5, 5, 5, 8, 99, 77, 106, 8, 8, 33, 143, 33]
+    # quick_sort(a)
+    # print(a)
