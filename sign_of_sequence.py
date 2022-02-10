@@ -1,4 +1,5 @@
 from count_inversions import count_inversions_quadratic
+import time
 
 
 def sign_of_sequence_quadratic(sequence: list) -> int:
@@ -26,13 +27,21 @@ def sign_of_sequence_fast(sequence: list) -> int:
 
 
 def is_even_permutation(sequence: list) -> bool:
-    return True if sign_of_sequence_quadratic(sequence) == 1 else False
+    return True if sign_of_sequence_fast(sequence) == 1 else False
 
 
 if __name__ == '__main__':
-    a = [7, 5, 1, 4, 2, 3, 6, 0]
-    print(sign_of_sequence_quadratic(a))
-    print(is_even_permutation(a))
+    SEQUENCE_LENGTH = 1111
+    a = [_ for _ in range(SEQUENCE_LENGTH - 1, -1, -1)]
 
-    a = [7, 5, 1, 4, 2, 3, 6, 0]
-    print(sign_of_sequence_fast(a))
+    time_begin = time.time()
+    s = sign_of_sequence_quadratic(a)
+    time_end = time.time() - time_begin
+    print('sign_of_sequence_quadratic time: ', round(time_end, 8), 'sign = ', s)
+
+    time_begin = time.time()
+    s = sign_of_sequence_fast(a)
+    time_end = time.time() - time_begin
+    print('sign_of_sequence_fast time     : ', round(time_end, 8), 'sign = ', s)
+
+    print(f'{is_even_permutation(a)=}')
