@@ -4,7 +4,6 @@ def sign_of_sequence(sequence: list) -> int:
 
 
 def is_even_permutation(sequence: list) -> bool:
-    """Max inversions quantity equals to n*(n - 1)/2."""
     pass
 
 
