@@ -17,8 +17,12 @@ def reverse(sequence: list, length_to_reverse: int = None) -> None:
     if length_to_reverse is None:
         length_to_reverse = len(sequence)
 
-    for i in range(length_to_reverse // 2):
-        sequence[i], sequence[length_to_reverse - i - 1] = sequence[length_to_reverse - i - 1], sequence[i]
+    i = 0
+    j = length_to_reverse
+    while i < j:
+        sequence[i], sequence[j - 1] = sequence[j - 1], sequence[i]
+        i += 1
+        j -= 1
 
 
 if __name__ == '__main__':
