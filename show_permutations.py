@@ -23,6 +23,4 @@ def reverse(sequence: list, length_to_reverse: int = None) -> None:
 
 if __name__ == '__main__':
     a = [_ for _ in range(9)]
-
-    show_permutations()
-
+    show_permutations_anti_lexicographic()
