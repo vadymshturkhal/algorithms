@@ -1,6 +1,11 @@
-def show_permutations_anti_lexicographic(sequence=None, length=3) -> None:
+def show_permutations_anti_lexicographic(sequence=None, length=None) -> None:
     if sequence is None:
+        if length is None:
+            length = 3
         sequence = [i + 1 for i in range(length)]
+
+    if length is None:
+        length = len(sequence)
 
     if length == 0:
         print(sequence)
@@ -26,5 +31,4 @@ def reverse(sequence: list, length_to_reverse: int = None) -> None:
 
 
 if __name__ == '__main__':
-    a = [_ for _ in range(9)]
-    show_permutations_anti_lexicographic()
+    show_permutations_anti_lexicographic(length=3)
