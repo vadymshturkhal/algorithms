@@ -29,4 +29,4 @@ def permutation_from_previous(length, index):
 
 
 if __name__ == '__main__':
-    show_permutations_anti_lexicographic_fast(length=4)
+    show_permutations_anti_lexicographic_fast(length=3)
