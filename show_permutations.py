@@ -1,4 +1,4 @@
-def show_permutations(sequence=None, length=3) -> None:
+def show_permutations_anti_lexicographic(sequence=None, length=3) -> None:
     if sequence is None:
         sequence = [i + 1 for i in range(length)]
 
@@ -7,7 +7,7 @@ def show_permutations(sequence=None, length=3) -> None:
         return
     else:
         for i in range(length):
-            show_permutations(sequence, length - 1)
+            show_permutations_anti_lexicographic(sequence, length - 1)
             if i < length - 1:
                 sequence[i], sequence[length - 1] = sequence[length - 1], sequence[i]
                 reverse(sequence, length - 1)
