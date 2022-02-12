@@ -7,6 +7,6 @@ def show_permutations_min_transpositions(sequence: list, length: int):
     if length is None:
         length = len(sequence)
 
-def init_
+
 if __name__ == '__main__':
     pass
