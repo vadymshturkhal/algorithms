@@ -1,4 +1,5 @@
 def generate_all_subsets(power: int):
+    """Gray code"""
     pass
 
 
