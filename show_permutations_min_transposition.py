@@ -1,4 +1,5 @@
 def show_permutations_min_transpositions(sequence: list = None, length: int = None):
+    """Permutation can illustrates Hamiltonian path"""
     if sequence is None:
         if length is None:
             length = 3
