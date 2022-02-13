@@ -12,8 +12,10 @@ def show_permutations_min_transpositions(sequence: list = None, length: int = No
 
     how_position[length - 1] = 0
     print(sequence)
+    counter = 1
 
     i = 0
+    length -= 1
     while i < length:
         i = 0
         x = 0
@@ -30,11 +32,13 @@ def show_permutations_min_transpositions(sequence: list = None, length: int = No
             if is_element_moves_forward[i]:
                 k = how_position[i] + x
             else:
-                k = length - i + 1 - how_position[i] + x
+                k = length - 1 - i - how_position[i] + x
 
             sequence[k], sequence[k + 1] = sequence[k + 1], sequence[k]
             print(sequence)
+            counter += 1
             how_position[i] = how_position[i] + 1
+            print(counter)
 
 
 if __name__ == '__main__':
