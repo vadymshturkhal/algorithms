@@ -1,20 +1,23 @@
 from typing import Union
+from math import comb
 
 
 def comb_visual(length: int, subset_length: int) -> Union[int, None]:
     """Visualize math.comb"""
-    if subset_length > length:
-        return
-
     current_subset = [i + 1 for i in range(subset_length)]
 
+    counter = 0
+    if subset_length > length:
+        return counter
+
     if subset_length == length:
-        print(*current_subset)
-        return
+        counter += 1
+        return counter
 
     pointer = subset_length - 1
     while 0 <= pointer:
         print(*current_subset)
+        counter += 1
 
         if current_subset[subset_length - 1] == length:
             pointer -= 1
@@ -25,8 +28,11 @@ def comb_visual(length: int, subset_length: int) -> Union[int, None]:
             for i in range(subset_length - 1, pointer - 1, -1):
                 current_subset[i] = current_subset[pointer] + i - pointer + 1
 
+    return counter
+
 
 if __name__ == '__main__':
     N = 6
     K = 4
-    comb_visual(N, K)
+    print(comb_visual(N, K))
+    print(comb(N, K))
