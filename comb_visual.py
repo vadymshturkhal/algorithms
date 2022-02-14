@@ -1,4 +1,7 @@
-def generate_all_k_elements_subsets(length: int, subset_length: int) -> None:
+from typing import Union
+
+
+def comb_visual(length: int, subset_length: int) -> Union[int, None]:
     """Visualize math.comb"""
     if subset_length > length:
         return
@@ -24,4 +27,6 @@ def generate_all_k_elements_subsets(length: int, subset_length: int) -> None:
 
 
 if __name__ == '__main__':
-    generate_all_k_elements_subsets(4, 3)
+    N = 6
+    K = 4
+    comb_visual(N, K)
