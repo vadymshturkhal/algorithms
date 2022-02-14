@@ -4,7 +4,7 @@ def generate_all_subsets(power: int):
     generated_subsets_quantity = 0
 
     while True:
-        print(subset)
+        print(*subset)
         generated_subsets_quantity += 1
         p = 0
         j = generated_subsets_quantity
