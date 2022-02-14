@@ -1,4 +1,5 @@
 def generate_all_k_elements_subsets(length: int, subset_length: int) -> None:
+    """Visualize math.comb"""
     if subset_length > length:
         return
 
