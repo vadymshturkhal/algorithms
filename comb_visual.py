@@ -3,7 +3,7 @@ from math import comb
 
 
 def comb_visual(length: int, subset_length: int) -> Union[int, None]:
-    """Visualize math.comb"""
+    """Visualize math.comb in lexicographic order"""
     current_subset = [i + 1 for i in range(subset_length)]
 
     counter = 0
