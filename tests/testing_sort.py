@@ -1,9 +1,9 @@
 import time
-from merge_sort import merge_sort
-from merge_sort_insertion import merge_sort_insertion
-from quick_sort import quick_sort
-from quick_sort_insertion import quick_sort_insertion
-from insertion_sort import insertion_sort
+from algorithms.merge_sort import merge_sort
+from algorithms.merge_sort_insertion import merge_sort_insertion
+from algorithms.quick_sort import quick_sort
+from algorithms.quick_sort_insertion import quick_sort_insertion
+from algorithms.insertion_sort import insertion_sort
 
 ARRAY_LENGTH = 5000
 

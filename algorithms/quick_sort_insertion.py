@@ -1,6 +1,6 @@
 import random
-from insertion_sort import insertion_sort
-from quick_sort import dijkstra_three_way_partitioning
+from algorithms.insertion_sort import insertion_sort
+from algorithms.quick_sort import dijkstra_three_way_partitioning
 
 CUTOFF = 5
 
