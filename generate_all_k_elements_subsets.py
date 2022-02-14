@@ -1,5 +1,12 @@
 def generate_all_k_elements_subsets(length: int, subset_length: int) -> None:
+    if subset_length > length:
+        return
+
     current_subset = [i + 1 for i in range(subset_length)]
+
+    if subset_length == length:
+        print(current_subset)
+        return
 
     pointer = subset_length - 1
     while 0 <= pointer:
@@ -16,4 +23,4 @@ def generate_all_k_elements_subsets(length: int, subset_length: int) -> None:
 
 
 if __name__ == '__main__':
-    generate_all_k_elements_subsets(6, 4)
+    generate_all_k_elements_subsets(4, 4)
