@@ -1,4 +1,5 @@
 class Stack:
+    """LIFO = "last in first out"""
     def __init__(self):
         pass
 
