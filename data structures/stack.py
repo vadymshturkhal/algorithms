@@ -1,5 +1,5 @@
 from node import Node
-from typing import Any
+from typing import Any, Union
 
 
 class Stack:
@@ -7,23 +7,41 @@ class Stack:
 
     def __init__(self):
         self.__last_node = None
+        self.__length = 0
 
     def push(self, item: Any):
-        old_first_node = self.__last_node
+        old_last_node = self.__last_node
 
         new_node = Node()
-        new_node.add_previous(old_first_node)
-        new_node.add_item(item)
+        new_node.previous = old_last_node
+        new_node.item = item
 
         self.__last_node = new_node
+        self.__length += 1
 
-    def pop(self):
-        pass
+    def pop(self) -> Union[None, Node]:
+        if self.__length == 0:
+            return None
 
-    def __len__(self):
-        return 0
+        current_last_node = self.__last_node
+        self.__last_node = current_last_node.previous
+        current_last_node.previous = None
+
+        self.__length -= 1
+        return current_last_node.item
+
+    def __len__(self) -> int:
+        return self.__length
 
 
 if __name__ == '__main__':
+    STACK_LENGTH = 5
     s = Stack()
-    print(len(s))
+
+    for i in range(1, STACK_LENGTH + 1):
+        s.push(i)
+
+    print("Stack length =", len(s))
+
+    for i in range(STACK_LENGTH):
+        print(s.pop())
