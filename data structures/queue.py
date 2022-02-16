@@ -36,6 +36,14 @@ class Queue:
     def __len__(self):
         return self.__length
 
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.__length <= 0:
+            raise StopIteration
+        return self.dequeue()
+
 
 if __name__ == '__main__':
     QUEUE_LENGTH = 5
@@ -46,5 +54,5 @@ if __name__ == '__main__':
 
     print(len(q))
 
-    for i in range(QUEUE_LENGTH):
-        print(q.dequeue())
+    for item in q:
+        print(item)
