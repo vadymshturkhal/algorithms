@@ -2,8 +2,8 @@ from typing import Any, Union
 
 
 class BinaryHeap:
-    def __init__(self):
-        self.__items = [0]
+    def __init__(self, items=Union[None, list]):
+        self.__items = []
 
     def insert(self, item: Any) -> None:
         self.__items.append(item)
@@ -12,18 +12,18 @@ class BinaryHeap:
     def del_max(self) -> Union[Any, None]:
         items = self.__items
 
-        if len(items) <= 1:
+        if len(items) <= 0:
             return
 
-        items[1], items[len(items) - 1] = items[len(items) - 1], items[1]
+        items[0], items[len(items) - 1] = items[len(items) - 1], items[0]
         max_item = items.pop()
 
-        self.__sink(1)
+        self.__sink(0)
         return max_item
 
     def __swim(self, index):
         items = self.__items
-        while index > 1 and items[index // 2] < items[index]:
+        while index > 0 and items[index // 2] < items[index]:
             items[index], items[index // 2] = items[index // 2], items[index]
             index //= 2
 
@@ -46,7 +46,7 @@ class BinaryHeap:
 
 
 if __name__ == '__main__':
-    HEAP_ITEMS_QUANTITY = 10
+    HEAP_ITEMS_QUANTITY = 5
     bh = BinaryHeap()
     for i in range(1, HEAP_ITEMS_QUANTITY + 1):
         bh.insert(i)
