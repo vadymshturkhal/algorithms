@@ -1,12 +1,13 @@
 from typing import Any
 
 
-class PriorityQueue:
+class UnorderedMaxPriorityQueue:
     def __init__(self):
         self.__length = 0
+        self.__items = []
 
-    def insert(self, key: Any) -> None:
-        pass
+    def insert(self, item: Any) -> None:
+        self.__items.append(item)
 
     def delete_max(self) -> Any:
         pass
