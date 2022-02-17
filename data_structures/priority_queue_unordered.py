@@ -8,7 +8,7 @@ class UnorderedMaxPriorityQueue:
     def insert(self, item: Any) -> None:
         self.__items.append(item)
 
-    def delete_max(self) -> Union[Any, None]:
+    def del_max(self) -> Union[Any, None]:
         if len(self.__items) == 0:
             return
 
