@@ -2,7 +2,7 @@ from typing import Any
 
 
 class Node:
-    """Node for data structures"""
+    """Node for data_structures"""
 
     def __init__(self):
         self.__item = None
