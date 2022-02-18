@@ -2,14 +2,15 @@ from typing import Any, Union
 
 
 class BinaryHeap:
-    def __init__(self, items=Union[None, list]):
+    def __init__(self, return_max=False):
         self.__items = []
+        self.__return_max = return_max
 
     def insert(self, item: Any) -> None:
         self.__items.append(item)
         self.__swim(len(self.__items) - 1)
 
-    def del_max(self) -> Union[Any, None]:
+    def del_element(self) -> Union[Any, None]:
         items = self.__items
 
         if len(items) <= 0:
@@ -23,19 +24,36 @@ class BinaryHeap:
 
     def __swim(self, index):
         items = self.__items
-        while index > 0 and items[index // 2] < items[index]:
+        a = items[index // 2]
+        b = items[index]
+
+        if not self.__return_max:
+            a, b = b, a
+
+        while index > 0 and a < b:
             items[index], items[index // 2] = items[index // 2], items[index]
             index //= 2
 
     def __sink(self, index) -> None:
         items = self.__items
-        while 2 * index <= len(items) - 1:
+
+        while 2 * index < len(items) - 1:
             j = 2 * index
 
-            if j < len(items) - 1 and items[j] < items[j + 1]:
+            a = items[j]
+            b = items[j + 1]
+            if not self.__return_max:
+                a, b = b, a
+
+            if j < len(items) - 1 and a < b:
                 j += 1
 
-            if items[index] >= items[j]:
+            a = items[index]
+            b = items[j]
+            if not self.__return_max:
+                a, b = b, a
+
+            if a >= b:
                 break
 
             items[index], items[j] = items[j], items[index]
@@ -53,4 +71,4 @@ if __name__ == '__main__':
 
     bh.insert(132)
     for i in range(HEAP_ITEMS_QUANTITY + 1):
-        print("max item =", bh.del_max())
+        print("max item =", bh.del_element())
