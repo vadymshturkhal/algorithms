@@ -33,6 +33,10 @@ class BinaryHeap:
         while index > 0 and a < b:
             items[index], items[index // 2] = items[index // 2], items[index]
             index //= 2
+            a = items[index // 2]
+            b = items[index]
+            if not self.__return_max:
+                a, b = b, a
 
     def __sink(self, index) -> None:
         items = self.__items
