@@ -5,6 +5,7 @@ from algorithms.quick_sort import quick_sort
 from algorithms.quick_sort_insertion import quick_sort_insertion
 from algorithms.insertion_sort import insertion_sort
 from algorithms.heap_sort import heap_sort
+from algorithms.shell_sort import shell_sort
 
 ARRAY_LENGTH = 5000
 
@@ -14,8 +15,9 @@ SORTS = {
     'merge_sort_insertion': merge_sort_insertion,
     'quick_sort          ': quick_sort,
     'quick_sort_insertion': quick_sort_insertion,
-    # 'insertion_sort      ': insertion_sort,
     'heap_sort           ': heap_sort,
+    # 'insertion_sort      ': insertion_sort,
+    # 'shell_sort          ': shell_sort,
 }
 
 for name, sort in SORTS.items():
