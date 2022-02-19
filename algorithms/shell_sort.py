@@ -2,7 +2,16 @@ from random import shuffle
 
 
 def shell_sort(sequence: list) -> None:
-    pass
+    h = 1
+    while h < len(sequence) / 3:
+        h = 3 * h + 1
+
+    while h >= 1:
+        for i in range(len(sequence)):
+            for j in range(i, h - 1, -h):
+                if sequence[j] < sequence[j - h]:
+                    sequence[j], sequence[j - h] = sequence[j - h], sequence[j]
+        h //= 3
 
 
 if __name__ == '__main__':
