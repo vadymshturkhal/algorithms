@@ -1,4 +1,4 @@
-def generate_all_subsets(power: int):
+def generate_all_subsets_gray_code(power: int):
     """Gray code"""
     subset = [0 for _ in range(power)]
     generated_subsets_quantity = 0
@@ -22,4 +22,4 @@ def generate_all_subsets(power: int):
 
 if __name__ == '__main__':
     POW = 4
-    generate_all_subsets(POW)
+    generate_all_subsets_gray_code(POW)
