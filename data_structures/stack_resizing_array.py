@@ -34,6 +34,14 @@ class StackResizingArray:
     def __len__(self) -> int:
         return self.__length
 
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.__length <= 0:
+            raise StopIteration
+        return self.pop()
+
 
 if __name__ == '__main__':
     STACK_LENGTH = 10
@@ -44,6 +52,6 @@ if __name__ == '__main__':
 
     print("Stack length =", len(s))
 
-    for i in range(1, STACK_LENGTH + 1):
-        print(s.pop())
+    for item in s:
+        print(f"{item = }")
     print("Stack length =", len(s))
