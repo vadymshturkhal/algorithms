@@ -1,7 +1,11 @@
 class UnionFind:
+    # O(N)
     def __init__(self, length):
+        # Set id of each object to itself
         self.__elements_id = [_ for _ in range(length)]
 
+    # O(N)
+    # Change all entries with p_id to q_id
     def union(self, p, q):
         p_id = self.__elements_id[p]
         q_id = self.__elements_id[q]
