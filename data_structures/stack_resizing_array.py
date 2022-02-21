@@ -1,16 +1,27 @@
+from typing import Any, Union
+
+
 class StackResizingArray:
     def __init__(self):
+        self.__data = [None]
+        self.__length = 0
+
+    def push(self, item: Any) -> None:
         pass
 
-    def push(self):
+    def pop(self) -> Union[None, Any]:
         pass
 
-    def pop(self):
+    def __resize_array(self):
         pass
 
-    def __len__(self):
-        pass
+    def __len__(self) -> int:
+        return self.__length
 
 
 if __name__ == '__main__':
-    pass
+    STACK_LENGTH = 5
+    s = StackResizingArray()
+
+    print("Stack length =", len(s))
+
