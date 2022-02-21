@@ -8,7 +8,7 @@ class UnorderedMaxPriorityQueue:
     def insert(self, item: Any) -> None:
         self.__items.append(item)
 
-    def del_max(self) -> Union[Any, None]:
+    def del_element(self) -> Union[Any, None]:
         if len(self.__items) == 0:
             return
 
@@ -34,6 +34,6 @@ if __name__ == '__main__':
     for i in range(ITEMS_LENGTH, 0, -1):
         unordered_max_pq.insert(i)
 
-    print(unordered_max_pq.delete_max())
-    print(unordered_max_pq.delete_max())
-    print(unordered_max_pq.delete_max())
+    print(unordered_max_pq.del_element())
+    print(unordered_max_pq.del_element())
+    print(unordered_max_pq.del_element())

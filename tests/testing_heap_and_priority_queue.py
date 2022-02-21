@@ -19,7 +19,7 @@ for name, ds in data_structs.items():
         ds.insert(i)
 
     for i in range(ITEMS_QUANTITY):
-        ds.del_max()
+        ds.del_element()
 
     elapsed_time = time() - start_time
     print(f"{name}, {elapsed_time = }")
