@@ -1,5 +1,13 @@
 def generate_all_subsets(length: int):
-    pass
+    partition = []
+    forward = []
+    next_partition = [0] * length
+
+    for i in range(length):
+        partition[i] = 1
+        forward[i] = True
+
+    pointer = length
 
 
 if __name__ == '__main__':
