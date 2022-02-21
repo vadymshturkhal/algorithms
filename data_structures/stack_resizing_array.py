@@ -7,13 +7,17 @@ class StackResizingArray:
         self.__length = 0
 
     def push(self, item: Any) -> None:
-        pass
+        if self.__length == len(self.__data):
+            self.__resize_array(self.__length * 2)
 
     def pop(self) -> Union[None, Any]:
         pass
 
-    def __resize_array(self):
-        pass
+    def __resize_array(self, capacity):
+        temp_array = [None] * capacity
+        for i in range(len(self.__data)):
+            temp_array[i] = self.__data[i]
+        self.__data = temp_array
 
     def __len__(self) -> int:
         return self.__length
@@ -24,4 +28,3 @@ if __name__ == '__main__':
     s = StackResizingArray()
 
     print("Stack length =", len(s))
-
