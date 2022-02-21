@@ -1,12 +1,17 @@
 class UnionFind:
     def __init__(self, length):
-        self.__elements = [_ for _ in range(length)]
+        self.__elements_id = [_ for _ in range(length)]
 
     def union(self, p, q):
-        pass
+        p_id = self.__elements_id[p]
+        q_id = self.__elements_id[q]
+
+        for i in range(len(self.__elements_id)):
+            if self.__elements_id[i] == p_id:
+                self.__elements_id[i] = q_id
 
     def is_connected(self, p, q) -> bool:
-        return self.__elements[p] == self.__elements[q]
+        return self.__elements_id[p] == self.__elements_id[q]
 
 
 if __name__ == '__main__':
