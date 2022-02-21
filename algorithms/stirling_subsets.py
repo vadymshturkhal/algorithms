@@ -1,4 +1,4 @@
-def generate_all_subsets(length: int):
+def stirling_subsets(length: int):
     partition = []
     forward = []
     next_partition = [0] * length
@@ -12,4 +12,4 @@ def generate_all_subsets(length: int):
 
 if __name__ == '__main__':
     SEQUENCE_LENGTH = 4
-    generate_all_subsets(SEQUENCE_LENGTH)
+    stirling_subsets(SEQUENCE_LENGTH)
