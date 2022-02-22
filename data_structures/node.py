@@ -4,8 +4,9 @@ from typing import Any
 class Node:
     """Node for data_structures"""
 
-    def __init__(self):
-        self.__item = None
+    def __init__(self, key=None, value=None):
+        self.__key = key
+        self.__item = value
         self.__forward = None
         self.__previous = None
 
@@ -32,5 +33,3 @@ class Node:
     @previous.setter
     def previous(self, n: 'Node') -> None:
         self.__previous = n
-
-
