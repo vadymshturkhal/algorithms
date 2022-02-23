@@ -11,6 +11,14 @@ class Node:
         self.__previous = None
 
     @property
+    def key(self) -> Any:
+        return self.__key
+
+    @key.setter
+    def key(self, value: Any):
+        self.__key = value
+
+    @property
     def item(self) -> Any:
         return self.__item
 
