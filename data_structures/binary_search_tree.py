@@ -14,7 +14,7 @@ class BinarySearchTree:
         self.__root = None
 
     def put(self, key: Any, item: Any) -> None:
-        pass
+        self.__root = self.__put(self.__root, key, item)
 
     def __put(self, node: Node, key: Any, item: Any) -> Node:
         if node is None:
@@ -44,3 +44,14 @@ class BinarySearchTree:
 
     def delete(self) -> None:
         pass
+
+
+if __name__ == '__main__':
+    BST_ELEMENTS_QUANTITY = 10
+    bst = BinarySearchTree()
+
+    for i in range(BST_ELEMENTS_QUANTITY):
+        bst.put(i, i + 1)
+
+    for i in range(BST_ELEMENTS_QUANTITY):
+        print(bst.get(i))
