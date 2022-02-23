@@ -21,11 +21,11 @@ class BinarySearchTree:
             return Node(key, item)
 
         if key < node.key:
-            pass
+            node.previous = self.__put(node.previous, key, item)
         elif key > node.key:
-            pass
+            node.next_node = self.__put(node.next_node, key, item)
         else:
-            pass
+            node.item = item
 
         return node
 
