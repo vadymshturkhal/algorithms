@@ -33,9 +33,11 @@ class BinarySearchTree:
         current_node = self.__root
 
         while current_node is not None:
-            if current_node.key < key:
+            if  key < current_node.key:
+                print(current_node.key)
+
                 current_node = current_node.previous
-            elif current_node.key > key:
+            elif key > current_node.key:
                 current_node = current_node.next_node
             else:
                 return current_node.item
@@ -47,7 +49,7 @@ class BinarySearchTree:
 
 
 if __name__ == '__main__':
-    BST_ELEMENTS_QUANTITY = 10
+    BST_ELEMENTS_QUANTITY = 3
     bst = BinarySearchTree()
 
     for i in range(BST_ELEMENTS_QUANTITY):
