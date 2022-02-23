@@ -16,6 +16,19 @@ class BinarySearchTree:
     def put(self, key: Any, item: Any) -> None:
         pass
 
+    def __put(self, node: Node, key: Any, item: Any) -> Node:
+        if node is None:
+            return Node(key, item)
+
+        if key < node.key:
+            pass
+        elif key > node.key:
+            pass
+        else:
+            pass
+
+        return node
+
     def get(self, key) -> Union[None, Any]:
         current_node = self.__root
 
