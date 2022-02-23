@@ -8,6 +8,9 @@ class BinarySearchTree:
         Each node has a key, and every node’s key is:
             1. Larger than all keys in its left subtree;
             2. Smaller than all keys in its right subtree.
+
+        Node.previous = smaller,
+        Node.next_node = greater.
     """
 
     def __init__(self):
