@@ -27,7 +27,7 @@ class Node:
         self.__item = item
 
     @property
-    def next_node(self) -> None:
+    def next_node(self) -> 'Node':
         return self.__forward
 
     @next_node.setter
