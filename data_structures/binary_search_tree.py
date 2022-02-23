@@ -13,7 +13,7 @@ class BinarySearchTree:
     def __init__(self):
         self.__root = None
 
-    def put(self, item: Any) -> None:
+    def put(self, key: Any, item: Any) -> None:
         pass
 
     def get(self, key) -> Union[None, Any]:
