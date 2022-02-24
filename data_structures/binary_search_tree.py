@@ -36,9 +36,7 @@ class BinarySearchTree:
         current_node = self.__root
 
         while current_node is not None:
-            if  key < current_node.key:
-                print(current_node.key)
-
+            if key < current_node.key:
                 current_node = current_node.previous
             elif key > current_node.key:
                 current_node = current_node.next_node
