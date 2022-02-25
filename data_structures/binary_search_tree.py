@@ -48,6 +48,12 @@ class BinarySearchTree:
     def delete(self) -> None:
         pass
 
+    def max(self) -> Node:
+        pass
+
+    def min(self) -> Node:
+        pass
+
 
 if __name__ == '__main__':
     BST_ELEMENTS_QUANTITY = 3
