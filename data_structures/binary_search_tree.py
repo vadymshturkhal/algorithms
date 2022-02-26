@@ -54,6 +54,12 @@ class BinarySearchTree:
     def min(self) -> Node:
         pass
 
+    def floor(self) -> Node:
+        pass
+
+    def ceiling(self) -> Node:
+        pass
+
 
 if __name__ == '__main__':
     BST_ELEMENTS_QUANTITY = 3
