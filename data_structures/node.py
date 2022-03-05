@@ -10,7 +10,7 @@ class Node:
         self.__forward = None
         self.__previous = None
         self.__color = None
-        self.__count = None
+        self.__count = 0
 
     @property
     def key(self) -> Any:
@@ -73,5 +73,5 @@ class Node:
         return self.__count
 
     @count.setter
-    def count(self) -> None:
-        self.__count += 1
+    def count(self, value: int) -> None:
+        self.__count += value
