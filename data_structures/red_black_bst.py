@@ -43,5 +43,11 @@ class RedBlackBST:
         n.color = self.__RED
         return temp
 
+    def __flip_colors(self, n: Node) -> None:
+        n.color = self.__RED
+        n.left.color = self.__BLACK
+        n.right.color = self.__BLACK
+
+
 if __name__ == '__main__':
     rb = RedBlackBST()
