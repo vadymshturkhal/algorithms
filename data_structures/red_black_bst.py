@@ -4,6 +4,8 @@ from data_structures.node import Node
 
 class RedBlackBST:
     def __init__(self):
+        self.__RED = True
+        self.__BLACK = False
         self.__root = None
 
     def get(self, key) -> Union[None, Any]:
@@ -19,6 +21,11 @@ class RedBlackBST:
                 return current_node.item
 
         return None
+
+    def __is_red(self, n: Node):
+        if n is None:
+            return False
+        return n.color == self.__RED
 
 
 if __name__ == '__main__':
