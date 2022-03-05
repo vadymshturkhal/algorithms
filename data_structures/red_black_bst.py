@@ -22,6 +22,19 @@ class RedBlackBST:
 
         return None
 
+    def put(self, key: Any, value: Any, n: Node = None):
+        if n is None:
+            return Node(key, value, self.__RED)
+
+        if key < n.key:
+            n.left = self.put(key, value, n.left)
+        elif key > n.key:
+            n.right = self.put(key, value, n.right)
+        else:
+            n.item = value
+
+        return n
+
     def __is_red(self, n: Node):
         if n is None:
             return False
