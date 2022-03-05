@@ -19,19 +19,6 @@ class BinarySearchTree:
     def put(self, key: Any, item: Any) -> None:
         self.__root = self.__put(self.__root, key, item)
 
-    def __put(self, node: Node, key: Any, item: Any) -> Node:
-        if node is None:
-            return Node(key, item)
-
-        if key < node.key:
-            node.previous = self.__put(node.previous, key, item)
-        elif key > node.key:
-            node.next_node = self.__put(node.next_node, key, item)
-        else:
-            node.item = item
-
-        return node
-
     def get(self, key) -> Union[None, Any]:
         current_node = self.__root
 
@@ -54,11 +41,44 @@ class BinarySearchTree:
     def min(self) -> Node:
         pass
 
-    def floor(self) -> Node:
-        pass
+    def floor(self, key: Any) -> Any:
+        """Largest key that is less than n"""
+        temp = self.__floor(self.__root, key)
+
+        if temp is None:
+            return None
+
+        return temp.key
 
     def ceiling(self) -> Node:
         pass
+
+    def __put(self, node: Node, key: Any, item: Any) -> Node:
+        if node is None:
+            return Node(key, item)
+
+        if key < node.key:
+            node.previous = self.__put(node.previous, key, item)
+        elif key > node.key:
+            node.next_node = self.__put(node.next_node, key, item)
+        else:
+            node.item = item
+
+        return node
+
+    def __floor(self, n: Node, key: Any) -> Union[None, Node]:
+        if n is None:
+            return None
+
+        if key == n.key:
+            return n
+
+        if key < n.key:
+            return self.__floor(n.left, key)
+
+        temp = self.__floor(n.right, key)
+
+        return n if temp is None else temp
 
 
 if __name__ == '__main__':
