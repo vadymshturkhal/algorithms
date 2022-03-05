@@ -36,6 +36,9 @@ class BinarySearchTree:
     def size(self):
         return self.__size(self.__root)
 
+    def rank(self, key: Any) -> int:
+        return self.__rank(key, self.__root)
+
     def delete(self) -> None:
         pass
 
@@ -67,7 +70,9 @@ class BinarySearchTree:
             node.right = self.__put(node.right, key, item)
         else:
             node.item = item
+
         node.count = 1 + self.__size(node.left) + self.__size(node.right)
+
         return node
 
     def __floor(self, n: Node, key: Any) -> Union[None, Node]:
@@ -88,6 +93,18 @@ class BinarySearchTree:
         if n is None:
             return 0
         return n.count
+
+    def __rank(self, key: Any, n: Node) -> int:
+        if n is None:
+            return 0
+
+        if key < n.key:
+            return self.__rank(key, n.left)
+
+        if key > n.key:
+            return 1 + self.__size(n.left) + self.__rank(key, n.right)
+
+        return self.__size(n.left)
 
 
 if __name__ == '__main__':
