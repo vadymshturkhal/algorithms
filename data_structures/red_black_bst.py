@@ -27,6 +27,14 @@ class RedBlackBST:
             return False
         return n.color == self.__RED
 
+    def __rotate_left(self, n: Node):
+        temp = n.right
+        n.right = temp.left
+        temp.left = n
+        temp.color = n.color
+        n.color = self.__RED
+        return temp
+
 
 if __name__ == '__main__':
     rb = RedBlackBST()
