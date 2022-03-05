@@ -41,3 +41,19 @@ class Node:
     @previous.setter
     def previous(self, n: 'Node') -> None:
         self.__previous = n
+
+    @property
+    def left(self) -> 'Node':
+        return self.__previous
+
+    @left.setter
+    def left(self, n: 'Node') -> None:
+        self.__previous = n
+
+    @property
+    def right(self) -> 'Node':
+        return self.__forward
+
+    @right.setter
+    def right(self, n: 'Node') -> None:
+        self.__forward = n
