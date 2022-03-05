@@ -4,7 +4,7 @@ from typing import Any
 class Node:
     """Node for data_structures"""
 
-    def __init__(self, key=None, value=None):
+    def __init__(self, key=None, value=None, color=None):
         self.__key = key
         self.__item = value
         self.__forward = None
