@@ -9,6 +9,7 @@ class Node:
         self.__item = value
         self.__forward = None
         self.__previous = None
+        self.__color = None
 
     @property
     def key(self) -> Any:
@@ -57,3 +58,11 @@ class Node:
     @right.setter
     def right(self, n: 'Node') -> None:
         self.__forward = n
+
+    @property
+    def color(self) -> bool:
+        return self.__color
+
+    @color.setter
+    def color(self, value: bool):
+        self.__color = value
