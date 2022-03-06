@@ -42,6 +42,7 @@ class BinarySearchTree:
         if cursor_node is None:
             return None
 
+        # If len == 1
         if cursor_node.left is None:
             self.__root = self.__root.right
             return None
@@ -51,6 +52,25 @@ class BinarySearchTree:
             cursor_node = cursor_node.left
             if cursor_node.left is None:
                 prev_node.left = cursor_node.right
+                break
+
+        return None
+
+    def delete_max(self) -> None:
+        cursor_node = self.__root
+        if cursor_node is None:
+            return None
+
+        # If len == 1
+        if cursor_node.right is None:
+            self.__root = self.__root.left
+            return None
+
+        while True:
+            prev_node = cursor_node
+            cursor_node = cursor_node.right
+            if cursor_node.right is None:
+                prev_node.right = cursor_node.left
                 break
 
         return None
@@ -99,5 +119,11 @@ if __name__ == '__main__':
     print()
     print('After delete_min')
     bst.delete_min()
+    for item in bst:
+        print(item)
+
+    print()
+    print('After delete_max')
+    bst.delete_max()
     for item in bst:
         print(item)
