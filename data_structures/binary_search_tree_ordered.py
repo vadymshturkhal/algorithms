@@ -37,6 +37,7 @@ class BinarySearchTree:
         return self.__size(self.__root)
 
     def rank(self, key: Any) -> int:
+        """How many keys < k?"""
         return self.__rank(key, self.__root)
 
     def delete(self) -> None:
@@ -153,6 +154,8 @@ if __name__ == '__main__':
     print(bst.floor(5))
     print(bst.ceiling(-1))
     print(bst.ceiling(12))
+    print(bst.size())
+    print(bst.rank(1))
     print()
-    for i in range(BST_ELEMENTS_QUANTITY):
-        print(bst.get(i))
+    # for i in range(BST_ELEMENTS_QUANTITY):
+    #     print(bst.get(i))
