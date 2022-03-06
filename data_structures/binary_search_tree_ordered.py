@@ -42,19 +42,25 @@ class BinarySearchTree:
     def delete(self) -> None:
         pass
 
+    def min(self) -> Union[None, Node]:
+        if self.__root is None:
+            return None
+
+        temp_node = self.__root
+        while True:
+            if temp_node.left is None:
+                return temp_node
+            temp_node = temp_node.left
+
     def max(self) -> Union[None, Node]:
         if self.__root is None:
             return None
 
         temp_node = self.__root
-
         while True:
             if temp_node.right is None:
                 return temp_node
             temp_node = temp_node.right
-
-    def min(self) -> Node:
-        pass
 
     def floor(self, key: Any) -> Any:
         """Largest key that is less than n"""
@@ -116,12 +122,13 @@ class BinarySearchTree:
 
 
 if __name__ == '__main__':
-    BST_ELEMENTS_QUANTITY = 6
+    BST_ELEMENTS_QUANTITY = 10
     bst = BinarySearchTree()
 
     for i in range(BST_ELEMENTS_QUANTITY):
         bst.put(i, i + 1)
 
+    print(bst.min().item)
     print(bst.max().item)
     # for i in range(BST_ELEMENTS_QUANTITY):
-        # print(bst.get(i))
+    # print(bst.get(i))
