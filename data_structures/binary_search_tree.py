@@ -1,5 +1,6 @@
 from typing import Any, Union
 from data_structures.node import Node
+from data_structures.queue import Queue
 
 
 class BinarySearchTree:
@@ -15,6 +16,7 @@ class BinarySearchTree:
 
     def __init__(self):
         self.__root = None
+        self.__iterable = None
 
     def put(self, key: Any, value: Any) -> None:
         self.__root = self.__put(self.__root, key, value)
@@ -66,18 +68,36 @@ class BinarySearchTree:
 
         return node
 
+    def __prepare_iterable(self, n: Node = None, q: Queue = None) -> None:
+        if n is None:
+            return
+        self.__prepare_iterable(n.left, q)
+        q.enqueue(n)
+        self.__prepare_iterable(n.right, q)
+
+    def __iter__(self):
+        self.__iterable = Queue()
+        self.__prepare_iterable(self.__root, self.__iterable)
+        return self
+
+    def __next__(self):
+        for node in self.__iterable:
+            return node.item
+        raise StopIteration
+
 
 if __name__ == '__main__':
-    BST_ELEMENTS_QUANTITY = 3
     bst = BinarySearchTree()
 
-    for i in range(BST_ELEMENTS_QUANTITY):
-        bst.put(i, i + 1)
+    keys = [2, 1, 3, 5, 8, 4, 12]
+    for k in keys:
+        bst.put(k, k)
 
-    for i in range(BST_ELEMENTS_QUANTITY):
-        print(bst.get(i))
+    for item in bst:
+        print(item)
 
+    print()
     print('After delete_min')
     bst.delete_min()
-    for i in range(BST_ELEMENTS_QUANTITY):
-        print(bst.get(i))
+    for item in bst:
+        print(item)
