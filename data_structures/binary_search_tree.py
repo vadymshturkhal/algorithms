@@ -35,6 +35,24 @@ class BinarySearchTree:
     def delete(self) -> None:
         pass
 
+    def delete_min(self) -> None:
+        cursor_node = self.__root
+        if cursor_node is None:
+            return None
+
+        if cursor_node.left is None:
+            self.__root = self.__root.right
+            return None
+
+        while True:
+            prev_node = cursor_node
+            cursor_node = cursor_node.left
+            if cursor_node.left is None:
+                prev_node.left = cursor_node.right
+                break
+
+        return None
+
     def __put(self, node: Node, key: Any, value: Any) -> Node:
         if node is None:
             return Node(key, value)
@@ -56,5 +74,10 @@ if __name__ == '__main__':
     for i in range(BST_ELEMENTS_QUANTITY):
         bst.put(i, i + 1)
 
+    for i in range(BST_ELEMENTS_QUANTITY):
+        print(bst.get(i))
+
+    print('After delete_min')
+    bst.delete_min()
     for i in range(BST_ELEMENTS_QUANTITY):
         print(bst.get(i))
