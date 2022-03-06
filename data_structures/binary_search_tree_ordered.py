@@ -42,8 +42,16 @@ class BinarySearchTree:
     def delete(self) -> None:
         pass
 
-    def max(self) -> Node:
-        pass
+    def max(self) -> Union[None, Node]:
+        if self.__root is None:
+            return None
+
+        temp_node = self.__root
+
+        while True:
+            if temp_node.right is None:
+                return temp_node
+            temp_node = temp_node.right
 
     def min(self) -> Node:
         pass
@@ -108,11 +116,12 @@ class BinarySearchTree:
 
 
 if __name__ == '__main__':
-    BST_ELEMENTS_QUANTITY = 3
+    BST_ELEMENTS_QUANTITY = 6
     bst = BinarySearchTree()
 
     for i in range(BST_ELEMENTS_QUANTITY):
         bst.put(i, i + 1)
 
-    for i in range(BST_ELEMENTS_QUANTITY):
-        print(bst.get(i))
+    print(bst.max().item)
+    # for i in range(BST_ELEMENTS_QUANTITY):
+        # print(bst.get(i))
