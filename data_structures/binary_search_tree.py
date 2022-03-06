@@ -34,11 +34,16 @@ class BinarySearchTree:
 
         return None
 
-    def delete(self) -> None:
-        pass
+    def delete(self, key) -> None:
+        """Hibbard deletion"""
+        self.__root = self.__delete(self.__root, key)
 
-    def delete_min(self) -> None:
-        cursor_node = self.__root
+    def delete_min(self, node: Node = None) -> Union[None, Node]:
+        if node is None:
+            cursor_node = self.__root
+        else:
+            cursor_node = node
+
         if cursor_node is None:
             return None
 
@@ -54,7 +59,7 @@ class BinarySearchTree:
                 prev_node.left = cursor_node.right
                 break
 
-        return None
+        return cursor_node
 
     def delete_max(self) -> None:
         cursor_node = self.__root
@@ -74,6 +79,9 @@ class BinarySearchTree:
                 break
 
         return None
+
+    def __delete(self, n: Node, key: Any) -> Union[None, Node]:
+        pass
 
     def __put(self, node: Node, key: Any, value: Any) -> Node:
         if node is None:
@@ -118,7 +126,7 @@ if __name__ == '__main__':
 
     print()
     print('After delete_min')
-    bst.delete_min()
+    print('min =', bst.delete_min().key)
     for item in bst:
         print(item)
 
