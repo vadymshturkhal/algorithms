@@ -101,7 +101,24 @@ class BinarySearchTree:
         return None
 
     def __delete(self, n: Node, key: Any) -> Union[None, Node]:
-        pass
+        if n is None:
+            return None
+
+        if key < n.key:
+            n.left = self.__delete(n.left, key)
+        elif key > n.key:
+            n.right = self.__delete(n.right, key)
+        else:
+            if n.right is None:
+                return n.left
+            if n.left is None:
+                return n.right
+
+            temp_node = n
+            n = self.min(temp_node.right)
+            n.right = self.delete_min(temp_node.right)
+            n.left = temp_node.left
+        return n
 
     def __put(self, node: Node, key: Any, value: Any) -> Node:
         if node is None:
