@@ -54,10 +54,6 @@ class BinarySearchTree:
 
         return cursor_node
 
-    def delete(self, key) -> None:
-        """Hibbard deletion"""
-        self.__root = self.__delete(self.__root, key)
-
     def delete_min(self, node: Node = None) -> Union[None, Node]:
         if node is None:
             cursor_node = self.__root
@@ -99,6 +95,10 @@ class BinarySearchTree:
                 break
 
         return None
+
+    def delete(self, key) -> None:
+        """Hibbard deletion"""
+        self.__root = self.__delete(self.__root, key)
 
     def __delete(self, n: Node, key: Any) -> Union[None, Node]:
         if n is None:
