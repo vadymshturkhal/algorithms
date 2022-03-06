@@ -74,4 +74,4 @@ class Node:
 
     @count.setter
     def count(self, value: int) -> None:
-        self.__count += value
+        self.__count = value
