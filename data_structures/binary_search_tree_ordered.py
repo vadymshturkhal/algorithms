@@ -63,7 +63,7 @@ class BinarySearchTree:
             temp_node = temp_node.right
 
     def floor(self, key: Any) -> Any:
-        """Largest key that is less than n"""
+        """Largest key ≤ a given key"""
         temp = self.__floor(self.__root, key)
 
         if temp is None:
@@ -71,8 +71,14 @@ class BinarySearchTree:
 
         return temp.key
 
-    def ceiling(self) -> Node:
-        pass
+    def ceiling(self, key: Any) -> Any:
+        """Smallest key ≥ a given key."""
+        temp = self.__ceiling(self.__root, key)
+
+        if temp is None:
+            return None
+
+        return temp.key
 
     def __put(self, node: Node, key: Any, value: Any) -> Node:
         if node is None:
@@ -103,6 +109,20 @@ class BinarySearchTree:
 
         return n if temp is None else temp
 
+    def __ceiling(self, n: Node, key: Any) -> Union[None, Node]:
+        if n is None:
+            return None
+
+        if key == n.key:
+            return n
+
+        if key > n.key:
+            return self.__ceiling(n.right, key)
+
+        temp = self.__ceiling(n.left, key)
+
+        return n if temp is None else temp
+
     def __size(self, n: Node) -> int:
         if n is None:
             return 0
@@ -126,9 +146,13 @@ if __name__ == '__main__':
     bst = BinarySearchTree()
 
     for i in range(BST_ELEMENTS_QUANTITY):
-        bst.put(i, i + 1)
+        bst.put(i, i)
 
     print(bst.min().item)
     print(bst.max().item)
-    # for i in range(BST_ELEMENTS_QUANTITY):
-    # print(bst.get(i))
+    print(bst.floor(5))
+    print(bst.ceiling(-1))
+    print(bst.ceiling(12))
+    print()
+    for i in range(BST_ELEMENTS_QUANTITY):
+        print(bst.get(i))
