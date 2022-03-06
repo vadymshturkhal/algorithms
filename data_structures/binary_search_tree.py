@@ -45,8 +45,7 @@ class BinarySearchTree:
 
         # If len == 1
         if cursor_node.left is None:
-            self.__root = self.__root.right
-            return None
+            return cursor_node
 
         while True:
             cursor_node = cursor_node.left
@@ -142,18 +141,24 @@ if __name__ == '__main__':
     for k in keys:
         bst.put(k, k)
 
-    for item in bst:
-        print(item)
+    # for item in bst:
+    #     print(item)
+    #
+    # print()
+    # print('min =', bst.min().key)
+    # print('After delete_min')
+    # print('min =', bst.delete_min().key)
+    # for item in bst:
+    #     print(item)
+    #
+    # print()
+    # print('After delete_max')
+    # bst.delete_max()
+    # for item in bst:
+    #     print(item)
 
-    print()
-    print('min =', bst.min().key)
-    print('After delete_min')
-    print('min =', bst.delete_min().key)
-    for item in bst:
-        print(item)
-
-    print()
-    print('After delete_max')
-    bst.delete_max()
+    # print()
+    print('After delete 5')
+    bst.delete(5)
     for item in bst:
         print(item)
