@@ -1,5 +1,6 @@
 from typing import Union, Any
 from data_structures.node import Node
+from data_structures.queue import Queue
 
 
 class RedBlackBST:
@@ -7,6 +8,7 @@ class RedBlackBST:
         self.__RED = True
         self.__BLACK = False
         self.__root = None
+        self.__iterable = None
 
     def get(self, key) -> Union[None, Any]:
         """
@@ -73,6 +75,29 @@ class RedBlackBST:
         n.left.color = self.__BLACK
         n.right.color = self.__BLACK
 
+    def __prepare_iterable(self, n: Node = None, q: Queue = None) -> None:
+        if n is None:
+            return
+        self.__prepare_iterable(n.left, q)
+        q.enqueue(n)
+        self.__prepare_iterable(n.right, q)
+
+    def __iter__(self):
+        self.__iterable = Queue()
+        self.__prepare_iterable(self.__root, self.__iterable)
+        return self
+
+    def __next__(self):
+        for node in self.__iterable:
+            return node.item
+        raise StopIteration
+
 
 if __name__ == '__main__':
     rb = RedBlackBST()
+
+    keys = ['s', 'e', 'a', 'r', 'c', 'h', 'x', 'm', 'p', 'l']
+    for k in keys:
+        rb.put(k, k)
+
+    print(*rb)
