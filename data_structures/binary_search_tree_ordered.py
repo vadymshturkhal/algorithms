@@ -40,9 +40,6 @@ class BinarySearchTree:
         """How many keys < k?"""
         return self.__rank(key, self.__root)
 
-    def delete(self) -> None:
-        pass
-
     def min(self) -> Union[None, Node]:
         if self.__root is None:
             return None
@@ -80,6 +77,53 @@ class BinarySearchTree:
             return None
 
         return temp.key
+
+    def delete_min(self, node: Node = None) -> Union[None, Node]:
+        if node is None:
+            cursor_node = self.__root
+        else:
+            cursor_node = node
+
+        if cursor_node is None:
+            return None
+
+        # If len == 1
+        if cursor_node.left is None:
+            return cursor_node
+
+        while True:
+            prev_node = cursor_node
+            cursor_node = cursor_node.left
+            if cursor_node.left is None:
+                prev_node.left = cursor_node.right
+                break
+
+        return cursor_node
+
+    def delete(self, key) -> None:
+        """Hibbard deletion"""
+        self.__root = self.__delete(self.__root, key)
+
+    def __delete(self, n: Node, key: Any) -> Union[None, Node]:
+        if n is None:
+            return None
+
+        if key < n.key:
+            n.left = self.__delete(n.left, key)
+        elif key > n.key:
+            n.right = self.__delete(n.right, key)
+        else:
+            if n.right is None:
+                return n.left
+            if n.left is None:
+                return n.right
+
+            node_to_replace = self.delete_min(n.right)
+            node_to_replace.left = n.left
+            n = node_to_replace
+
+        n.count = self.__size(n.left) + self.__size(n.right) + 1
+        return n
 
     def __put(self, node: Node, key: Any, value: Any) -> Node:
         if node is None:
@@ -143,19 +187,8 @@ class BinarySearchTree:
 
 
 if __name__ == '__main__':
-    BST_ELEMENTS_QUANTITY = 10
     bst = BinarySearchTree()
 
-    for i in range(BST_ELEMENTS_QUANTITY):
-        bst.put(i, i)
-
-    print(bst.min().item)
-    print(bst.max().item)
-    print(bst.floor(5))
-    print(bst.ceiling(-1))
-    print(bst.ceiling(12))
-    print(bst.size())
-    print(bst.rank(1))
-    print()
-    # for i in range(BST_ELEMENTS_QUANTITY):
-    #     print(bst.get(i))
+    keys = [2, 1, 3, 5, 8, 4, 12]
+    for k in keys:
+        bst.put(k, k)
