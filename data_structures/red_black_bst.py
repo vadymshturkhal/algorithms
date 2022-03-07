@@ -32,7 +32,7 @@ class RedBlackBST:
 
     def __put(self, node: Node, key: Any, value: Any) -> Node:
         if node is None:
-            return Node(key, value)
+            return Node(key, value, self.__RED)
 
         if key < node.key:
             node.left = self.__put(node.left, key, value)
@@ -42,10 +42,10 @@ class RedBlackBST:
             node.item = value
 
         if self.__is_red(node.right) and not self.__is_red(node.left):
-            self.__rotate_left(node)
+            node = self.__rotate_left(node)
 
         if self.__is_red(node.left) and self.__is_red(node.left.left):
-            self.__rotate_right(node)
+            node = self.__rotate_right(node)
 
         if self.__is_red(node.left) and self.__is_red(node.right):
             self.__flip_colors(node)
