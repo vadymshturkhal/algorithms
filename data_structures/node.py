@@ -9,7 +9,7 @@ class Node:
         self.__item = value
         self.__forward = None
         self.__previous = None
-        self.__color = None
+        self.__color = color
         self.__count = 0
 
     @property
