@@ -27,27 +27,30 @@ class RedBlackBST:
 
         return None
 
-    def put(self, key: Any, value: Any, n: Node = None):
-        if n is None:
-            return Node(key, value, self.__RED)
+    def put(self, key: Any, value: Any) -> None:
+        self.__root = self.__put(self.__root, key, value)
 
-        if key < n.key:
-            n.left = self.put(key, value, n.left)
-        elif key > n.key:
-            n.right = self.put(key, value, n.right)
+    def __put(self, node: Node, key: Any, value: Any) -> Node:
+        if node is None:
+            return Node(key, value)
+
+        if key < node.key:
+            node.left = self.__put(node.left, key, value)
+        elif key > node.key:
+            node.right = self.__put(node.right, key, value)
         else:
-            n.item = value
+            node.item = value
 
-        if self.__is_red(n.right) and not self.__is_red(n.left):
-            self.__rotate_left(n)
+        if self.__is_red(node.right) and not self.__is_red(node.left):
+            self.__rotate_left(node)
 
-        if self.__is_red(n.left) and self.__is_red(n.left.left):
-            self.__rotate_right(n)
+        if self.__is_red(node.left) and self.__is_red(node.left.left):
+            self.__rotate_right(node)
 
-        if self.__is_red(n.left) and self.__is_red(n.right):
-            self.__flip_colors(n)
+        if self.__is_red(node.left) and self.__is_red(node.right):
+            self.__flip_colors(node)
 
-        return n
+        return node
 
     def __is_red(self, n: Node):
         if n is None:
