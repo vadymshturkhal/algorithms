@@ -9,7 +9,10 @@ class RedBlackBST:
         self.__root = None
 
     def get(self, key) -> Union[None, Any]:
-        """Search is the same as for elementary BST (ignore color)"""
+        """
+            Search is the same as for elementary BST (ignore color).
+            But runs faster because of better balance.
+        """
         current_node = self.__root
 
         while current_node is not None:
