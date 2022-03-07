@@ -4,13 +4,13 @@ from typing import Any
 class Node:
     """Node for data_structures"""
 
-    def __init__(self, key=None, value=None, color=None):
+    def __init__(self, key=None, value=None, color=None, count=0):
         self.__key = key
         self.__item = value
         self.__forward = None
         self.__previous = None
         self.__color = color
-        self.__count = 0
+        self.__count = count
 
     @property
     def key(self) -> Any:

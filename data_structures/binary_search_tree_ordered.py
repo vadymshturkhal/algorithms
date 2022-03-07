@@ -129,7 +129,7 @@ class BinarySearchTree:
 
     def __put(self, node: Node, key: Any, value: Any) -> Node:
         if node is None:
-            return Node(key, value)
+            return Node(key, value, count=1)
 
         if key < node.key:
             node.left = self.__put(node.left, key, value)
@@ -139,6 +139,7 @@ class BinarySearchTree:
             node.item = value
 
         node.count = 1 + self.__size(node.left) + self.__size(node.right)
+        # print(node.item, node.count)
 
         return node
 
@@ -181,11 +182,10 @@ class BinarySearchTree:
 
         if key < n.key:
             return self.__rank(key, n.left)
-
-        if key > n.key:
+        elif key > n.key:
             return 1 + self.__size(n.left) + self.__rank(key, n.right)
-
-        return self.__size(n.left)
+        else:
+            return self.__size(n.left)
 
     def __prepare_iterable(self, n: Node = None, q: Queue = None) -> None:
         if n is None:
@@ -211,6 +211,8 @@ if __name__ == '__main__':
     keys = [2, 1, 3, 5, 8, 4, 12]
     for k in keys:
         bst.put(k, k)
+
+    print('rank 2 =', bst.rank(2), '\n')
 
     print('original BST')
     print(*bst, '\n')
