@@ -36,6 +36,15 @@ class RedBlackBST:
         else:
             n.item = value
 
+        if self.__is_red(n.right) and not self.__is_red(n.left):
+            self.__rotate_left(n)
+
+        if self.__is_red(n.left) and self.__is_red(n.left.left):
+            self.__rotate_right(n)
+
+        if self.__is_red(n.left) and self.__is_red(n.right):
+            self.__flip_colors(n)
+
         return n
 
     def __is_red(self, n: Node):
@@ -54,8 +63,8 @@ class RedBlackBST:
     def __rotate_right(self, n: Node) -> Node:
         temp = n.left
         n.left = temp.right
-        temp.color = n.color
         temp.right = n
+        temp.color = n.color
         n.color = self.__RED
         return temp
 
