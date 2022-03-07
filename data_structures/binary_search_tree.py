@@ -65,8 +65,7 @@ class BinarySearchTree:
 
         # If len == 1
         if cursor_node.left is None:
-            self.__root = self.__root.right
-            return None
+            return cursor_node
 
         while True:
             prev_node = cursor_node
@@ -114,10 +113,10 @@ class BinarySearchTree:
             if n.left is None:
                 return n.right
 
-            temp_node = n
-            n = self.min(temp_node.right)
-            n.right = self.delete_min(temp_node.right)
-            n.left = temp_node.left
+            node_to_replace = self.delete_min(n.right)
+            node_to_replace.left = n.left
+            n = node_to_replace
+
         return n
 
     def __put(self, node: Node, key: Any, value: Any) -> Node:
@@ -158,24 +157,23 @@ if __name__ == '__main__':
     for k in keys:
         bst.put(k, k)
 
-    # for item in bst:
-    #     print(item)
-    #
-    # print()
-    # print('min =', bst.min().key)
-    # print('After delete_min')
-    # print('min =', bst.delete_min().key)
-    # for item in bst:
-    #     print(item)
-    #
-    # print()
-    # print('After delete_max')
-    # bst.delete_max()
-    # for item in bst:
-    #     print(item)
+    print('original BST')
+    print(*bst, '\n')
 
-    # print()
+    bst.delete(3)
+    print('After delete 3')
+    print(*bst, '\n')
+
     print('After delete 5')
     bst.delete(5)
-    for item in bst:
-        print(item)
+    print(*bst, '\n')
+
+    print('min =', bst.min().key)
+    print('After delete_min')
+    bst.delete_min()
+    print(*bst, '\n')
+
+    print('After delete_max')
+    bst.delete_max()
+    print(*bst, '\n')
+
