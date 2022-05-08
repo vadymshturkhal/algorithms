@@ -1,5 +1,5 @@
 from data_structures.node import Node
-
+from typing import Union
 
 class LinkedList:
     def __init__(self) -> None:
@@ -7,7 +7,7 @@ class LinkedList:
         self.__current = None
         self.__length = 0
 
-    def search(self, value) -> [None, Node]:
+    def search(self, value) -> Union[None, Node]:
         """Returns Node or None"""
         cur = self.__first
 
@@ -32,7 +32,12 @@ class LinkedList:
         self.__current = current
 
     def delete(self, value):
-        pass
+        """Delete first node with value"""
+        node = self.search(value)
+        prev = node.previous
+        
+        if prev is not None:
+            prev.next_node = node.next_node
 
     def is_empty(self):
         return self.__length == 0
@@ -60,4 +65,6 @@ if __name__ == '__main__':
 
     n = l_l.search(3)
     n.item = 11
+
+    l_l.delete(2)
     print(l_l)
