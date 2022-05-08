@@ -6,32 +6,30 @@ class Stack:
 
     def __init__(self):
         self.__stack = []
-        self.__last_element_index = 0
 
     def push(self, value: Any) -> None:
         self.__stack.append(value)
-        self.__last_element_index += 1
 
     def pop(self) -> Union[None, Any]:
         if self.is_empty(): return
 
-        value_to_return = self.__stack[self.__last_element_index - 1]
-        self.__stack[self.__last_element_index - 1] = None
-        self.__last_element_index -= 1
-        return value_to_return
+        return self.__stack.pop()
 
 
     def is_empty(self):
-        return self.__last_element_index == 0
+        return len(self.__stack) == 0
 
     def __len__(self) -> int:
-        return self.__last_element_index
+        return len(self.__stack)
 
     def __iter__(self):
-        pass
+        return self
 
     def __next__(self):
-        pass
+        if self.is_empty():
+            raise StopIteration
+
+        return self.__stack.pop()
 
 
 if __name__ == '__main__':
@@ -40,8 +38,19 @@ if __name__ == '__main__':
 
     for i in range(1, STACK_LENGTH + 1):
         s.push(i)
-    
+    print('pop()')
     print("Stack length =", len(s))
 
     for i in range(1, STACK_LENGTH + 1):
         print(s.pop())
+    print(f'{s.is_empty()=}')
+    print(f'{s.pop()=}')
+    print()
+
+    print('for...in')
+    for i in range(1, STACK_LENGTH + 1):
+        s.push(i)
+    print("Stack length =", len(s))
+    for val in s:
+        print(val)
+    print(f'{s.pop()=}')
