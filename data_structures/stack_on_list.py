@@ -11,12 +11,12 @@ class Stack:
         self.__stack.append(value)
 
     def pop(self) -> Union[None, Any]:
-        if self.is_empty(): return
+        if self.is_empty(): 
+            return
 
         return self.__stack.pop()
 
-
-    def is_empty(self):
+    def is_empty(self) -> bool:
         return len(self.__stack) == 0
 
     def __len__(self) -> int:
