@@ -38,6 +38,8 @@ class LinkedList:
         
         if prev is not None:
             prev.next_node = node.next_node
+        
+        del node
 
     def is_empty(self):
         return self.__length == 0
