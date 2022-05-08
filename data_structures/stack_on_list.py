@@ -7,19 +7,25 @@ class Stack:
     def __init__(self):
         self.__stack = []
         self.__last_element_index = 0
-        self.__length = 0
 
     def push(self, value: Any) -> None:
-        pass
+        self.__stack.append(value)
+        self.__last_element_index += 1
 
     def pop(self) -> Union[None, Any]:
-        pass
+        if self.is_empty(): return
+
+        value_to_return = self.__stack[self.__last_element_index]
+        self.__stack[self.__last_element_index] = None
+        self.__last_element_index -= 1
+        return value_to_return
+
 
     def is_empty(self):
-        pass
+        return self.__last_element_index == 0
 
     def __len__(self) -> int:
-        pass
+        return self.__last_element_index
 
     def __iter__(self):
         pass
@@ -34,4 +40,9 @@ if __name__ == '__main__':
 
     for i in range(1, STACK_LENGTH + 1):
         s.push(i)
+    
+    print("Stack length =", len(s))
+
+    for i in range(1, STACK_LENGTH + 1):
+        print(s.pop())
 
