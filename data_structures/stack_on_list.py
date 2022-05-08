@@ -15,8 +15,8 @@ class Stack:
     def pop(self) -> Union[None, Any]:
         if self.is_empty(): return
 
-        value_to_return = self.__stack[self.__last_element_index]
-        self.__stack[self.__last_element_index] = None
+        value_to_return = self.__stack[self.__last_element_index - 1]
+        self.__stack[self.__last_element_index - 1] = None
         self.__last_element_index -= 1
         return value_to_return
 
@@ -45,4 +45,3 @@ if __name__ == '__main__':
 
     for i in range(1, STACK_LENGTH + 1):
         print(s.pop())
-
