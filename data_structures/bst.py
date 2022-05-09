@@ -21,8 +21,7 @@ class BST:
         if self.__root is None:
             return
 
-        self.__delete_min(self.__root)
-
+        self.__root = self.__delete_min(self.__root)
 
     def search_min(self, node=None) -> Union[None, Node]:
         if self.__root is None:
