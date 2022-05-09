@@ -1,5 +1,5 @@
-from typing_extensions import Self
 from data_structures.node import Node
+from data_structures.queue import Queue
 
 class BST:
     def __init__(self) -> None:
@@ -29,17 +29,26 @@ class BST:
 
     def delete(self, value) -> None:
         pass
+    
+    def __iter__(self):
+        self.__nodes = Queue()
+        self.__prepare_iterable(self.__root, self.__nodes)
+        return self
 
-    def print_values(self) -> None:
-        self.__print(self.__root)
-
-    def __print(self, node):
+    def __prepare_iterable(self, node, nodes: Queue):
         if node is None:
             return
 
-        self.__print(node.left)
-        print(node.item)
-        self.__print(node.right)
+        self.__prepare_iterable(node.left, nodes)
+        nodes.enqueue(node.item)
+        self.__prepare_iterable(node.right, nodes)
+
+    def __next__(self):
+        for value in self.__nodes:
+            return value
+        
+        del self.__nodes
+        raise StopIteration
 
 if __name__ == '__main__':
     bst = BST()
@@ -49,5 +58,6 @@ if __name__ == '__main__':
     bst.insert(1)
     bst.insert(4)
     bst.insert(-1)
+    bst.insert(-1)
 
-    bst.print_values()
+    print(*bst)
