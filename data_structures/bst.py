@@ -7,29 +7,31 @@ class BST:
         self.__root = None
 
     def insert(self, value) -> None:
-        new_node = Node(value=value)
-
         if self.__root is None:
-            self.__root = new_node
+            self.__root = Node(value=value)
             return
-        
-        current_node = self.__root
-        while True:
-            if value > current_node.item:
-                if current_node.right is None:
-                    current_node.right = new_node
-                    break
-                else:
-                    current_node = current_node.right
-            else:
-                if current_node.left is None:
-                    current_node.left = new_node
-                    break
-                else:
-                    current_node = current_node.left
+
+        self.__insert(self.__root, value)
 
     def delete(self, value) -> None:
-        pass
+        if self.__root is None:
+            return
+
+        current_node = self.__root
+        while True:
+            if current_node is None:
+                break
+            if current_node.item == value:
+                break
+
+            if value > current_node.item:
+                current_node = current_node.right
+            elif value < current_node.item:
+                current_node = current_node.left
+            else:
+                return current_node
+
+        return current_node
 
     def search_min(self, node=None) -> Union[None, Node]:
         if self.__root is None:
@@ -40,26 +42,18 @@ class BST:
         
         if node.left is None:
             return node
+
         return self.search_min(node.left)
 
-    def search_node(self, value) -> Union[None, Node]:
-        """Search first node with value"""
+    def __insert(self, node, value):
+        if node is None:
+            return Node(value=value)
 
-        if self.__root is None:
-            return
-
-        current_node = self.__root
-        while True:
-            if current_node is None:
-                break
-            if value > current_node.item:
-                current_node = current_node.right
-            elif value < current_node.item:
-                current_node = current_node.left
-            else:
-                return current_node
-            
-        return current_node
+        if value > node.item:
+            node.right = self.__insert(node.right, value)
+        else:
+            node.left = self.__insert(node.left, value)
+        return node
 
     def __iter__(self):
         self.__nodes = Queue()
@@ -83,12 +77,11 @@ class BST:
 
 if __name__ == '__main__':
     bst = BST()
-    nums_to_put = [12, 18, 15, 19, 13, 17, 5, 2, 9]
-    # nums_to_put = [5, 6, 7, 1, 4, -1]
+    # nums_to_put = [12, 18, 15, 19, 13, 17, 5, 2, 9]
+    nums_to_put = [5, 6, 7, 1, 4, -1]
     for num in nums_to_put:
         bst.insert(num)
 
     print(*bst)
 
     print(f'{bst.search_min().item = }')
-    print(f'{bst.search_node(2).item = }')
