@@ -43,7 +43,23 @@ class BST:
         return self.search_min(node.left)
 
     def search_node(self, value) -> Union[None, Node]:
-        pass
+        """Search first node with value"""
+
+        if self.__root is None:
+            return
+
+        current_node = self.__root
+        while True:
+            if current_node is None:
+                break
+            if value > current_node.item:
+                current_node = current_node.right
+            elif value < current_node.item:
+                current_node = current_node.left
+            else:
+                return current_node
+            
+        return current_node
 
     def __iter__(self):
         self.__nodes = Queue()
@@ -68,9 +84,11 @@ class BST:
 if __name__ == '__main__':
     bst = BST()
     nums_to_put = [12, 18, 15, 19, 13, 17, 5, 2, 9]
+    # nums_to_put = [5, 6, 7, 1, 4, -1]
     for num in nums_to_put:
         bst.insert(num)
 
     print(*bst)
 
-    print(bst.search_min().item)
+    print(f'{bst.search_min().item = }')
+    print(f'{bst.search_node(2).item = }')
