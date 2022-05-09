@@ -1,8 +1,9 @@
+from typing import Union
 from data_structures.node import Node
 from data_structures.queue import Queue
 
 class BST:
-    def __init__(self) -> None:
+    def __init__(self):
         self.__root = None
 
     def insert(self, value) -> None:
@@ -29,7 +30,21 @@ class BST:
 
     def delete(self, value) -> None:
         pass
-    
+
+    def search_min(self, node=None) -> Union[None, Node]:
+        if self.__root is None:
+            return
+
+        if node is None:
+            node = self.__root
+        
+        if node.left is None:
+            return node
+        return self.search_min(node.left)
+
+    def search_node(self, value) -> Union[None, Node]:
+        pass
+
     def __iter__(self):
         self.__nodes = Queue()
         self.__prepare_iterable(self.__root, self.__nodes)
@@ -52,12 +67,10 @@ class BST:
 
 if __name__ == '__main__':
     bst = BST()
-    bst.insert(5)
-    bst.insert(6)
-    bst.insert(7)
-    bst.insert(1)
-    bst.insert(4)
-    bst.insert(-1)
-    bst.insert(-1)
+    nums_to_put = [12, 18, 15, 19, 13, 17, 5, 2, 9]
+    for num in nums_to_put:
+        bst.insert(num)
 
     print(*bst)
+
+    print(bst.search_min().item)
