@@ -17,11 +17,16 @@ class BST:
         if self.__root is None:
             return
 
+        self.__root = self.__delete(self.__root, value)
+
     def delete_min(self, node=None) -> None:
         if self.__root is None:
             return
+        
+        if node is None:
+            node = self.__root
 
-        self.__root = self.__delete_min(self.__root)
+        self.__root = self.__delete_min(node)
 
     def search_min(self, node=None) -> Union[None, Node]:
         if self.__root is None:
@@ -55,9 +60,36 @@ class BST:
 
     def __delete_min(self, node):
         if node.left is None:
+            """At the moment node has a minimum value"""
+            self.__min = node
             return node.right
 
         node.left = self.__delete_min(node.left)
+        return node
+
+    def __delete(self, node, value):
+        if node is None:
+            return
+
+        if value > node.item:
+            node.right = self.__delete(node.right, value)
+        elif value < node.item:
+            node.left = self.__delete(node.left, value)
+        else:
+            if node.left is None:
+                return node.right
+            if node.right is None:
+                return node.left
+
+            self.delete_min(node.right)
+            self.__min.left = node.left
+            self.__min.right = node.right
+
+            node.left = None
+            node.right = None
+            min = self.__min
+            del self.__min
+            return min
         return node
 
     def __iter__(self):
@@ -84,4 +116,10 @@ if __name__ == '__main__':
 
     bst.delete_min() 
     print('\nAfter bst.delete_min()')
+    print(*bst)
+
+    bst.delete(6)
+    print(*bst)
+
+    bst.delete(7)
     print(*bst)
