@@ -17,21 +17,12 @@ class BST:
         if self.__root is None:
             return
 
-        current_node = self.__root
-        while True:
-            if current_node is None:
-                break
-            if current_node.item == value:
-                break
+    def delete_min(self, node=None) -> None:
+        if self.__root is None:
+            return
 
-            if value > current_node.item:
-                current_node = current_node.right
-            elif value < current_node.item:
-                current_node = current_node.left
-            else:
-                return current_node
+        self.__delete_min(self.__root)
 
-        return current_node
 
     def search_min(self, node=None) -> Union[None, Node]:
         if self.__root is None:
@@ -55,11 +46,6 @@ class BST:
             node.left = self.__insert(node.left, value)
         return node
 
-    def __iter__(self):
-        self.__nodes = Queue()
-        self.__prepare_iterable(self.__root, self.__nodes)
-        return self
-
     def __prepare_iterable(self, node, nodes: Queue):
         if node is None:
             return
@@ -68,20 +54,35 @@ class BST:
         nodes.enqueue(node.item)
         self.__prepare_iterable(node.right, nodes)
 
+    def __delete_min(self, node):
+        if node.left is None:
+            return node.right
+
+        node.left = self.__delete_min(node.left)
+        return node
+
+    def __iter__(self):
+        self.__nodes = Queue()
+        self.__prepare_iterable(self.__root, self.__nodes)
+        return self
+
     def __next__(self):
         for value in self.__nodes:
             return value
-        
+
         del self.__nodes
         raise StopIteration
 
 if __name__ == '__main__':
     bst = BST()
     # nums_to_put = [12, 18, 15, 19, 13, 17, 5, 2, 9]
-    nums_to_put = [5, 6, 7, 1, 4, -1]
+    nums_to_put = [5, 6, 7, 1, 4, -1, 5.5, 6.5]
     for num in nums_to_put:
         bst.insert(num)
 
     print(*bst)
-
     print(f'{bst.search_min().item = }')
+
+    bst.delete_min() 
+    print('\nAfter bst.delete_min()')
+    print(*bst)
