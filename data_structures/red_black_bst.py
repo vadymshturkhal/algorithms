@@ -5,10 +5,13 @@ from data_structures.queue import Queue
 
 class RedBlackBST:
     def __init__(self):
+        self.__root = None
         self.__RED = True
         self.__BLACK = False
-        self.__root = None
-        self.__iterable = None
+
+    def insert(self, value) -> None:
+        """Ignores same value"""
+        self.__root = self.__insert(self.__root, value)
 
     def get(self, key) -> Union[None, Any]:
         """
@@ -27,19 +30,16 @@ class RedBlackBST:
 
         return None
 
-    def put(self, key: Any, value: Any) -> None:
-        self.__root = self.__put(self.__root, key, value)
-
-    def __put(self, node: Node, key: Any, value: Any) -> Node:
+    def __insert(self, node, value):
         if node is None:
-            return Node(key, value, self.__RED)
+            return Node(value=value, color=self.__RED)
 
-        if key < node.key:
-            node.left = self.__put(node.left, key, value)
-        elif key > node.key:
-            node.right = self.__put(node.right, key, value)
-        else:
-            node.item = value
+        if value > node.item:
+            node.right = self.__insert(node.right, value)
+        elif value < node.item:
+            node.left = self.__insert(node.left, value)
+        else:  # Ignore when the same
+            pass
 
         if self.__is_red(node.right) and not self.__is_red(node.left):
             node = self.__rotate_left(node)
@@ -49,7 +49,7 @@ class RedBlackBST:
 
         if self.__is_red(node.left) and self.__is_red(node.right):
             self.__flip_colors(node)
-
+        
         return node
 
     def __is_red(self, n: Node):
@@ -97,10 +97,13 @@ class RedBlackBST:
 
 
 if __name__ == '__main__':
-    rb = RedBlackBST()
+    rb_bst = RedBlackBST()
+    # to_put = [12, 18, 15, 19, 13, 17, 5, 2, 9]
+    # nums_to_put = [5, 6, 7, 1, 4, -1, 5.5, 6.5]
+    # to_put = ['a', 'b']
+    to_put = ['s', 'e', 'a', 'r', 'c', 'h', 'x', 'm', 'p', 'l']
 
-    keys = ['s', 'e', 'a', 'r', 'c', 'h', 'x', 'm', 'p', 'l']
-    for k in keys:
-        rb.put(k, k)
+    for num in to_put:
+        rb_bst.insert(num)
 
-    print(*rb)
+    print(*rb_bst)
