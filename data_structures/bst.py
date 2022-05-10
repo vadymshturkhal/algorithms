@@ -7,6 +7,8 @@ class BST:
         self.__root = None
 
     def insert(self, value) -> None:
+        """Ignores same value"""
+
         if self.__root is None:
             self.__root = Node(value=value)
             return
@@ -46,7 +48,7 @@ class BST:
 
         if value > node.item:
             node.right = self.__insert(node.right, value)
-        else:
+        elif value < node.item:
             node.left = self.__insert(node.left, value)
         return node
 
@@ -122,4 +124,9 @@ if __name__ == '__main__':
     print(*bst)
 
     bst.delete(7)
+    print(*bst)
+
+    bst.insert(1)
+    bst.insert(1)
+    bst.insert(1)
     print(*bst)
