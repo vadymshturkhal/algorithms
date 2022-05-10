@@ -78,21 +78,24 @@ class RedBlackBST:
         n.left.color = self.__BLACK
         n.right.color = self.__BLACK
 
-    def __prepare_iterable(self, n: Node = None, q: Queue = None) -> None:
-        if n is None:
+    def __prepare_iterable(self, node, nodes: Queue):
+        if node is None:
             return
-        self.__prepare_iterable(n.left, q)
-        q.enqueue(n)
-        self.__prepare_iterable(n.right, q)
+
+        self.__prepare_iterable(node.left, nodes)
+        nodes.enqueue(node.item)
+        self.__prepare_iterable(node.right, nodes)
 
     def __iter__(self):
-        self.__iterable = Queue()
-        self.__prepare_iterable(self.__root, self.__iterable)
+        self.__nodes = Queue()
+        self.__prepare_iterable(self.__root, self.__nodes)
         return self
 
     def __next__(self):
-        for node in self.__iterable:
-            return node.item
+        for value in self.__nodes:
+            return value
+
+        del self.__nodes
         raise StopIteration
 
 
