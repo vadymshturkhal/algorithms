@@ -15,8 +15,10 @@ class BST:
 
         return current_node
     
-    def min_key(self):
-        node = self.__root
+    def min_key(self, node=None):
+        if node is None:
+            node = self.__root
+
         key = None
 
         while node is not None:
@@ -25,7 +27,10 @@ class BST:
 
         return key
 
-    def max_key(self):
+    def max_key(self, node=None):
+        if node is None:
+            node = self.__root
+
         node = self.__root
         key = None
 
