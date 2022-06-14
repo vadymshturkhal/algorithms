@@ -25,6 +25,15 @@ class BST:
 
         return key
 
+    def max_key(self):
+        node = self.__root
+        key = None
+
+        while node is not None:
+            key = node.key
+            node = node.right
+
+        return key
 
     def __prepare_iterable(self, node, nodes: Queue):
         if node is None:
