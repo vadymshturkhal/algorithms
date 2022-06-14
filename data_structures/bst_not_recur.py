@@ -13,6 +13,8 @@ class BST:
             else:
                 current_node = current_node.right
 
+        return current_node
+
     def __prepare_iterable(self, node, nodes: Queue):
         if node is None:
             return
