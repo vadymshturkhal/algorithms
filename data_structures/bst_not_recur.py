@@ -5,6 +5,9 @@ class BST:
     def __init__(self):
         self.__root = None
 
+    def insert(self, key):
+        pass
+
     def search(self, key):
         current_node = self.__root
         while current_node is not None and key != current_node.key:
