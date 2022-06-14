@@ -24,7 +24,7 @@ class Node:
     def value(self) -> Any:
         return self.__item
 
-    @property.setter
+    @value.setter
     def value(self, value) -> None:
         self.__item = value
 
