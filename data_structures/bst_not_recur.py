@@ -14,6 +14,17 @@ class BST:
                 current_node = current_node.right
 
         return current_node
+    
+    def min_key(self):
+        node = self.__root
+        key = None
+
+        while node is not None:
+            key = node.key
+            node = node.left
+
+        return key
+
 
     def __prepare_iterable(self, node, nodes: Queue):
         if node is None:
