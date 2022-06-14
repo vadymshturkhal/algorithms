@@ -21,6 +21,14 @@ class Node:
         self.__key = value
 
     @property
+    def value(self) -> Any:
+        return self.__item
+
+    @property.setter
+    def value(self, value) -> None:
+        self.__item = value
+
+    @property
     def item(self) -> Any:
         return self.__item
 
