@@ -30,6 +30,18 @@ class BST:
 
         self.__root = self.__delete_min(node)
 
+    def search(self, key, node=None):
+        if node is None:
+            node = self.__root
+
+        if self.__root is None or self.__root.item == key:
+            return self.__root
+        
+        if key < node.item:
+            return self.search(key, node.left)
+
+        return self.search(key, node.right)
+
     def search_min(self, node=None) -> Union[None, Node]:
         if self.__root is None:
             return
@@ -115,6 +127,7 @@ if __name__ == '__main__':
 
     print(*bst)
     print(f'{bst.search_min().item = }')
+    print('search', bst.search(5))
 
     bst.delete_min() 
     print('\nAfter bst.delete_min()')
