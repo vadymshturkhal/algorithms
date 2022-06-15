@@ -5,8 +5,26 @@ class BST:
     def __init__(self):
         self.__root = None
 
-    def insert(self, key):
-        pass
+    def insert(self, key, value=None):
+        node = Node(key, value)
+        if self.__root is None:
+            self.__root = node
+            return
+
+        parent = None
+        cursor = self.__root
+
+        while cursor is not None:
+            parent = cursor
+            if key < cursor.key:
+                cursor = cursor.left
+            else:
+                cursor = cursor.right
+        
+        if key < parent.key:
+            parent.left = node
+        else:
+            parent.right = node
 
     def search(self, key):
         current_node = self.__root
@@ -17,7 +35,7 @@ class BST:
                 current_node = current_node.right
 
         return current_node
-    
+
     def min_key(self, node=None):
         if node is None:
             node = self.__root
