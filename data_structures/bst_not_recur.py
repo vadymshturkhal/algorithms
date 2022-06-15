@@ -110,6 +110,6 @@ if __name__ == '__main__':
     for num in nums_to_put:
         bst.insert(num)
 
-    print(bst.min_key())
-    print(bst.max_key())
+    print(f'{bst.min_key() = }')
+    print(f'{bst.max_key() = }')
     print(*bst)
