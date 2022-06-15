@@ -66,7 +66,7 @@ class BST:
             return
 
         self.__prepare_iterable(node.left, nodes)
-        nodes.enqueue(node.item)
+        nodes.enqueue(node.key)
         self.__prepare_iterable(node.right, nodes)
     
     def __iter__(self):
@@ -87,4 +87,6 @@ if __name__ == '__main__':
     for num in nums_to_put:
         bst.insert(num)
 
+    print(bst.min_key())
+    print(bst.max_key())
     print(*bst)
