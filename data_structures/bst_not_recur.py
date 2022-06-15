@@ -61,6 +61,29 @@ class BST:
 
         return key
 
+    def successor_key(self, key):
+        """Returns node with the smallest key bigger than given"""
+
+        node = self.search(key)
+
+        if node is None:
+            return
+
+        if node.right is not None:
+            return self.min_key(node.right)
+        return
+
+    def predecessor_key(self, key):
+        """Returns node with the biggest key smaller than given"""
+        node = self.search(key)
+
+        if node is None:
+            return
+
+        if node.left is not None:
+            return self.max_key(node.left)
+        return
+
     def __prepare_iterable(self, node, nodes: Queue):
         if node is None:
             return
