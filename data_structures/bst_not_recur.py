@@ -38,6 +38,7 @@ class BST:
 
     def delete_key(self, key):
         node_to_del = self.search(key)
+        # parent_node = self.__get_parent(key)
 
         if node_to_del is None:
             return
@@ -51,11 +52,14 @@ class BST:
         else:
             x = node_might_be_del.right
 
+        x = None
         if x is not None:
             pass
 
+        return
 
-    def min_key(self, node=None):
+
+    def min_key(self, node=None, return_node=False):
         if node is None:
             node = self.__root
 
@@ -65,9 +69,9 @@ class BST:
             key = node.key
             node = node.left
 
-        return key
+        return key if not return_node else node
 
-    def max_key(self, node=None):
+    def max_key(self, node=None, return_node=False):
         if node is None:
             node = self.__root
 
@@ -78,9 +82,9 @@ class BST:
             key = node.key
             node = node.right
 
-        return key
+        return key if not return_node else node
 
-    def successor_key(self, key):
+    def successor_key(self, key, return_node=False):
         """Returns node with the smallest key bigger than given"""
 
         node = self.search(key)
@@ -89,10 +93,10 @@ class BST:
             return
 
         if node.right is not None:
-            return self.min_key(node.right)
+            return self.min_key(node.right, return_node)
         return
 
-    def predecessor_key(self, key):
+    def predecessor_key(self, key, return_node=False):
         """Returns node with the biggest key smaller than given"""
         node = self.search(key)
 
@@ -100,7 +104,7 @@ class BST:
             return
 
         if node.left is not None:
-            return self.max_key(node.left)
+            return self.max_key(node.left, return_node)
         return
 
     def __prepare_iterable(self, node, nodes: Queue):
@@ -132,3 +136,5 @@ if __name__ == '__main__':
     print(*bst)
     print(f'{bst.min_key() = }')
     print(f'{bst.max_key() = }')
+
+    bst.delete_key(7)
