@@ -36,6 +36,25 @@ class BST:
 
         return current_node
 
+    def delete_key(self, key):
+        node_to_del = self.search(key)
+
+        if node_to_del is None:
+            return
+
+        node_might_be_del = None
+        if node_to_del.left is None or node_to_del.right is None:
+            node_might_be_del = node_to_del
+        
+        if node_might_be_del.left is not None:
+            x = node_might_be_del.left
+        else:
+            x = node_might_be_del.right
+
+        if x is not None:
+            pass
+
+
     def min_key(self, node=None):
         if node is None:
             node = self.__root
@@ -110,6 +129,6 @@ if __name__ == '__main__':
     for num in nums_to_put:
         bst.insert(num)
 
+    print(*bst)
     print(f'{bst.min_key() = }')
     print(f'{bst.max_key() = }')
-    print(*bst)
