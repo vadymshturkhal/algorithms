@@ -26,38 +26,24 @@ class BST:
         else:
             parent.right = node
 
-    def search(self, key):
+    def search(self, key, also_return_parent=False):
         current_node = self.__root
+        parent = None
         while current_node is not None and key != current_node.key:
+            parent = current_node
+
             if key < current_node.key:
                 current_node = current_node.left
             else:
                 current_node = current_node.right
 
+        if also_return_parent:
+            return current_node, parent
+
         return current_node
 
     def delete_key(self, key):
-        node_to_del = self.search(key)
-        # parent_node = self.__get_parent(key)
-
-        if node_to_del is None:
-            return
-
-        node_might_be_del = None
-        if node_to_del.left is None or node_to_del.right is None:
-            node_might_be_del = node_to_del
-        
-        if node_might_be_del.left is not None:
-            x = node_might_be_del.left
-        else:
-            x = node_might_be_del.right
-
-        x = None
-        if x is not None:
-            pass
-
-        return
-
+        node_to_del, parent = self.search(key, also_return_parent=True)
 
     def min_key(self, node=None, return_node=False):
         if node is None:
@@ -129,7 +115,7 @@ class BST:
 
 if __name__ == '__main__':
     bst = BST()
-    nums_to_put = [5, 6, 7, 1, 4, -1, 5.5, 6.5]
+    nums_to_put = [15, 6, 3, 2, 4, 7, 13, 9, 18, 20, 17]
     for num in nums_to_put:
         bst.insert(num)
 
@@ -137,4 +123,5 @@ if __name__ == '__main__':
     print(f'{bst.min_key() = }')
     print(f'{bst.max_key() = }')
 
-    bst.delete_key(7)
+    bst.delete_key(2)
+    print(*bst)
