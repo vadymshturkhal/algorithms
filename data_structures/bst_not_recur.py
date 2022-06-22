@@ -45,6 +45,10 @@ class BST:
     def delete_key(self, key):
         node_to_del, parent = self.search(key, also_return_parent=True)
 
+        # Node with the key doesn't exist
+        if node_to_del is None:
+            return
+
     def min_key(self, node=None, return_node=False):
         if node is None:
             node = self.__root
