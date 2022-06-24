@@ -45,9 +45,10 @@ class BST:
     def delete_key(self, key):
         node_to_del, parent = self.search(key, also_return_parent=True)
 
-        # Node with the key doesn't exist
-        if node_to_del is None:
-            return
+        if parent.left is node_to_del:
+            parent.left = self._child_node(node_to_del)
+        else:
+            parent.right = self._child_node(node_to_del)
 
     def min_key(self, node=None, return_node=False):
         if node is None:
@@ -96,6 +97,21 @@ class BST:
         if node.left is not None:
             return self.max_key(node.left, return_node)
         return
+
+    def _child_node(self, node_to_del):
+        if node_to_del is None:
+            return
+
+        is_all_children_exist= all([node_to_del.left, node_to_del.right])
+
+        if not is_all_children_exist:
+            return
+        
+        if is_all_children_exist:
+            print('all children exist')
+            return
+
+        return node_to_del.left if node_to_del.left else node_to_del.right        
 
     def __prepare_iterable(self, node, nodes: Queue):
         if node is None:
