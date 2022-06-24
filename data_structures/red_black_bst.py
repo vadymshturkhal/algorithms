@@ -83,6 +83,7 @@ class RedBlackBST:
             return
 
         self.__prepare_iterable(node.left, nodes)
+        print(node.item, node.color)
         nodes.enqueue(node.item)
         self.__prepare_iterable(node.right, nodes)
 
@@ -103,10 +104,11 @@ if __name__ == '__main__':
     rb_bst = RedBlackBST()
     # to_put = [12, 18, 15, 19, 13, 17, 5, 2, 9]
     # nums_to_put = [5, 6, 7, 1, 4, -1, 5.5, 6.5]
-    # to_put = ['a', 'b']
-    to_put = ['s', 'e', 'a', 'r', 'c', 'h', 'x', 'm', 'p', 'l']
+    # to_put = ['s', 'e', 'a', 'r', 'c', 'h', 'x', 'm', 'p', 'l']
+    to_put = ['a', 'c', 'd', 'e', 'j', 'g']
 
     for num in to_put:
         rb_bst.insert(num)
 
     print(*rb_bst)
+    print()
