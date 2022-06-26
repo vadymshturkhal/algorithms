@@ -48,6 +48,7 @@ if __name__ == '__main__':
 
     print(f"{comb_visual_improved(ELEMENTS, K) = }")
     print(f"{comb(len(ELEMENTS), K) = }")
+    print()
 
     print(f"{comb_visual_improved(3, 2) = }")
     print(f"{comb(3, 2) = }")
