@@ -27,6 +27,10 @@ def break_number_to_ordered_sum_of_terms(number: int, terms=None, memoize=None):
     current_sum = 0
     for term in terms:
         current_term = number - term
+
+        if (current_term < 0):
+            return current_sum
+
         if memoize.get(current_term) is None:
             current_sums_quantity = break_number_to_ordered_sum_of_terms(current_term, terms, memoize)
             memoize[current_term] = current_sums_quantity
