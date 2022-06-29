@@ -18,16 +18,16 @@ def comb_visual_generators(elements: int, subset_length: int) -> Union[int, None
 
     if subset_length == length:
         counter += 1
-        yield current_subset
+        yield tuple(current_subset)
         return counter
 
     pointer = subset_length - 1
     while 0 <= pointer:
         if is_print_elements:
             current_state = [elements[current_subset[i] - 1] for i in range(len(current_subset))]
-            yield current_state
+            yield tuple(current_state)
         else:
-            yield current_subset
+            yield tuple(current_subset)
 
         counter += 1
 
