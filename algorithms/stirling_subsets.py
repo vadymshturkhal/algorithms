@@ -8,16 +8,15 @@ def stirling_subsets(elements, to_union=None, default_start=1):
         elements = [_ for _ in range(default_start, length + default_start)]
 
     if len(elements) <= 1:
-        x = set(elements)
+        x = [tuple(elements)]
         if to_union is not None:
-            print(1)
-            to_return = invariant(set(elements), to_union)
-
+            to_return = invariant(x, {to_union})
+            return to_return
         return x
 
     x = stirling_subsets(elements[:len(elements) - 1], elements[-1])
-    print(x)
-    return x.add(1)
+    
+    return x
     # if len(elements) == 2:
     #     # if to_print:
     #     #     print(tuple(to_print), tuple(elements))
@@ -31,12 +30,18 @@ def stirling_subsets(elements, to_union=None, default_start=1):
     #     return all_partitions
 
 
-def invariant(partition, to_union):
-    print(partition, to_union)
-
+def invariant(partitions: list, to_union):
+    unions = []
+    for part in partitions:
+        for p in part:
+            t = set([p]).union(to_union)
+            t1 = (set([p]), to_union)
+            unions.append(t)
+            unions.append(t1)
+    return tuple(unions)
 
 if __name__ == '__main__':
-    SEQUENCE_LENGTH = 2
+    SEQUENCE_LENGTH = 3
 
     """
         Must be:
@@ -57,4 +62,6 @@ if __name__ == '__main__':
             (13)(2)(4)
     """
     # stirling_subsets(SEQUENCE_LENGTH)
-    stirling_subsets(SEQUENCE_LENGTH)
+    x = stirling_subsets(SEQUENCE_LENGTH)
+    for i in x:
+        print(*i)
