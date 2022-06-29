@@ -1,15 +1,24 @@
 def stirling_subsets(length: int):
-    partition = []
-    forward = []
-    next_partition = [0] * length
+    num_of_block = []
+    direction_to_move = []
+    next = [0] * length
 
-    for i in range(length):
-        partition[i] = 1
-        forward[i] = True
+    for _ in range(length):
+        num_of_block.append(0)
+        direction_to_move.append(True)
 
-    pointer = length
+    print(num_of_block)
+    print(direction_to_move)
+    print(next)
+
+    active_element = length - 1
+    k = num_of_block[active_element]
+
+    if direction_to_move[active_element]:
+        # move element forward
+        pass
 
 
 if __name__ == '__main__':
-    SEQUENCE_LENGTH = 4
+    SEQUENCE_LENGTH = 3
     stirling_subsets(SEQUENCE_LENGTH)
