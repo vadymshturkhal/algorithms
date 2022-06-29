@@ -2,7 +2,7 @@ from typing import Union
 from math import comb
 
 
-def comb_visual_improved(elements: int, subset_length: int) -> Union[int, None]:
+def comb_visual_generators(elements: int, subset_length: int) -> Union[int, None]:
     """Visualize math.comb in lexicographic order"""
     is_print_elements = False
     if type(elements) == list:
@@ -18,16 +18,16 @@ def comb_visual_improved(elements: int, subset_length: int) -> Union[int, None]:
 
     if subset_length == length:
         counter += 1
-        print(*current_subset)
+        yield current_subset
         return counter
 
     pointer = subset_length - 1
     while 0 <= pointer:
         if is_print_elements:
             current_state = [elements[current_subset[i] - 1] for i in range(len(current_subset))]
-            print(*current_state)
+            yield current_state
         else:
-            print(*current_subset)
+            yield current_subset
 
         counter += 1
 
@@ -47,9 +47,9 @@ if __name__ == '__main__':
     ELEMENTS = ['a', 'b', 'c', 'd', 'e', 1, 2, 3]
     K = 4
 
-    print(f"{comb_visual_improved(ELEMENTS, K) = }")
-    print(f"{comb(len(ELEMENTS), K) = }")
-    print()
+    comb_gen = comb_visual_generators(ELEMENTS, K)
+    print(next(comb_gen))
+    print(next(comb_gen))
 
-    print(f"{comb_visual_improved(3, 2) = }")
-    print(f"{comb(3, 2) = }")
+    for i in comb_gen:
+        print(i)
