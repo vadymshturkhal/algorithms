@@ -1,24 +1,31 @@
 def stirling_subsets(length: int):
-    num_of_block = []
-    direction_to_move = []
-    next = [0] * length
+    elements = [_ for _ in range(1, length + 1)]
+    print(elements)
 
-    for _ in range(length):
-        num_of_block.append(0)
-        direction_to_move.append(True)
+    cursor = length - 1
 
-    print(num_of_block)
-    print(direction_to_move)
-    print(next)
-
-    active_element = length - 1
-    k = num_of_block[active_element]
-
-    if direction_to_move[active_element]:
-        # move element forward
-        pass
-
+    # if cursor move forward 
+    # then move forward (123)(4)
 
 if __name__ == '__main__':
-    SEQUENCE_LENGTH = 3
+    SEQUENCE_LENGTH = 4
+
+    """
+        Must be:
+            (1234)
+            (123)(4)
+            (12)(3)(4
+            (12)(34)
+            (124)(3)
+            (14)(2)(3
+            (1)(24)(3
+            (1)(2)(34
+            (1)(2)(3) 4)
+            (1)(23)(4
+            (1)(234)
+            (14)(23)
+            (134)(2)
+            (13)(24)
+            (13)(2)(4)
+    """
     stirling_subsets(SEQUENCE_LENGTH)
