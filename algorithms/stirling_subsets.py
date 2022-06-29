@@ -2,19 +2,21 @@ from comb_visual_generators import comb_visual_generators
 
 def stirling_subsets(length: int):
     start = 1
-    elements = set([_ for _ in range(start, length + start)])
-    how_many_elements_to_choose = length
+    elements = [_ for _ in range(start, length + start)]
 
-    comb_gen = comb_visual_generators(elements, how_many_elements_to_choose)
+    for i in range(length // 2 + 1):
+        how_many_elements_to_choose = length - i
 
-    for current_combination in comb_gen:
-        print('(', *current_combination, ')', sep='', end='')
+        comb_gen = comb_visual_generators(elements, how_many_elements_to_choose)
 
-        diff = elements.difference(current_combination)
-        if len(diff) > 0:
-            print(diff)
-        else:
-            print()
+        for current_combination in comb_gen:
+            print('(', *current_combination, ')', sep='', end='')
+
+            diff = set(elements).difference(current_combination)
+            if len(diff) > 0:
+                print('(', *diff, ')', sep='')
+            else:
+                print()
 
 
 
