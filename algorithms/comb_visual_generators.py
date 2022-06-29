@@ -5,7 +5,7 @@ from math import comb
 def comb_visual_generators(elements: int, subset_length: int) -> Union[int, None]:
     """Visualize math.comb in lexicographic order"""
     is_print_elements = False
-    if type(elements) == list:
+    if type(elements) == list or type(elements) == set:
         length = len(elements)
         is_print_elements = True
     else:

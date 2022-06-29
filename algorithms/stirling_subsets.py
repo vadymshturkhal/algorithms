@@ -1,26 +1,21 @@
+from comb_visual_generators import comb_visual_generators
+
 def stirling_subsets(length: int):
     start = 1
-    elements = [_ for _ in range(start, length + start)]
-    is_move_forward = [True for _ in range(length)]
-    print(elements)
+    elements = set([_ for _ in range(start, length + start)])
+    how_many_elements_to_choose = length
 
-    cursor = length - 1
+    comb_gen = comb_visual_generators(elements, how_many_elements_to_choose)
 
-    # if cursor move forward 
-    # then move forward (123)(4)
-    if is_move_forward[cursor]:
-        element = elements[cursor]
-    
-    print(elements[:cursor], [element])
-    # print(cursor, cursor + start)
-    while cursor > 0 and is_move_forward[cursor] and elements[cursor] == (cursor + start):
-        # print(cursor, is_move_forward[cursor])
-        is_move_forward[cursor] = not is_move_forward
-        # print(cursor, is_move_forward[cursor])
+    for current_combination in comb_gen:
+        print('(', *current_combination, ')', sep='', end='')
 
-        cursor -= 1
+        diff = elements.difference(current_combination)
+        if len(diff) > 0:
+            print(diff)
+        else:
+            print()
 
-    # print(cursor)
 
 
 if __name__ == '__main__':
