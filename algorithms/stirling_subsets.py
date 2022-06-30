@@ -8,47 +8,27 @@ def stirling_subsets(elements, to_union=None, default_start=1):
         elements = [_ for _ in range(default_start, length + default_start)]
 
     if len(elements) <= 1:
-        # x = tuple(elements)
-        # if to_union is not None:
-        #     to_return = invariant(x, {to_union})
-        #     return to_return
-        return (set(elements),)
+        # return tuple of tuples for invariant
+        return ((set(elements),),)
 
     to_union = elements[-1]
     x = stirling_subsets(elements[:len(elements) - 1], to_union)
     to_return = invariant(x, {to_union})
     return to_return
-    # return x
-    # if len(elements) == 2:
-    #     # if to_print:
-    #     #     print(tuple(to_print), tuple(elements))
-    #     #     print(tuple(to_print), f'({elements[0]}) ({elements[1]})')
-    #     # else:
-    #     #     print(tuple(elements))
-    #     #     print(f'({elements[0]}) ({elements[1]})')
-    #     all_partitions = (set(elements), (set([elements[0]]), set([elements[1]])))
-    #     for partition in all_partitions:
-    #         print(partition, type(partition) == tuple)
-    #     return all_partitions
-
 
 def invariant(partitions: list, to_union, unions=None):
     if unions is None:
         unions = []
 
     for part in partitions:
-        if type(part) == set:
-
-            x = union_sets(part, to_union)
-            x1 = add_to_set(part, to_union)
-            # print(x, x1)
-            unions.append((x, x1))
-            # return (x, x1)
-        else:
-            x = invariant(part, to_union, unions)
-            print(part, to_union)
-
-            # return x
+        if type(part) == list:
+            invariant(part, to_union, unions)
+        else:  # type(part) == tuple
+            # print('part', part, 'to_union', to_union)
+            add = add_to_set(part, to_union)
+            union = union_sets(part, to_union)
+            result = [union, add]
+            unions.append(result)
     # print(unions)
     return unions
 
@@ -59,8 +39,12 @@ def union_sets(partition, to_union):
             to_union: {4}
             result: ({1, 2, 3, 4},)
     """
-    # print((partition.union(to_union), ))
-    return (partition.union(to_union), )
+    u = []
+    for part in partition:
+        u.append(part.union(to_union))
+        # print(part, to_union, u)
+
+    return (*u,)
 
 def add_to_set(partition, to_add):
     """
@@ -69,8 +53,10 @@ def add_to_set(partition, to_add):
             to_add: {4}
             result: ({1, 2, 3}, {4})
     """
-    # print((partition, to_add))
-    return (partition, to_add)
+    if len(partition) == 1:
+        if type(partition) == set:
+            partition = [partition]
+    return (*partition, to_add)
 
 if __name__ == '__main__':
     SEQUENCE_LENGTH = 3
