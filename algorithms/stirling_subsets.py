@@ -1,3 +1,4 @@
+from re import sub
 from comb_visual_generators import comb_visual_generators
 
 def stirling_subsets(elements, to_union=None, default_start=1):
@@ -29,39 +30,28 @@ def invariant(partitions: list, to_union, unions=None):
             union = union_sets(part, to_union)
             result = [union, add]
             unions.append(result)
-    # print(unions)
     return unions
 
-def union_sets(partition, to_union):
+def union_sets(subset: set, to_union: set) -> tuple:
     """
         Example:
-            partition: {1, 2, 3}
+            subset: {1, 2, 3}
             to_union: {4}
-            result: ({1, 2, 3, 4},)
+            result: ({1, 2, 3, 4}, )
     """
-    u = []
-    print(partition)
-    for part in partition:
-        to_add = part.union(to_union)
-        u.append(part.union(to_union))
-        print(part, to_union, u)
+    return (subset.union(to_union), )
 
-    return (*u,)
-
-def add_to_set(partition, to_add):
+def add_to_set(subset: set, to_add: set) -> tuple:
     """
         Example:
-            partition: {1, 2, 3}
+            subset: {1, 2, 3}
             to_add: {4}
             result: ({1, 2, 3}, {4})
     """
-    if len(partition) == 1:
-        if type(partition) == set:
-            partition = [partition]
-    return (*partition, to_add)
+    return (subset, to_add)
 
 if __name__ == '__main__':
-    SEQUENCE_LENGTH = 3
+    SEQUENCE_LENGTH = 2
 
     """
         Must be:
@@ -82,7 +72,14 @@ if __name__ == '__main__':
             (13)(2)(4)
     """
     # stirling_subsets(SEQUENCE_LENGTH)
-    x = stirling_subsets(SEQUENCE_LENGTH)
-    print(x)
+    # x = stirling_subsets(SEQUENCE_LENGTH)
+    # print(x)
     # for i in x:
         # print(*i)
+
+    print(union_sets({1, 2}, {3}))
+    print(union_sets({1}, {3}))
+    print(union_sets({2}, {3}))
+    # print(union_sets({1, 2}, {3}))
+    # print(union_sets({1, 2}, {3}))
+    # print(add_to_set({1, 2}, {3}))
