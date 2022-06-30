@@ -11,8 +11,8 @@ def stirling_subsets(elements, to_union=None, default_start=1):
         # return tuple of tuples for invariant
         return ((set(elements),),)
 
-    to_union = elements[-1]
-    x = stirling_subsets(elements[:len(elements) - 1], to_union)
+    to_union = elements.pop()
+    x = stirling_subsets(elements, to_union)
     to_return = invariant(x, {to_union})
     return to_return
 
@@ -40,9 +40,11 @@ def union_sets(partition, to_union):
             result: ({1, 2, 3, 4},)
     """
     u = []
+    print(partition)
     for part in partition:
+        to_add = part.union(to_union)
         u.append(part.union(to_union))
-        # print(part, to_union, u)
+        print(part, to_union, u)
 
     return (*u,)
 
