@@ -14,28 +14,38 @@ def stirling_subsets(elements, to_union=None, default_start=1):
     # must be a set
     element_to_union = frozenset([elements.pop()])
     subset = stirling_subsets(elements, element_to_union)
-    unioned = invariant(subset, element_to_union)
-    return unioned
+    merged = merge(subset, element_to_union)
+    return merged
 
-def invariant(partitions: set, to_union: frozenset) -> set:
+def merge(partitions: set, to_union: frozenset) -> set:
     new_set = set()
     for partition in partitions:
         # print(partition)
-        new_set.add(union_all_sets(partition, to_union))
-        # new_set.add(add_to_set(partition, to_union))  # works fine
+        # new_set.add(union_all_sets(partition, to_union))
+
+        # found bug frozenset({3}) frozenset({frozenset({2}), frozenset({1})})
+        new_set.add(add_to_set(partition, to_union))  # works fine
     return new_set
 
-def union_all_sets(sets: set, to_union: set) -> frozenset:
+def union_all_sets(sets: frozenset, to_union: set) -> frozenset:
+    assert type(sets) == frozenset
     """
         Example:
             subset: {1, 2, 3}
             to_union: {4}
             result: ({1, 2, 3, 4}, )
     """
-    print(sets)
-    # for subset in sets:
-        # print(subset)
-    # return sets.union(to_union)
+    # print(sets)
+    # print(to_union, type(to_union))
+    # print(sets.union(to_union))
+    result_set = set()
+    for subset in sets:
+        if type(subset) != frozenset:
+            return sets.union(to_union)
+
+        # Each merge
+        # {(1), (2 3)} {(1 3), (2)}
+        print(subset)
 
 def add_to_set(subset: frozenset, to_add: frozenset) -> frozenset:
     """
@@ -70,5 +80,8 @@ if __name__ == '__main__':
     # all_subsets = stirling_subsets(SEQUENCE_LENGTH)
     # print(all_subsets)
 
-    x = invariant({frozenset({frozenset({2}), frozenset({1})}), frozenset({1, 2})}, frozenset([3]))
-    print(x)
+    result = merge({frozenset({frozenset({2}), frozenset({1})}), frozenset({1, 2})}, frozenset([3]))
+    # print(x)
+
+    for res in result:
+        print(*res)
