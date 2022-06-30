@@ -17,22 +17,25 @@ def stirling_subsets(elements, to_union=None, default_start=1):
     unioned = invariant(subset, element_to_union)
     return unioned
 
-def invariant(partitions: list, to_union):
+def invariant(partitions: set, to_union: frozenset) -> set:
     new_set = set()
     for partition in partitions:
         # print(partition)
-        new_set.add(union_sets(partition, to_union))
-        new_set.add(add_to_set(partition, to_union))
+        new_set.add(union_all_sets(partition, to_union))
+        # new_set.add(add_to_set(partition, to_union))  # works fine
     return new_set
 
-def union_sets(subset: set, to_union: set) -> frozenset:
+def union_all_sets(sets: set, to_union: set) -> frozenset:
     """
         Example:
             subset: {1, 2, 3}
             to_union: {4}
             result: ({1, 2, 3, 4}, )
     """
-    return subset.union(to_union)
+    print(sets)
+    # for subset in sets:
+        # print(subset)
+    # return sets.union(to_union)
 
 def add_to_set(subset: frozenset, to_add: frozenset) -> frozenset:
     """
@@ -64,5 +67,8 @@ if __name__ == '__main__':
             (13)(24)
             (13)(2)(4)
     """
-    all_subsets = stirling_subsets(SEQUENCE_LENGTH)
-    print(all_subsets)
+    # all_subsets = stirling_subsets(SEQUENCE_LENGTH)
+    # print(all_subsets)
+
+    x = invariant({frozenset({frozenset({2}), frozenset({1})}), frozenset({1, 2})}, frozenset([3]))
+    print(x)
