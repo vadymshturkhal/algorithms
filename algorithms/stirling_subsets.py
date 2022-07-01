@@ -1,3 +1,4 @@
+from hashlib import new
 from comb_visual_generators import comb_visual_generators
 
 def stirling_subsets(elements, to_union=None, default_start=1):
@@ -23,14 +24,14 @@ def stirling_subsets(elements, to_union=None, default_start=1):
     return merged
 
 def merge(partitions: tuple, to_union: tuple) -> set:
-    new_set = set()
+    new_partitions = []
     for partition in partitions:
         # print('p',partition)
 
         gen = union_all_sets(partition, to_union)
         for subset in gen:
             # print(subset)
-            new_set.add(subset)
+            new_partitions.append(subset)
 
         # print('after union')
 
@@ -39,12 +40,12 @@ def merge(partitions: tuple, to_union: tuple) -> set:
         # print(x)
         # print('after add_to_set')
 
-        new_set.add(x)  # works fine
+        new_partitions.append(x)  # works fine
 
     # print(new_set)
     # print()
 
-    return new_set
+    return new_partitions
 
 def merge_tuples(first: tuple, second: tuple) -> tuple:
     first = set(first)
