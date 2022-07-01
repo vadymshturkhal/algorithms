@@ -1,17 +1,21 @@
-from hashlib import new
-from comb_visual_generators import comb_visual_generators
+from stirling_numbers_second_kind import stirling_nums_second
 
-def stirling_subsets(elements, to_union=None, default_start=1):
+"""
+    Show Bell's numbers of N.
+    Which equals to sum of S(N, i) from i = 0 to i = N.
+    S = Stirling numbers of second kind.
+"""
+
+def stirling_subsets(elements, to_union=None, default_start=1) -> list:
     if type(elements) == list:
         length = len(elements)
     else:
         length = elements
         elements = [_ for _ in range(default_start, length + default_start)]
 
-    # return tuple of tuples for consistency
     if len(elements) <= 1:
         elements = tuple(elements)
-        return (elements, )
+        return [elements]
 
     # must be a set
     element_to_union = (elements.pop(),)
@@ -102,6 +106,13 @@ def add_to_set(subset: tuple, *to_add: tuple) -> tuple:
 def is_tuple_of_tuples(subset):
     return type(subset[0]) == tuple
 
+def bell_number(n):
+    bell_num = 0
+    for i in range(n + 1):
+        bell_num += stirling_nums_second(SEQUENCE_LENGTH, i)
+    return bell_num
+
+
 if __name__ == '__main__':
     SEQUENCE_LENGTH = 4
 
@@ -123,14 +134,11 @@ if __name__ == '__main__':
             (13)(24)
             (13)(2)(4)
     """
+
     all_subsets = stirling_subsets(SEQUENCE_LENGTH)
     # print(all_subsets)
     for subset in all_subsets:
         print(subset)
 
-    # test = {((1,), (2,), (3,)), ((1, 3), (2,)), (1, 2, 3), ((2, 3), (1,)), ((1, 2), (3,))}
-    # test = ((1,), (2,), (3,))
-
-    # gen = union_all_sets(test, (4,))
-    # for i in gen:
-        # print(i)
+    bell_num = bell_number(SEQUENCE_LENGTH)
+    print(f'Bell num = {bell_num}')
