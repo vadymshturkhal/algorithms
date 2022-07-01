@@ -1,21 +1,24 @@
 from comb_visual_generators import comb_visual_generators
 
-def stirling_subsets(elements, to_union=None, default_start=1):
+def stirling_subsets(elements, to_union=None, default_start=1) -> tuple:
     if type(elements) == list:
         length = len(elements)
     else:
         length = elements
         elements = [_ for _ in range(default_start, length + default_start)]
 
+    # return tuple of tuples for consistency
     if len(elements) <= 1:
-        elements = {frozenset(elements)}
-        return elements
+        elements = tuple(elements)
+        return (elements, )
 
     # must be a set
-    element_to_union = frozenset([elements.pop()])
+    element_to_union = (elements.pop(),)
     subset = stirling_subsets(elements, element_to_union)
-    merged = merge(subset, element_to_union)
-    return merged
+    print(subset, element_to_union)
+    # merged = merge(subset, element_to_union)
+    # print(merged)
+    # return merged
 
 def merge(partitions: tuple, to_union: tuple) -> set:
     new_set = set()
@@ -100,11 +103,12 @@ if __name__ == '__main__':
             (13)(24)
             (13)(2)(4)
     """
-    # all_subsets = stirling_subsets(SEQUENCE_LENGTH)
-    # print(all_subsets)
+    all_subsets = stirling_subsets(SEQUENCE_LENGTH)
+    print(all_subsets)
+    # for subset in all_subsets:
+        # print(subset)
 
-    result = merge([(1, 2), ((1,), (2,))], (3,))
+    # result = merge([(1, 2), ((1,), (2,))], (3,))
     # print(result)
-
-    for res in result:
-        print(res)
+    # for res in result:
+        # print(res)
