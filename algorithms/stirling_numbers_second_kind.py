@@ -4,7 +4,7 @@
     S(n, 0) = 0, for n > 0
 """
 
-def stirling_nums_second(n, k):
+def stirling_nums_second(n, k, /, *, memoize=None):
     if k > n:
         return -1
 
@@ -16,7 +16,7 @@ def stirling_nums_second(n, k):
     
     if k == 0:
         return 0
-    
+
     return stirling_nums_second(n - 1, k - 1) + k * stirling_nums_second(n - 1, k)
 
 
