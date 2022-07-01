@@ -7,57 +7,102 @@ def stirling_subsets(elements, to_union=None, default_start=1):
         length = elements
         elements = [_ for _ in range(default_start, length + default_start)]
 
+    # return tuple of tuples for consistency
     if len(elements) <= 1:
-        elements = {frozenset(elements)}
-        return elements
+        elements = tuple(elements)
+        return (elements, )
 
     # must be a set
-    element_to_union = frozenset([elements.pop()])
+    element_to_union = (elements.pop(),)
     subset = stirling_subsets(elements, element_to_union)
     merged = merge(subset, element_to_union)
+
+    # print(subset, element_to_union)
+    # print(merged)
+
     return merged
 
-def merge(partitions: set, to_union: frozenset) -> set:
+def merge(partitions: tuple, to_union: tuple) -> set:
     new_set = set()
     for partition in partitions:
-        # print(partition)
-        # new_set.add(union_all_sets(partition, to_union))
+        # print('p',partition)
 
-        # found bug frozenset({3}) frozenset({frozenset({2}), frozenset({1})})
-        new_set.add(add_to_set(partition, to_union))  # works fine
+        gen = union_all_sets(partition, to_union)
+        for subset in gen:
+            # print(subset)
+            new_set.add(subset)
+
+        # print('after union')
+
+        x = add_to_set(partition, to_union)
+
+        # print(x)
+        # print('after add_to_set')
+
+        new_set.add(x)  # works fine
+
+    # print(new_set)
+    # print()
+
     return new_set
 
-def union_all_sets(sets: frozenset, to_union: set) -> frozenset:
-    assert type(sets) == frozenset
+def merge_tuples(first: tuple, second: tuple) -> tuple:
+    first = set(first)
+    second = set(second)
+    merged = first.union(second)
+    tuple_merged = tuple(merged)
+    return tuple_merged
+
+def union_all_sets(subset: tuple, to_union: tuple) -> tuple:
     """
         Example:
-            subset: {1, 2, 3}
-            to_union: {4}
-            result: ({1, 2, 3, 4}, )
+            subset: (1, 2, 3)
+            to_union: (4,)
+            result: (1, 2, 3, 4)
     """
-    # print(sets)
-    # print(to_union, type(to_union))
-    # print(sets.union(to_union))
-    result_set = set()
-    for subset in sets:
-        if type(subset) != frozenset:
-            return sets.union(to_union)
+    # print(subset, to_union)
+    # if subset is tuple (1, 2, 3)
+    if not is_tuple_of_tuples(subset):
+        added = ([*subset, *to_union])
+        added = tuple(added)
+        # print(added, subset, to_union)
+        yield added
+        return
 
-        # Each merge
-        # {(1), (2 3)} {(1 3), (2)}
-        print(subset)
+    # if subset is tuple of tuples ((1,), (2,), (3,))
+    subsets = set(subset)
+    for subset in subsets:
+        subset_to_compare = set((subset, ))
+        difference = subsets.difference(subset_to_compare)
+        merged = merge_tuples(subset, to_union)
 
-def add_to_set(subset: frozenset, to_add: frozenset) -> frozenset:
+        added = add_to_set(merged, *difference)
+        yield added
+    return
+
+def add_to_set(subset: tuple, *to_add: tuple) -> tuple:
     """
         Example:
-            subset: {1, 2, 3}
-            to_add: {4}
-            result: ({1, 2, 3}, {4})
+            subset: (1, 2, 3)
+            to_add: (4,)
+            result: ((1, 2, 3), (4,))
     """
-    return frozenset([subset, to_add])
+    # if subset is tuple (1, 2, 3)
+    if not is_tuple_of_tuples(subset):
+        added = [subset, *to_add]
+        added = tuple(added)
+        return added
+    
+    # if subset is tuple of tuples ((1,), (2,), (3,))
+    added = [*subset, *to_add]
+    added = tuple(added)
+    return added
+
+def is_tuple_of_tuples(subset):
+    return type(subset[0]) == tuple
 
 if __name__ == '__main__':
-    SEQUENCE_LENGTH = 2
+    SEQUENCE_LENGTH = 4
 
     """
         Must be:
@@ -77,11 +122,14 @@ if __name__ == '__main__':
             (13)(24)
             (13)(2)(4)
     """
-    # all_subsets = stirling_subsets(SEQUENCE_LENGTH)
+    all_subsets = stirling_subsets(SEQUENCE_LENGTH)
     # print(all_subsets)
+    for subset in all_subsets:
+        print(subset)
 
-    result = merge({frozenset({frozenset({2}), frozenset({1})}), frozenset({1, 2})}, frozenset([3]))
-    # print(x)
+    # test = {((1,), (2,), (3,)), ((1, 3), (2,)), (1, 2, 3), ((2, 3), (1,)), ((1, 2), (3,))}
+    # test = ((1,), (2,), (3,))
 
-    for res in result:
-        print(*res)
+    # gen = union_all_sets(test, (4,))
+    # for i in gen:
+        # print(i)
