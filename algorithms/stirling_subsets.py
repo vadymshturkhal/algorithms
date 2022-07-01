@@ -109,7 +109,7 @@ def is_tuple_of_tuples(subset):
 def bell_number(n):
     bell_num = 0
     for i in range(n + 1):
-        bell_num += stirling_nums_second(SEQUENCE_LENGTH, i)
+        bell_num += stirling_nums_second(n, i)
     return bell_num
 
 
@@ -140,5 +140,11 @@ if __name__ == '__main__':
     for subset in all_subsets:
         print(subset)
 
-    bell_num = bell_number(SEQUENCE_LENGTH)
-    print(f'Bell num = {bell_num}')
+    bell_num = bell_number(SEQUENCE_LENGTH)  # should be 15
+    print(f'Bell num for {SEQUENCE_LENGTH} = {bell_num}')
+
+    bell_num = bell_number(5)  # should be 52
+    print(f'Bell num for {5} = {bell_num}')
+
+    bell_num = bell_number(10)  # should be 115975
+    print(f'Bell num for {10} = {bell_num}')
