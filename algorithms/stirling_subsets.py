@@ -20,9 +20,18 @@ def stirling_subsets(elements, to_union=None, default_start=1):
 def merge(partitions: tuple, to_union: tuple) -> set:
     new_set = set()
     for partition in partitions:
-        new_set.add(union_all_sets(partition, to_union))
+        gen = union_all_sets(partition, to_union)
+        for subset in gen:
+            new_set.add(subset)
         new_set.add(add_to_set(partition, to_union))  # works fine
     return new_set
+
+def merge_tuples(first: tuple, second: tuple) -> tuple:
+    first = set(first)
+    second = set(second)
+    merged = first.union(second)
+    tuple_merged = tuple(merged)
+    return tuple_merged
 
 def union_all_sets(subset: tuple, to_union: tuple) -> tuple:
     """
@@ -36,9 +45,18 @@ def union_all_sets(subset: tuple, to_union: tuple) -> tuple:
     if not is_tuple_of_tuples(subset):
         added = ([*subset, *to_union])
         added = tuple(added)
-        return added
+        yield added
+        return
 
-    return subset
+    # if subset is tuple of tuples ((1,), (2,), (3,))
+    subsets = set(subset)
+    for subset in subsets:
+        subset_to_compare = set((subset, ))
+        difference = subsets.difference(subset_to_compare)
+        merged = merge_tuples(subset, to_union)
+        added = add_to_set(merged, *difference)
+        yield added
+    return
 
 def add_to_set(subset: tuple, to_add: tuple) -> tuple:
     """
@@ -88,5 +106,5 @@ if __name__ == '__main__':
     result = merge([(1, 2), ((1,), (2,))], (3,))
     # print(result)
 
-    # for res in result:
-        # print(res)
+    for res in result:
+        print(res)
