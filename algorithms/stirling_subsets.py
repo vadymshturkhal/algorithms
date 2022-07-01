@@ -64,7 +64,7 @@ def union_all_sets(subset: tuple, to_union: tuple) -> tuple:
     # print(subset, to_union)
     # if subset is tuple (1, 2, 3)
     if not is_tuple_of_tuples(subset):
-        added = ([*subset, *to_union])
+        added = (sorted([*subset, *to_union]))
         added = tuple(added)
         # print(added, subset, to_union)
         yield added
@@ -77,7 +77,7 @@ def union_all_sets(subset: tuple, to_union: tuple) -> tuple:
         difference = subsets.difference(subset_to_compare)
         merged = merge_tuples(subset, to_union)
 
-        added = add_to_set(merged, *difference)
+        added = add_to_set(sorted([merged, *difference]))
         yield added
     return
 
