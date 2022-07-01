@@ -1,6 +1,6 @@
 from comb_visual_generators import comb_visual_generators
 
-def stirling_subsets(elements, to_union=None, default_start=1) -> tuple:
+def stirling_subsets(elements, to_union=None, default_start=1):
     if type(elements) == list:
         length = len(elements)
     else:
@@ -59,11 +59,12 @@ def union_all_sets(subset: tuple, to_union: tuple) -> tuple:
         subset_to_compare = set((subset, ))
         difference = subsets.difference(subset_to_compare)
         merged = merge_tuples(subset, to_union)
+
         added = add_to_set(merged, *difference)
         yield added
     return
 
-def add_to_set(subset: tuple, to_add: tuple) -> tuple:
+def add_to_set(subset: tuple, *to_add: tuple) -> tuple:
     """
         Example:
             subset: (1, 2, 3)
@@ -85,7 +86,7 @@ def is_tuple_of_tuples(subset):
     return type(subset[0]) == tuple
 
 if __name__ == '__main__':
-    SEQUENCE_LENGTH = 3
+    SEQUENCE_LENGTH = 4
 
     """
         Must be:
@@ -110,7 +111,9 @@ if __name__ == '__main__':
     for subset in all_subsets:
         print(subset)
 
-    # result = merge([(1, 2), ((1,), (2,))], (3,))
-    # print(result)
-    # for res in result:
-        # print(res)
+    # test = {((1,), (2,), (3,)), ((1, 3), (2,)), (1, 2, 3), ((2, 3), (1,)), ((1, 2), (3,))}
+    # test = ((1,), (2,), (3,))
+
+    # gen = union_all_sets(test, (4,))
+    # for i in gen:
+        # print(i)
