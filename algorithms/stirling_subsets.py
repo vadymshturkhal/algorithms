@@ -25,10 +25,25 @@ def stirling_subsets(elements, to_union=None, default_start=1):
 def merge(partitions: tuple, to_union: tuple) -> set:
     new_set = set()
     for partition in partitions:
+        # print('p',partition)
+
         gen = union_all_sets(partition, to_union)
         for subset in gen:
+            # print(subset)
             new_set.add(subset)
-        new_set.add(add_to_set(partition, to_union))  # works fine
+
+        # print('after union')
+
+        x = add_to_set(partition, to_union)
+
+        # print(x)
+        # print('after add_to_set')
+
+        new_set.add(x)  # works fine
+
+    # print(new_set)
+    # print()
+
     return new_set
 
 def merge_tuples(first: tuple, second: tuple) -> tuple:
@@ -50,6 +65,7 @@ def union_all_sets(subset: tuple, to_union: tuple) -> tuple:
     if not is_tuple_of_tuples(subset):
         added = ([*subset, *to_union])
         added = tuple(added)
+        # print(added, subset, to_union)
         yield added
         return
 
@@ -73,12 +89,12 @@ def add_to_set(subset: tuple, *to_add: tuple) -> tuple:
     """
     # if subset is tuple (1, 2, 3)
     if not is_tuple_of_tuples(subset):
-        added = [subset, to_add]
+        added = [subset, *to_add]
         added = tuple(added)
         return added
     
     # if subset is tuple of tuples ((1,), (2,), (3,))
-    added = [* subset, to_add]
+    added = [*subset, *to_add]
     added = tuple(added)
     return added
 
