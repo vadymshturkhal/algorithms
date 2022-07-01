@@ -20,32 +20,25 @@ def stirling_subsets(elements, to_union=None, default_start=1):
 def merge(partitions: tuple, to_union: tuple) -> set:
     new_set = set()
     for partition in partitions:
-        # print(partition)
-        # new_set.add(union_all_sets(partition, to_union))
-
-        # found bug frozenset({3}) frozenset({frozenset({2}), frozenset({1})})
+        new_set.add(union_all_sets(partition, to_union))
         new_set.add(add_to_set(partition, to_union))  # works fine
     return new_set
 
-def union_all_sets(sets: frozenset, to_union: set) -> frozenset:
-    assert type(sets) == frozenset
+def union_all_sets(subset: tuple, to_union: tuple) -> tuple:
     """
         Example:
-            subset: {1, 2, 3}
-            to_union: {4}
-            result: ({1, 2, 3, 4}, )
+            subset: (1, 2, 3)
+            to_union: (4,)
+            result: (1, 2, 3, 4)
     """
-    # print(sets)
-    # print(to_union, type(to_union))
-    # print(sets.union(to_union))
-    result_set = set()
-    for subset in sets:
-        if type(subset) != frozenset:
-            return sets.union(to_union)
+    # print(subset, to_union)
+    # if subset is tuple (1, 2, 3)
+    if not is_tuple_of_tuples(subset):
+        added = ([*subset, *to_union])
+        added = tuple(added)
+        return added
 
-        # Each merge
-        # {(1), (2 3)} {(1 3), (2)}
-        print(subset)
+    return subset
 
 def add_to_set(subset: tuple, to_add: tuple) -> tuple:
     """
@@ -55,7 +48,7 @@ def add_to_set(subset: tuple, to_add: tuple) -> tuple:
             result: ((1, 2, 3), (4,))
     """
     # if subset is tuple (1, 2, 3)
-    if type(subset[0]) != tuple:
+    if not is_tuple_of_tuples(subset):
         added = [subset, to_add]
         added = tuple(added)
         return added
@@ -64,6 +57,9 @@ def add_to_set(subset: tuple, to_add: tuple) -> tuple:
     added = [* subset, to_add]
     added = tuple(added)
     return added
+
+def is_tuple_of_tuples(subset):
+    return type(subset[0]) == tuple
 
 if __name__ == '__main__':
     SEQUENCE_LENGTH = 2
@@ -92,5 +88,5 @@ if __name__ == '__main__':
     result = merge([(1, 2), ((1,), (2,))], (3,))
     # print(result)
 
-    for res in result:
-        print(*res)
+    # for res in result:
+        # print(res)
