@@ -15,10 +15,12 @@ def stirling_subsets(elements, to_union=None, default_start=1) -> tuple:
     # must be a set
     element_to_union = (elements.pop(),)
     subset = stirling_subsets(elements, element_to_union)
-    print(subset, element_to_union)
-    # merged = merge(subset, element_to_union)
+    merged = merge(subset, element_to_union)
+
+    # print(subset, element_to_union)
     # print(merged)
-    # return merged
+
+    return merged
 
 def merge(partitions: tuple, to_union: tuple) -> set:
     new_set = set()
@@ -83,7 +85,7 @@ def is_tuple_of_tuples(subset):
     return type(subset[0]) == tuple
 
 if __name__ == '__main__':
-    SEQUENCE_LENGTH = 2
+    SEQUENCE_LENGTH = 3
 
     """
         Must be:
@@ -104,9 +106,9 @@ if __name__ == '__main__':
             (13)(2)(4)
     """
     all_subsets = stirling_subsets(SEQUENCE_LENGTH)
-    print(all_subsets)
-    # for subset in all_subsets:
-        # print(subset)
+    # print(all_subsets)
+    for subset in all_subsets:
+        print(subset)
 
     # result = merge([(1, 2), ((1,), (2,))], (3,))
     # print(result)
