@@ -23,7 +23,7 @@ def stirling_subsets(elements, to_union=None, default_start=1):
 
     return merged
 
-def merge(partitions: tuple, to_union: tuple) -> set:
+def merge(partitions: tuple, to_union: tuple) -> list:
     new_partitions = []
     for partition in partitions:
         # print('p',partition)
