@@ -12,7 +12,19 @@ def break_unorder_show(num):
         if unique_terms[cursor] == 1:
             current_sum += times_appear[cursor]
             cursor -= 1
-        print(current_sum)
+        
+        current_sum += unique_terms[cursor]
+        times_appear[cursor] = times_appear[cursor] - 1
+
+        new_term = unique_terms[cursor] - 1
+
+        if times_appear[cursor] > 0:
+            cursor += 1
+        
+        unique_terms[cursor] = new_term
+        times_appear[cursor] = current_sum // new_term
+
+        print(current_sum, unique_terms, times_appear, new_term, cursor)
         break
 
 
