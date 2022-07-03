@@ -4,6 +4,17 @@ def break_unorder_show(num):
 
     yield get_terms(unique_terms, times_appear)
 
+    cursor = 0
+    while unique_terms[cursor] > 1:
+        current_sum = 0
+
+        # delete terms which equals to 1
+        if unique_terms[cursor] == 1:
+            current_sum += times_appear[cursor]
+            cursor -= 1
+        print(current_sum)
+        break
+
 
 def get_terms(unique_terms, times_appear):
     terms = []
