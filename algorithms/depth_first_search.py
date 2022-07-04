@@ -1,6 +1,6 @@
 from data_structures.graph import Graph
 
-def depth_first_search(graph: Graph, from_: int, to_: int, is_seen=None) -> bool:
+def depth_first_search_recursive(graph: Graph, from_: int, to_: int, is_seen=None) -> bool:
     if is_seen is None:
         is_seen = {}
 
@@ -12,7 +12,7 @@ def depth_first_search(graph: Graph, from_: int, to_: int, is_seen=None) -> bool
 
     for neigbour in from_neighbours:
         if is_seen.get(neigbour) is None:
-            is_found = depth_first_search(graph, neigbour, to_, is_seen)
+            is_found = depth_first_search_recursive(graph, neigbour, to_, is_seen)
             if is_found:
                 return True
 
@@ -31,8 +31,8 @@ if __name__ == '__main__':
     ]
 
     g = Graph(edges)
-    is_path_exist = depth_first_search(g, 1, 4)  # must be True
+    is_path_exist = depth_first_search_recursive(g, 1, 4)  # must be True
     print(is_path_exist)
 
-    is_path_exist = depth_first_search(g, 1, 6)  # must be False
+    is_path_exist = depth_first_search_recursive(g, 1, 6)  # must be False
     print(is_path_exist)
