@@ -31,6 +31,12 @@ class Graph:
 
         return list(self.__edges[vertex])
 
+    def is_edge_exist(self, from_: int, to_: int) -> bool:
+        if from_ in self.__edges:
+            if to_ in self.__edges[from_]:
+                return True
+        return False
+
     def show_graph(self):
         print(self.__edges)
 
@@ -46,9 +52,9 @@ if __name__ == '__main__':
         (6, 5)
     ]
 
-    g = Graph()
-    g.add_edges(edges)
-    g.show_graph()
+    oriented_graph = Graph()
+    oriented_graph.add_edges(edges)
+    oriented_graph.show_graph()
 
     edges = [
         (1, 2),
@@ -56,8 +62,10 @@ if __name__ == '__main__':
         (1, 4),
     ]
 
-    g = Graph()
-    g.add_edges(edges, is_oriented=False)
-    g.show_graph()
-
-    print(g.get_neighbours(1))
+    graph = Graph()
+    graph.add_edges(edges, is_oriented=False)
+    graph.show_graph()
+    print(f'{graph.get_neighbours(1) = }')
+    print(f'{graph.get_neighbours(10) = }')
+    print(f'{graph.is_edge_exist(1, 4) = }')
+    print(f'{graph.is_edge_exist(1, 10) = }')
