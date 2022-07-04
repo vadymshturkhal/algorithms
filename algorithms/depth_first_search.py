@@ -1,5 +1,9 @@
 from data_structures.graph import Graph
 
+
+def depth_first_search(graph: Graph, from_: int, to_: int):
+    return False
+
 def depth_first_search_recursive(graph: Graph, from_: int, to_: int, is_seen=None) -> bool:
     if is_seen is None:
         is_seen = {}
@@ -35,4 +39,10 @@ if __name__ == '__main__':
     print(is_path_exist)
 
     is_path_exist = depth_first_search_recursive(g, 1, 6)  # must be False
+    print(is_path_exist)
+
+    is_path_exist = depth_first_search(g, 1, 4)  # must be True
+    print(is_path_exist)
+
+    is_path_exist = depth_first_search(g, 1, 6)  # must be False
     print(is_path_exist)
