@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 class Graph:
     """
         Used incidence list.
@@ -5,12 +7,12 @@ class Graph:
     """
 
     def __init__(self, edges: list = None) -> None:
-        self.__edges = self.add_edges(edges)
+        self.__edges = []
+        self.add_edges(edges)
 
     def add_edges(self, edges: list = None, *, is_oriented: bool = True) -> None:
         if edges is None:
-            edges = []
-            return edges
+            return
 
         for edge in edges:
             from_, to_ = edge
@@ -21,6 +23,14 @@ class Graph:
             if not is_oriented:
                 self.__init_len_of_edges(to_)
                 self.__edges[to_].append(from_)
+    
+    def get_neighbours(self, vertex: int) -> list:
+        """Returned copy of vertecies"""
+        if vertex >= len(self.__edges):
+            return []
+
+        return deepcopy(self.__edges[vertex])
+
 
     def show_graph(self):
         print(self.__edges)
