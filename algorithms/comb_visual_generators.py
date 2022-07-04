@@ -1,6 +1,4 @@
 from typing import Union
-from math import comb
-
 
 def comb_visual_generators(elements: int, subset_length: int) -> Union[int, None]:
     """Visualize math.comb in lexicographic order"""
