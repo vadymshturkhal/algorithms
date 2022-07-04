@@ -15,12 +15,10 @@ class Graph:
         for edge in edges:
             from_, to_ = edge
 
-            if from_ >= len(self.__edges):
-                self.__edges.append([to_])
-            else:
-                self.__edges[from_].append(to_)
+            while from_ >= len(self.__edges):
+                self.__edges.append([])
 
-        self.__edges = edges
+            self.__edges[from_].append(to_)
 
     def show_graph(self):
         print(self.__edges)
