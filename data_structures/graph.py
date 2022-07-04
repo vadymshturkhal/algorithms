@@ -1,6 +1,3 @@
-from node import Node
-
-
 class Graph:
     """
         Used incidence list.
@@ -14,7 +11,7 @@ class Graph:
         if edges is None:
             edges = []
             return edges
-        
+
         for edge in edges:
             from_, to_ = edge
 
@@ -31,7 +28,6 @@ class Graph:
     def __init_len_of_edges(self, required_len: int):
         while required_len >= len(self.__edges):
             self.__edges.append([])
-
 
 
 if __name__ == '__main__':
