@@ -2,7 +2,10 @@ from node import Node
 
 
 class Graph:
-    """Edge is list with tuples with ints"""
+    """
+        Used incidence list.
+        Edge is list with tuples with ints.
+    """
 
     def __init__(self, edges=None) -> None:
         self.__edges = self.add_edges(edges)
