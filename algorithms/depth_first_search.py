@@ -2,16 +2,28 @@ from data_structures.graph import Graph
 
 
 def depth_first_search(graph: Graph, from_: int, to_: int):
+    stack = []
+    is_seen = {}
+
+    stack.append(from_)
+
+    while len(stack):
+        to_see = stack.pop()
+
     return False
 
 def depth_first_search_recursive(graph: Graph, from_: int, to_: int, is_seen=None) -> bool:
     if is_seen is None:
         is_seen = {}
 
+
     if from_ == to_:
         return True
 
     from_neighbours = graph.get_neighbours(from_)
+    if from_neighbours is None:
+        return
+
     is_seen[from_] = is_seen.get(from_, True)
 
     for neigbour in from_neighbours:
@@ -34,15 +46,10 @@ if __name__ == '__main__':
         (6, 5)
     ]
 
-    g = Graph(edges)
-    is_path_exist = depth_first_search_recursive(g, 1, 4)  # must be True
-    print(is_path_exist)
+    oriented_graph = Graph(edges)
+    oriented_graph.show_graph()
+    print(f'{depth_first_search_recursive(oriented_graph, 1, 4) = }')  # must be True
+    print(f'{depth_first_search_recursive(oriented_graph, 1, 6) = }')  # must be False
 
-    is_path_exist = depth_first_search_recursive(g, 1, 6)  # must be False
-    print(is_path_exist)
-
-    is_path_exist = depth_first_search(g, 1, 4)  # must be True
-    print(is_path_exist)
-
-    is_path_exist = depth_first_search(g, 1, 6)  # must be False
-    print(is_path_exist)
+    print(f'{depth_first_search(oriented_graph, 1, 4) = }')  # must be True
+    print(f'{depth_first_search(oriented_graph, 1, 6) = }')  # must be False
