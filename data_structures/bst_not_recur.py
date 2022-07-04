@@ -46,9 +46,9 @@ class BST:
         node_to_del, parent = self.search(key, also_return_parent=True)
 
         if parent.left is node_to_del:
-            parent.left = self._child_node(node_to_del)
+            parent.left = self.__child_node(node_to_del)
         else:
-            parent.right = self._child_node(node_to_del)
+            parent.right = self.__child_node(node_to_del)
 
     def min_key(self, node=None, return_node=False):
         if node is None:
@@ -98,7 +98,7 @@ class BST:
             return self.max_key(node.left, return_node)
         return
 
-    def _child_node(self, node_to_del):
+    def __child_node(self, node_to_del):
         if node_to_del is None:
             return
 
