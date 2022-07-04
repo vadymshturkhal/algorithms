@@ -1,4 +1,5 @@
 from typing import Any
+from copy import deepcopy
 
 
 class Node:
@@ -11,6 +12,17 @@ class Node:
         self.__previous = None
         self.__color = color
         self.__count = count
+        self.__neighbours = None
+
+    def add_neigbours(self, neigbours):
+        if self.__neighbours is None:
+            self.__neighbours = []
+
+        for neghbour in neigbours:
+            self.__neighbours.append(neghbour)
+    
+    def get_neighbours(self):
+        return deepcopy(self.__neighbours)
 
     @property
     def key(self) -> Any:
