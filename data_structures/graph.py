@@ -38,7 +38,8 @@ class Graph:
         return False
 
     def show_graph(self):
-        print(self.__edges)
+        for key, value in self.__edges.items():
+            print(key, '->', list(value))
 
 
 if __name__ == '__main__':
@@ -54,7 +55,9 @@ if __name__ == '__main__':
 
     oriented_graph = Graph()
     oriented_graph.add_edges(edges)
+    print('Oriented graph')
     oriented_graph.show_graph()
+    print()
 
     edges = [
         (1, 2),
@@ -64,7 +67,9 @@ if __name__ == '__main__':
 
     graph = Graph()
     graph.add_edges(edges, is_oriented=False)
+    print('Graph')
     graph.show_graph()
+    print()
     print(f'{graph.get_neighbours(1) = }')
     print(f'{graph.get_neighbours(10) = }')
     print(f'{graph.is_edge_exist(1, 4) = }')
