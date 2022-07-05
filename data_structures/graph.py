@@ -1,3 +1,6 @@
+from copy import deepcopy
+
+
 class Graph:
     """
         Used dict.
@@ -5,6 +8,7 @@ class Graph:
 
     def __init__(self, edges: list = None, *, is_oriented=True) -> None:
         self.__is_oriented = is_oriented
+        self.__vertices = {}
         self.__edges = {}
         self.add_edges(edges)
 
@@ -30,12 +34,14 @@ class Graph:
 
             from_, to_ = edge
             self.__guarantee_vertex(from_)
+            self.add_vertex(from_)
 
             is_compact_neighbours = type(to_) == list
 
             if is_compact_neighbours:
                 for neighbour in to_:
                     self.__edges[from_][neighbour]= None
+                    self.add_vertex(neighbour)
 
                     if not self.is_oriented:
                         self.__guarantee_vertex(neighbour)
@@ -43,11 +49,20 @@ class Graph:
                 continue
 
             self.__edges[from_][to_]= None
+            self.add_vertex(to_)
 
             if not self.is_oriented:
                 self.__guarantee_vertex(to_)
                 self.__edges[to_][from_]= None
-        print(self.__edges)
+
+    def add_vertex(self, vertex, value=None):
+        if vertex in self.__vertices:
+            return
+        self.__vertices[vertex] = value
+
+    def get_vertex(self, vertex_key):
+        if vertex_key in self.__vertices:
+            return deepcopy(self.__vertices[vertex_key])
 
     def get_neighbours(self, vertex: int) -> list:
         """Returned copy of vertices"""
@@ -103,3 +118,7 @@ if __name__ == '__main__':
     print(f'{graph.get_neighbours(10) = }')
     print(f'{graph.is_edge_exist(1, 4) = }')
     print(f'{graph.is_edge_exist(1, 10) = }')
+    print(f'{graph.is_edge_exist(1, 2) = }')
+    print(graph.get_neighbours(1))
+    print(graph.get_vertex(111))
+    print(graph.get_vertex(1))
