@@ -1,7 +1,7 @@
 from data_structures.graph import Graph
 
 
-def depth_first_search(graph: Graph, from_: int, to_: int):
+def depth_first_search(graph: Graph, from_: int, to_: int) -> bool:
     stack = []
     is_seen = {}
 
