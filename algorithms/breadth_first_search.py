@@ -1,9 +1,25 @@
+from operator import ne
 from data_structures.graph import Graph
+from queue import SimpleQueue, Queue
 
 
 def breadth_first_search(graph: Graph, from_: int, to_: int) -> bool:
-    return False
+    queue_ = SimpleQueue()
+    is_seen = {}
 
+    queue_.put(from_)
+    is_seen[from_] = True
+    while not queue_.empty() :
+        to_see = queue_.get()
+
+        for neigbour in graph.get_neighbours(to_see):
+            if neigbour not in is_seen:
+                queue_.put(neigbour)
+                is_seen[neigbour] = True
+
+                if neigbour == to_:
+                    return True
+    return False
 
 if __name__ == '__main__':
     edges = [
@@ -22,7 +38,7 @@ if __name__ == '__main__':
     graph.show_graph()
 
     print()
-    print(f'{breadth_first_search(graph, 1, 9) = }')  # must be True
+    print(f'{breadth_first_search(graph, 1, 11) = }')  # must be True
     print(f'{breadth_first_search(graph, 1, 16) = }')  # must be False
 
     print(f'{breadth_first_search(graph, 1, 9) = }')  # must be True
