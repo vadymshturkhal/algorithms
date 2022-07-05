@@ -27,7 +27,7 @@ class Graph:
     def get_neighbours(self, vertex: int) -> list:
         """Returned copy of vertecies"""
         if vertex not in self.__edges:
-            return
+            return []
 
         return list(self.__edges[vertex])
 
