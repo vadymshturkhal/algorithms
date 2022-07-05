@@ -8,15 +8,32 @@ class Graph:
         self.add_edges(edges)
 
     def add_edges(self, edges: list = None, *, is_oriented: bool = True) -> None:
+        """
+            Edges might be both 
+                [(1, 2), (1, 3)]
+                [(1, [2, 3, 4])]
+
+        """
         if edges is None:
+            return
+        if len(edges) < 1:
             return
 
         for edge in edges:
-            from_, to_ = edge
+            if len(edge) != 2:
+                raise StopIteration(f'Can\'t parse the edge {edge}')
 
+            from_, to_ = edge
             if from_ not in self.__edges:
                 self.__edges[from_] = {}
 
+            is_compact_neighbours = type(to_) == list
+
+            if is_compact_neighbours:
+                for neighbour in to_:
+                    self.__edges[from_][neighbour]= None
+                continue
+        
             self.__edges[from_][to_]= None
 
             if not is_oriented:
@@ -43,30 +60,30 @@ class Graph:
 
 
 if __name__ == '__main__':
+    # edges = [
+    #     (1, 2),
+    #     (1, 3),
+    #     (3, 2),
+    #     (3, 4),
+    #     (5, 4),
+    #     (5, 6),
+    #     (6, 5)
+    # ]
+
+    # oriented_graph = Graph()
+    # oriented_graph.add_edges(edges)
+    # print('Oriented graph')
+    # oriented_graph.show_graph()
+    # print()
+
     edges = [
-        (1, 2),
-        (1, 3),
+        (1, [2, 3, 4]),
         (3, 2),
         (3, 4),
-        (5, 4),
-        (5, 6),
-        (6, 5)
-    ]
-
-    oriented_graph = Graph()
-    oriented_graph.add_edges(edges)
-    print('Oriented graph')
-    oriented_graph.show_graph()
-    print()
-
-    edges = [
-        (1, 2),
-        (1, 3),
-        (1, 4),
     ]
 
     graph = Graph()
-    graph.add_edges(edges, is_oriented=False)
+    graph.add_edges(edges, is_oriented=True)
     print('Graph')
     graph.show_graph()
     print()
