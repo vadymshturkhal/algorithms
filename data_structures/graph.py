@@ -32,6 +32,12 @@ class Graph:
             if is_compact_neighbours:
                 for neighbour in to_:
                     self.__edges[from_][neighbour]= None
+                
+                    if not is_oriented:
+                        if neighbour not in self.__edges:
+                            self.__edges[neighbour] = {}
+                        self.__edges[neighbour][from_]= None
+                
                 continue
         
             self.__edges[from_][to_]= None
@@ -60,30 +66,31 @@ class Graph:
 
 
 if __name__ == '__main__':
-    # edges = [
-    #     (1, 2),
-    #     (1, 3),
-    #     (3, 2),
-    #     (3, 4),
-    #     (5, 4),
-    #     (5, 6),
-    #     (6, 5)
-    # ]
-
-    # oriented_graph = Graph()
-    # oriented_graph.add_edges(edges)
-    # print('Oriented graph')
-    # oriented_graph.show_graph()
-    # print()
-
     edges = [
-        (1, [2, 3, 4]),
+        (1, 2),
+        (1, 3),
         (3, 2),
         (3, 4),
+        (5, 4),
+        (5, 6),
+        (6, 5)
+    ]
+
+    oriented_graph = Graph()
+    oriented_graph.add_edges(edges)
+    print('Oriented graph')
+    oriented_graph.show_graph()
+    print()
+
+    edges = [
+        (1, [2, 3]),
+        (3, [2, 4]),
+        (5, [4]),
+        (6, 5)
     ]
 
     graph = Graph()
-    graph.add_edges(edges, is_oriented=True)
+    graph.add_edges(edges, is_oriented=False)
     print('Graph')
     graph.show_graph()
     print()
