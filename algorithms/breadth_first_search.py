@@ -1,6 +1,6 @@
 from operator import ne
 from data_structures.graph import Graph
-from queue import SimpleQueue, Queue
+from queue import SimpleQueue
 
 
 def breadth_first_search(graph: Graph, from_: int, to_: int, *, is_print_shortest_path: bool=False) -> bool:
