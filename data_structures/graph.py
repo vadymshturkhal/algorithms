@@ -8,6 +8,10 @@ class Graph:
         self.__edges = {}
         self.add_edges(edges)
 
+    @property
+    def is_oriented(self):
+        return self.__is_oriented
+
     def add_edges(self, edges: list = None) -> None:
         """
             Edges might be both 
@@ -43,9 +47,10 @@ class Graph:
             if not self.is_oriented:
                 self.__guarantee_vertex(to_)
                 self.__edges[to_][from_]= None
+        print(self.__edges)
 
     def get_neighbours(self, vertex: int) -> list:
-        """Returned copy of vertecies"""
+        """Returned copy of vertices"""
         if vertex not in self.__edges:
             return []
 
@@ -56,10 +61,6 @@ class Graph:
             if to_ in self.__edges[from_]:
                 return True
         return False
-
-    @property
-    def is_oriented(self):
-        return self.__is_oriented
 
     def show_graph(self):
         for key, value in self.__edges.items():
