@@ -8,7 +8,20 @@ def depth_first_search(graph: Graph, from_: int, to_: int):
     stack.append(from_)
 
     while len(stack):
-        to_see = stack.pop()
+        to_see = stack[-1]
+
+        if to_see not in is_seen:
+            is_seen[to_see] = graph.get_neighbours(to_see)
+
+        if len(is_seen[to_see]):
+            to_watch = is_seen[to_see].pop()
+
+            if to_watch not in is_seen:
+                stack.append(to_watch)
+        else:
+            x = stack.pop()
+            if x == to_:
+                return True
 
     return False
 
