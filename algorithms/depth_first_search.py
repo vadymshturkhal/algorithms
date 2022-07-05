@@ -14,21 +14,22 @@ def depth_first_search(graph: Graph, from_: int, to_: int):
             is_seen[to_see] = graph.get_neighbours(to_see)
 
         if len(is_seen[to_see]):
+            # Get last but not first element of neighbours, for efficiency
             to_watch = is_seen[to_see].pop()
 
             if to_watch not in is_seen:
+                if to_watch == to_:
+                    return True
+
                 stack.append(to_watch)
         else:
-            x = stack.pop()
-            if x == to_:
-                return True
+            stack.pop()
 
     return False
 
 def depth_first_search_recursive(graph: Graph, from_: int, to_: int, is_seen=None) -> bool:
     if is_seen is None:
         is_seen = {}
-
 
     if from_ == to_:
         return True
@@ -56,13 +57,16 @@ if __name__ == '__main__':
         (3, 4),
         (5, 4),
         (5, 6),
-        (6, 5)
+        (6, 5),
+        (4, 5),
     ]
 
     oriented_graph = Graph(edges)
     oriented_graph.show_graph()
+
+    print()
     print(f'{depth_first_search_recursive(oriented_graph, 1, 4) = }')  # must be True
-    print(f'{depth_first_search_recursive(oriented_graph, 1, 6) = }')  # must be False
+    print(f'{depth_first_search_recursive(oriented_graph, 1, 16) = }')  # must be False
 
     print(f'{depth_first_search(oriented_graph, 1, 4) = }')  # must be True
-    print(f'{depth_first_search(oriented_graph, 1, 6) = }')  # must be False
+    print(f'{depth_first_search(oriented_graph, 1, 16) = }')  # must be False
