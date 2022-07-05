@@ -24,8 +24,7 @@ class Graph:
                 raise StopIteration(f'Can\'t parse the edge {edge}')
 
             from_, to_ = edge
-            if from_ not in self.__edges:
-                self.__edges[from_] = {}
+            self.__guarantee_vertex(from_)
 
             is_compact_neighbours = type(to_) == list
 
@@ -34,17 +33,14 @@ class Graph:
                     self.__edges[from_][neighbour]= None
                 
                     if not is_oriented:
-                        if neighbour not in self.__edges:
-                            self.__edges[neighbour] = {}
+                        self.__guarantee_vertex(neighbour)
                         self.__edges[neighbour][from_]= None
-                
                 continue
-        
+
             self.__edges[from_][to_]= None
 
             if not is_oriented:
-                if to_ not in self.__edges:
-                    self.__edges[to_] = {}
+                self.__guarantee_vertex(to_)
                 self.__edges[to_][from_]= None
 
     def get_neighbours(self, vertex: int) -> list:
@@ -63,6 +59,10 @@ class Graph:
     def show_graph(self):
         for key, value in self.__edges.items():
             print(key, '->', list(value))
+
+    def __guarantee_vertex(self, vertex):
+        if vertex not in self.__edges:
+            self.__edges[vertex] = {}
 
 
 if __name__ == '__main__':
