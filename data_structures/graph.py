@@ -64,6 +64,10 @@ class Graph:
         if vertex_key in self.__vertices:
             return deepcopy(self.__vertices[vertex_key])
 
+    def update_vertex_value(self, vertex_key, new_vertex_value):
+        if vertex_key in self.__vertices:
+            self.__vertices[vertex_key] = new_vertex_value
+
     def get_neighbours(self, vertex: int) -> list:
         """Returned copy of vertices"""
         if vertex not in self.__edges:
@@ -119,6 +123,7 @@ if __name__ == '__main__':
     print(f'{graph.is_edge_exist(1, 4) = }')
     print(f'{graph.is_edge_exist(1, 10) = }')
     print(f'{graph.is_edge_exist(1, 2) = }')
-    print(graph.get_neighbours(1))
-    print(graph.get_vertex(111))
-    print(graph.get_vertex(1))
+    print(f'{graph.get_vertex(1) = }')
+    graph.update_vertex_value(1, ['a', 'b'])
+    print("After graph.update_vertex_value(1, ['a', 'b'])")
+    print(f'{graph.get_vertex(1) = }')
