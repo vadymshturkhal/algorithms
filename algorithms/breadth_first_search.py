@@ -3,9 +3,10 @@ from data_structures.graph import Graph
 from queue import SimpleQueue, Queue
 
 
-def breadth_first_search(graph: Graph, from_: int, to_: int) -> bool:
+def breadth_first_search(graph: Graph, from_: int, to_: int, *, is_print_shortest_path: bool=False) -> bool:
     queue_ = SimpleQueue()
     is_seen = {}
+    shortest_path = {}
 
     queue_.put(from_)
     is_seen[from_] = True
@@ -16,10 +17,26 @@ def breadth_first_search(graph: Graph, from_: int, to_: int) -> bool:
             if neigbour not in is_seen:
                 queue_.put(neigbour)
                 is_seen[neigbour] = True
+                shortest_path[neigbour] = to_see
 
                 if neigbour == to_:
+                    if is_print_shortest_path:
+                        print_shortest_path(shortest_path, neigbour)
                     return True
     return False
+
+def print_shortest_path(messy_path, last_key_in_path):
+    previous_key = messy_path[last_key_in_path]
+
+    shortest_path = [last_key_in_path, previous_key]
+
+    while previous_key in messy_path:
+        previous_key = messy_path[previous_key]
+        shortest_path.append(previous_key)
+    
+    shortest_path.reverse()
+    print(shortest_path)
+
 
 if __name__ == '__main__':
     edges = [
@@ -41,8 +58,9 @@ if __name__ == '__main__':
     # or_graph.show_graph()
     # print()
 
-    print(f'{breadth_first_search(graph, 1, 11) = }')  # must be True
+    print(f'{breadth_first_search(graph, 1, 11, is_print_shortest_path=True) = }')  # must be True
     print(f'{breadth_first_search(graph, 1, 16) = }')  # must be False
+    print()
 
-    print(f'{breadth_first_search(or_graph, 1, 9) = }')  # must be True
-    print(f'{breadth_first_search(or_graph, 1, 16) = }')  # must be False
+    print(f'{breadth_first_search(or_graph, 1, 9, is_print_shortest_path=True) = }')  # must be True
+    print(f'{breadth_first_search(or_graph, 1, 16, is_print_shortest_path=True) = }')  # must be False
