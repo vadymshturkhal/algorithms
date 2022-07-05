@@ -3,11 +3,12 @@ class Graph:
         Used dict.
     """
 
-    def __init__(self, edges: list = None) -> None:
+    def __init__(self, edges: list = None, *, is_oriented=True) -> None:
+        self.__is_oriented = is_oriented
         self.__edges = {}
         self.add_edges(edges)
 
-    def add_edges(self, edges: list = None, *, is_oriented: bool = True) -> None:
+    def add_edges(self, edges: list = None) -> None:
         """
             Edges might be both 
                 [(1, 2), (1, 3)]
@@ -31,15 +32,15 @@ class Graph:
             if is_compact_neighbours:
                 for neighbour in to_:
                     self.__edges[from_][neighbour]= None
-                
-                    if not is_oriented:
+
+                    if not self.is_oriented:
                         self.__guarantee_vertex(neighbour)
                         self.__edges[neighbour][from_]= None
                 continue
 
             self.__edges[from_][to_]= None
 
-            if not is_oriented:
+            if not self.is_oriented:
                 self.__guarantee_vertex(to_)
                 self.__edges[to_][from_]= None
 
@@ -55,6 +56,10 @@ class Graph:
             if to_ in self.__edges[from_]:
                 return True
         return False
+
+    @property
+    def is_oriented(self):
+        return self.__is_oriented
 
     def show_graph(self):
         for key, value in self.__edges.items():
@@ -78,9 +83,8 @@ if __name__ == '__main__':
 
     oriented_graph = Graph()
     oriented_graph.add_edges(edges)
-    print('Oriented graph')
+    print(f'{oriented_graph.is_oriented = }')
     oriented_graph.show_graph()
-    print()
 
     edges = [
         (1, [2, 3]),
@@ -89,9 +93,9 @@ if __name__ == '__main__':
         (6, 5)
     ]
 
-    graph = Graph()
-    graph.add_edges(edges, is_oriented=False)
-    print('Graph')
+    graph = Graph(is_oriented=False)
+    graph.add_edges(edges)
+    print(f'{graph.is_oriented = }')
     graph.show_graph()
     print()
     print(f'{graph.get_neighbours(1) = }')
