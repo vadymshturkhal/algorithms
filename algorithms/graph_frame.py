@@ -36,8 +36,17 @@ if __name__ == '__main__':
         (8, 9),
     ]
 
+    # edges = [
+    #     (1, [2, 4]),
+    #     (2, [5, 3]),
+    #     (3, [6, 4]),
+    #     (4, [6, 7]),
+    #     (5, [8, 9, 6]),
+    #     (6, 7),
+    # ]
+
     graph = Graph(edges, is_oriented=False)
-    or_graph = Graph(edges)
+    # or_graph = Graph(edges)
 
     print('Original graph')
     graph.show_graph()
@@ -47,4 +56,5 @@ if __name__ == '__main__':
 
     print('Frame graph')
     frame_graph = graph_frame_breadth_first_search(graph, 1)
+    # frame_graph = graph_frame_breadth_first_search(or_graph, 1)
     frame_graph.show_graph()
