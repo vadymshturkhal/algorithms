@@ -3,7 +3,7 @@ from data_structures.graph import Graph
 from queue import SimpleQueue
 
 
-def graph_frame(graph: Graph, start_vertex: int) -> Graph:
+def graph_frame_breadth_first_search(graph: Graph, start_vertex: int) -> Graph:
     queue_ = SimpleQueue()
     is_seen = {}
 
@@ -47,5 +47,5 @@ if __name__ == '__main__':
     # print()
 
     print('Frame graph')
-    frame_graph = graph_frame(graph, 1)
+    frame_graph = graph_frame_breadth_first_search(graph, 1)
     frame_graph.show_graph()
