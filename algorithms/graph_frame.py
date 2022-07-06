@@ -3,6 +3,7 @@ from queue import SimpleQueue
 
 
 def graph_frame_breadth_first_search(graph: Graph, start_vertex: int) -> Graph:
+    """Search tree in graph"""
     queue_ = SimpleQueue()
     is_seen = {}
 
