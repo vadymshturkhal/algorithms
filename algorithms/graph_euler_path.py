@@ -35,21 +35,19 @@ def euler_path(graph: Graph, start_vertex: int) -> list:
 
 if __name__ == '__main__':
     edges = [
-        (1, [2, 4, 12]),
-        (2, 4),
-        (12, [4, 10, 11]),
-        (10, 11),
-        (4, [6, 7]),
-        (7, [3, 6]),
-        (6, [5, 9, 13]),
-        (5, [8, 9]),
-        (8, 9),
+        (1, [2, 3]),
+        (2, [3, 7, 8]),
+        (3, [4, 5]),
+        (4, 5),
+        (5, [6, 8]),
+        (6, [7, 8, 9,]),
+        (7, [8, 9]),
     ]
 
     graph = Graph(edges, is_oriented=False)
     # or_graph = Graph(edges)
-    # graph.show_graph()
-    # print()
+    graph.show_graph()
+    print()
     # or_graph.show_graph()
     # print()
 
