@@ -2,6 +2,7 @@ from data_structures.graph import Graph
 
 
 def euler_path(graph: Graph, start_vertex: int) -> list:
+    """In graph must be <= 2 vertices with odd power"""
     stack = []
     euler_path_sequence = []
 
