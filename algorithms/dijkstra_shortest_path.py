@@ -18,5 +18,19 @@ if __name__ == '__main__':
     or_graph = Graph(edges)
     or_graph.show_graph()
 
-    x = or_graph.get_edge_value((1, 2))
-    print(x)
+    weights = [
+        ((1, 2), 1),
+        ((2, 3), 5),
+        ((2, 4), 2),
+        ((2, 6), 7),
+        ((3, 6), 1),
+        ((4, 3), 1),
+        ((4, 5), 4),
+        ((5, 4), 3),
+        ((6, 5), 1),
+    ]
+
+    for edge, weight in weights:
+        or_graph.update_edge_value(edge, {'weight': weight})
+
+    or_graph.show_graph()
