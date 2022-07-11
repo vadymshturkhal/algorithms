@@ -89,6 +89,15 @@ class Graph:
         if a in self.__edges:
             return self.__edges[a].get(b)
 
+    def update_edge_value(self, edge, new_value):
+        if len(edge) != 2:
+            return
+        
+        a, b = edge
+        if a in self.__edges:
+            if b in self.__edges[a]:
+                self.__edges[a][b] = new_value
+
     def show_graph(self):
         for key, value in self.__edges.items():
             print(key, '->', list(value))
