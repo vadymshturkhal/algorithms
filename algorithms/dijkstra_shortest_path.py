@@ -1,6 +1,10 @@
 from data_structures.graph import Graph
 
 
+def dijkstra_shortest_path(graph):
+    pass
+
+
 if __name__ == '__main__':
     edges = [
         (1, 2),
@@ -13,3 +17,6 @@ if __name__ == '__main__':
 
     or_graph = Graph(edges)
     or_graph.show_graph()
+
+    x = or_graph.get_edge_value((1, 2))
+    print(x)
