@@ -1,4 +1,10 @@
 def gcd(first: int, second: int):
+    if first < 0 or second < 0:
+        return
+    
+    if type(first) != int or type(second) != int:
+        return
+
     if second == 0:
         return first
 
@@ -6,6 +12,6 @@ def gcd(first: int, second: int):
 
 
 if __name__ == '__main__':
-    a = 18
-    b = 15
-    print(gcd(a, b))
+    print(gcd(119, 544))
+    print(gcd(-119, 544))
+    print(gcd(119.111, 544))
