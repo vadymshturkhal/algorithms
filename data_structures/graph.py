@@ -65,6 +65,9 @@ class Graph:
         if vertex_key in self.__vertices:
             return deepcopy(self.__vertices[vertex_key])
 
+    def get_all_vertices(self):
+        return deepcopy(list(self.__vertices.keys()))
+
     def update_vertex_value(self, vertex_key, new_vertex_value):
         if vertex_key in self.__vertices:
             self.__vertices[vertex_key] = new_vertex_value
