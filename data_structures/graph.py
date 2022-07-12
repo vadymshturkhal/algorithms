@@ -18,6 +18,7 @@ class Graph:
 
     def add_edges(self, edges: list = None) -> None:
         """
+            Edges must be unique.
             Edges might be both 
                 [(1, 2), (1, 3)]
                 [(1, [2, 3, 4])]
