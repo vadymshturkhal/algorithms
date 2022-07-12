@@ -30,9 +30,6 @@ def connected_components(graph: Graph) -> int:
 
     return components
 
-def begin():
-    pass
-
 
 if __name__ == '__main__':
     edges = [
@@ -45,8 +42,10 @@ if __name__ == '__main__':
         (6, [5, 9, 13]),
         (5, [8, 9]),
         (8, 9),
+
         (15, 16),
         (16, 19),
+
         (102, 103),
     ]
 
@@ -55,4 +54,4 @@ if __name__ == '__main__':
     print()
 
     connected_components_quantity = connected_components(graph)
-    print(f'{connected_components_quantity = }')
+    print(f'{connected_components_quantity = }')  # must be 3
