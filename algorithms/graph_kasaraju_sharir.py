@@ -1,9 +1,27 @@
 from data_structures.graph import Graph
 from algorithms.graph_topological_sort import topological_sort
 
-def reverse_graph(graph):
-    pass
 
+def reverse_graph(graph: Graph):
+    reversed_edges = reverse_edges(graph)
+    print(reversed_edges)
+    parsed_edges = parse_edges(reverse_edges)
+
+def reverse_edges(graph: Graph) -> dict:
+    all_vertices = graph.get_all_vertices()
+    reversed_edges = {}
+
+    for vertex in all_vertices:
+        vertex_neighbours = graph.get_neighbours(vertex)
+        for neighbour in vertex_neighbours:
+            if neighbour not in reversed_edges:
+                reversed_edges[neighbour] = []
+            reversed_edges[neighbour].append(vertex)
+
+    return reversed_edges
+
+def parse_edges(edges: dict) -> list:
+    pass
 
 if __name__ == '__main__':
     edges = [
@@ -22,5 +40,7 @@ if __name__ == '__main__':
     ]
 
     graph = Graph(edges, is_directed=True)
-    topological_order = topological_sort(graph)
-    print(topological_order)
+    reverser_graph = reverse_graph(graph)
+
+    # topological_order = topological_sort(graph)
+    # print(topological_order)
