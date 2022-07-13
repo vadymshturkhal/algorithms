@@ -4,8 +4,8 @@ from algorithms.graph_topological_sort import topological_sort
 
 def reverse_graph(graph: Graph):
     reversed_edges = reverse_edges(graph)
-    print(reversed_edges)
-    parsed_edges = parse_edges(reverse_edges)
+    parsed_edges = parse_edges(reversed_edges)
+    print(parsed_edges)
 
 def reverse_edges(graph: Graph) -> dict:
     all_vertices = graph.get_all_vertices()
@@ -20,8 +20,12 @@ def reverse_edges(graph: Graph) -> dict:
 
     return reversed_edges
 
-def parse_edges(edges: dict) -> list:
-    pass
+def parse_edges(vertices: dict) -> list:
+    edges = []
+    for vertex, neighbours in vertices.items():
+        edges.append((vertex, neighbours))
+    return edges
+
 
 if __name__ == '__main__':
     edges = [
