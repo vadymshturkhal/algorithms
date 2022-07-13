@@ -45,7 +45,7 @@ if __name__ == '__main__':
         (7, [8, 9]),
     ]
 
-    graph = Graph(edges, is_oriented=False)
+    graph = Graph(edges, is_directed=False)
     # or_graph = Graph(edges)
     graph.show_graph()
     print()
