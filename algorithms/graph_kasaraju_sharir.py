@@ -58,3 +58,4 @@ if __name__ == '__main__':
 
     strongly_connected_components = get_strongly_connected_components(graph)
     print(strongly_connected_components)
+    print(len(strongly_connected_components))  # must be 5
