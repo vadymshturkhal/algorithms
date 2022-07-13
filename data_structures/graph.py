@@ -110,6 +110,9 @@ class Graph:
         if vertex not in self.__edges:
             self.__edges[vertex] = {}
 
+    def __repr__(self):
+        return 'Graph'
+
 
 if __name__ == '__main__':
     edges = [
