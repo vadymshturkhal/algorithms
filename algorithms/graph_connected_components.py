@@ -1,16 +1,17 @@
 from data_structures.graph import Graph
 
 
-def connected_components(graph: Graph) -> int:
+def get_connected_components(graph: Graph) -> list:
+    """Returns list of connected components"""
     stack = []
     is_seen = {}
-    components = 0
+    all_components = []
 
     for vertex in graph.get_all_vertices():
         if vertex in is_seen:
             continue
 
-        components += 1
+        current_component = []
         stack.append(vertex)
 
         while len(stack):
@@ -26,9 +27,12 @@ def connected_components(graph: Graph) -> int:
                 if to_watch not in is_seen:
                     stack.append(to_watch)
             else:
-                stack.pop()
+                seen_vertex = stack.pop()
+                current_component.append(seen_vertex)
 
-    return components
+        all_components.append(current_component)
+
+    return all_components
 
 
 if __name__ == '__main__':
@@ -50,8 +54,8 @@ if __name__ == '__main__':
     ]
 
     graph = Graph(edges, is_directed=False)
-    graph.show_graph()
-    print()
+    # graph.show_graph()
+    # print()
 
-    connected_components_quantity = connected_components(graph)
-    print(f'{connected_components_quantity = }')  # must be 3
+    connected_components = get_connected_components(graph)
+    print(f'{len(connected_components) = }')  # must be 3
