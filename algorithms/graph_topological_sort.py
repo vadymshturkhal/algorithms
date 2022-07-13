@@ -2,7 +2,14 @@ from data_structures.graph import Graph
 
 
 def topological_sort(graph: Graph) -> list:
-    """Returns vertices in topological sort"""
+    """
+        Graph must be directed and acyclic.
+        Returns vertices in topological sort.
+    """
+
+    if not graph.is_directed:
+        return
+
     stack = []
     is_seen = {}
     topological = []
