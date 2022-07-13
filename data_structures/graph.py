@@ -6,15 +6,15 @@ class Graph:
         Used dict.
     """
 
-    def __init__(self, edges: list = None, *, is_oriented=True) -> None:
-        self.__is_oriented = is_oriented
+    def __init__(self, edges: list = None, *, is_directed=True) -> None:
+        self.__is_directed = is_directed
         self.__vertices = {}
         self.__edges = {}
         self.add_edges(edges)
 
     @property
-    def is_oriented(self):
-        return self.__is_oriented
+    def is_directed(self):
+        return self.__is_directed
 
     def add_edges(self, edges: list = None) -> None:
         """
@@ -44,7 +44,7 @@ class Graph:
                     self.__edges[from_][neighbour]= None
                     self.add_vertex(neighbour)
 
-                    if not self.is_oriented:
+                    if not self.is_directed:
                         self.__guarantee_vertex(neighbour)
                         self.__edges[neighbour][from_]= None
                 continue
@@ -52,7 +52,7 @@ class Graph:
             self.__edges[from_][to_]= None
             self.add_vertex(to_)
 
-            if not self.is_oriented:
+            if not self.is_directed:
                 self.__guarantee_vertex(to_)
                 self.__edges[to_][from_]= None
 
@@ -124,7 +124,7 @@ if __name__ == '__main__':
 
     oriented_graph = Graph()
     oriented_graph.add_edges(edges)
-    print(f'{oriented_graph.is_oriented = }')
+    print(f'{oriented_graph.is_directed = }')
     oriented_graph.show_graph()
 
     edges = [
@@ -134,9 +134,9 @@ if __name__ == '__main__':
         (6, 5)
     ]
 
-    graph = Graph(is_oriented=False)
+    graph = Graph(is_directed=False)
     graph.add_edges(edges)
-    print(f'{graph.is_oriented = }')
+    print(f'{graph.is_directed = }')
     graph.show_graph()
     print()
     print(f'{graph.get_neighbours(1) = }')

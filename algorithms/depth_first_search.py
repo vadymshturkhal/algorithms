@@ -62,16 +62,15 @@ if __name__ == '__main__':
         (8, 9),
     ]
 
-    graph = Graph(edges, is_oriented=False)
-    or_graph = Graph(edges)
+    graph = Graph(edges, is_directed=False)
     # graph.show_graph()
     # print()
-    # or_graph.show_graph()
-    # print()
 
-    print()
     print(f'{depth_first_search_recursive(graph, 1, 9) = }')  # must be True
     print(f'{depth_first_search_recursive(graph, 1, 16) = }')  # must be False
 
-    print(f'{depth_first_search(or_graph, 1, 9) = }')  # must be True
-    print(f'{depth_first_search(or_graph, 1, 16) = }')  # must be False
+    d_graph = Graph(edges)
+    # d_graph.show_graph()
+    # print()
+    # print(f'{depth_first_search(d_graph, 1, 9) = }')  # must be True
+    # print(f'{depth_first_search(d_graph, 1, 16) = }')  # must be False
