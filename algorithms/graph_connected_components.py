@@ -1,13 +1,16 @@
 from data_structures.graph import Graph
 
 
-def get_connected_components(graph: Graph) -> list:
+def get_connected_components(graph: Graph, vertices: list = None) -> list:
     """Returns list of connected components"""
     stack = []
     is_seen = {}
     all_components = []
 
-    for vertex in graph.get_all_vertices():
+    if vertices is None:
+        vertices = graph.get_all_vertices()
+
+    for vertex in vertices:
         if vertex in is_seen:
             continue
 

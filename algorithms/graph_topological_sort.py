@@ -1,7 +1,7 @@
 from data_structures.graph import Graph
 
 
-def topological_sort(graph: Graph) -> list:
+def topological_sort(graph: Graph, is_classic_order=True) -> list:
     """
         Graph must be directed and acyclic.
         Returns vertices in topological sort.
@@ -23,11 +23,13 @@ def topological_sort(graph: Graph) -> list:
         while len(stack):
             to_see = stack[-1]
 
+
             if to_see not in is_seen:
-                is_seen[to_see] = sorted(graph.get_neighbours(to_see), reverse=True)
+                is_seen[to_see] = sorted(graph.get_neighbours(to_see), reverse=is_classic_order)
 
             if len(is_seen[to_see]):
                 # Get last but not first element of neighbours, for efficiency
+
                 to_watch = is_seen[to_see].pop()
 
                 if to_watch not in is_seen:
