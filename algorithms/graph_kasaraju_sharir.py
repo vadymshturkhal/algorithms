@@ -5,7 +5,8 @@ from algorithms.graph_topological_sort import topological_sort
 def reverse_graph(graph: Graph):
     reversed_edges = reverse_edges(graph)
     parsed_edges = parse_edges(reversed_edges)
-    print(parsed_edges)
+    reversed_graph = Graph(parsed_edges, is_directed=True)
+    return reversed_graph
 
 def reverse_edges(graph: Graph) -> dict:
     all_vertices = graph.get_all_vertices()
@@ -44,7 +45,11 @@ if __name__ == '__main__':
     ]
 
     graph = Graph(edges, is_directed=True)
-    reverser_graph = reverse_graph(graph)
+    reversed_graph = reverse_graph(graph)
+
+    graph.show_graph()
+    print()
+    reversed_graph.show_graph()
 
     # topological_order = topological_sort(graph)
     # print(topological_order)
