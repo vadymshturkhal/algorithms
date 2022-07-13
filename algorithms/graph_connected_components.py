@@ -49,7 +49,7 @@ if __name__ == '__main__':
         (102, 103),
     ]
 
-    graph = Graph(edges, is_oriented=False)
+    graph = Graph(edges, is_directed=False)
     graph.show_graph()
     print()
 
