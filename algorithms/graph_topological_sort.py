@@ -41,30 +41,14 @@ def topological_sort(graph: Graph) -> list:
 
 if __name__ == '__main__':
     edges = [
-        (1, [2, 4, 12]),
-        (2, 4),
-        (12, [4, 10, 11]),
-        (10, 11),
-        (4, [6, 7]),
-        (7, [3, 6]),
-        (6, [5, 9, 13]),
-        (5, [8, 9]),
-        (8, 9),
-
-        (15, 16),
-        (16, 19),
-
-        (102, 103),
-    ]
-
-    edges = [
         (0, [1, 5, 2]),
         (3, [5, 6, 4, 2]),
         (5, 2),
-        (6, [0, 4]),
+        (6, [0, 4, 8]),
         (1, 4),
+        (8, [0, 4])
     ]
 
     graph = Graph(edges, is_directed=True)
     topological_order = topological_sort(graph)
-    print(topological_order == [4, 1, 2, 5, 0, 6, 3])
+    print(topological_order == [4, 1, 2, 5, 0, 8, 6, 3])
