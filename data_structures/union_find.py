@@ -1,4 +1,4 @@
-class UnionFindQuick:
+class UnionFind:
     # O(1)
     def __init__(self):
         self.__elements_id = {}
@@ -53,7 +53,7 @@ if __name__ == '__main__':
         [6, 1],
     ]
 
-    union_find_quick = UnionFindQuick()
+    union_find_quick = UnionFind()
 
     for edge in to_union:
         union_find_quick.union(edge)
