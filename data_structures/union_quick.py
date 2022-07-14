@@ -5,7 +5,7 @@ class UnionQuick:
 
     # O(Vertices)
     def union(self, edge):
-        """Change all entries with start_id to end_id"""
+        """Change all entries with start_parent to end_parent"""
 
         if len(edge) != 2:
             return
@@ -13,13 +13,9 @@ class UnionQuick:
         self.__ensure_edge_vertices(edge)
         start, end = edge
 
-        start_id = self.__elements_id[start]
-        end_id = self.__elements_id[end]
-
-        while start_id != self.__elements_id[start_id]:
-            start_id = self.__elements_id[start_id]
-
-        self.__elements_id[start_id] = self.__elements_id[end_id]
+        start_parent = self.__get_root(start)
+        end_parent = self.__get_root(end)
+        self.__elements_id[start_parent] = self.__elements_id[end_parent]
 
     # O(1)
     def is_connected(self, edge) -> bool:
@@ -29,6 +25,11 @@ class UnionQuick:
     def show_union(self):
         for vertex, id in self.__elements_id.items():
             print(vertex, id)
+
+    def __get_root(self, vertex):
+        while vertex != self.__elements_id[vertex]:
+            vertex = self.__elements_id[vertex]
+        return vertex
 
     def __ensure_edge_vertices(self, edge):
         """Set id of each object to itself"""
