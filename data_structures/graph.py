@@ -93,6 +93,15 @@ class Graph:
         if a in self.__edges:
             return deepcopy(self.__edges[a].get(b))
 
+    def get_all_edges(self):
+        all_edges = []
+        for start_vertex, end_vertices in self.__edges.items():
+            end_vertices = list(end_vertices.keys())
+            for end_vertex in end_vertices:
+                all_edges.append((start_vertex, end_vertex))
+
+        return all_edges
+
     def update_edge_value(self, edge, new_value):
         if len(edge) != 2:
             return
