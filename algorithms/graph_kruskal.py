@@ -16,19 +16,23 @@ def create_weight_binary_heap_with(graph: Graph):
     all_edges = graph.get_all_edges()
 
     def edge_weight_comparator(first_edge, second_edge):
-        first_weigth = graph.get_edge_value(first_edge)['weight']
-        second_weight = graph.get_edge_value(second_edge)['weight']
+        first_edge, first_weigth = first_edge
+        second_edge, second_weight = second_edge
 
         if first_weigth < second_weight:
-            return -1
-        if first_weigth < second_weight:
-            return 1
-        return 0
+            returned_value = -1
+        elif first_weigth > second_weight:
+            returned_value = 1
+        else:
+            returned_value = 0
+        
+        return returned_value
     
     binary_heap = BinaryHeap(comparator=edge_weight_comparator)
 
     for edge in all_edges:
-        binary_heap.insert(edge)
+        edge_to_compare = [edge, graph.get_edge_value(edge)['weight']]
+        binary_heap.insert(edge_to_compare)
 
     return binary_heap
 
