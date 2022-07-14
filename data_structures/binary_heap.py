@@ -2,14 +2,14 @@ from typing import Any, Union
 
 
 class BinaryHeap:
-    def __init__(self, *, return_max=False, comparator=None):
+    def __init__(self, *, is_reverse_order=False, comparator=None):
         self.__items = [None]
-        self.__return_max = return_max
 
         if comparator is None:
             comparator = self.__create_comparator()
 
         self.__comparator = comparator
+        self.__controller = -1 if is_reverse_order else 1
 
     def insert(self, item: Any) -> None:
         self.__items.append(item)
@@ -30,54 +30,37 @@ class BinaryHeap:
         self.__sink(1)
         return max_item
 
-    def __swim(self, index):
+    def __swim(self, pointer):
+        if pointer <= 1:
+            return
+
         items = self.__items
-        first_child = items[index // 2]
-        second_child = items[index]
 
-        if not self.__return_max:
-            first_child, second_child = second_child, first_child
+        parent = items[pointer // 2]
+        to_swim = items[pointer]
 
-        while index > 1 and self.__comparator(first_child, second_child) == -1:
-            self.__swap_elements(index, index // 2)
+        while pointer > 1 and self.__comparator(parent, to_swim) == self.__controller:
+            self.__swap_elements(pointer // 2, pointer)
 
-            index //= 2
-            first_child = items[index // 2]
-            second_child = items[index]
+            pointer //= 2
 
-            if not self.__return_max:
-                first_child, second_child = second_child, first_child
+            parent = items[pointer // 2]
+            to_swim = items[pointer]
 
     def __sink(self, index) -> None:
         items = self.__items
+        while 2 * index <= len(items) - 1:
+            j = 2 * index
 
-        while 2 * index < len(items):
-            child_min_index = 2 * index
+            if j < len(items) - 1:
+                if self.__comparator(items[j], items[j + 1]) == self.__controller:
+                    j += 1
 
-            first_child = items[child_min_index]
-
-            if child_min_index == len(items) - 1:
-                second_child = first_child
-            else:
-                second_child = items[child_min_index + 1]
-
-            if not self.__return_max:
-                first_child, second_child = second_child, first_child
-
-            if (child_min_index < len(items) - 1) and self.__comparator(first_child, second_child) == -1:
-                child_min_index += 1
-
-            first_child = items[index]
-            second_child = items[child_min_index]
-
-            if not self.__return_max:
-                first_child, second_child = second_child, first_child
-
-            if first_child >= second_child:
+            if self.__comparator(items[index], items[j]) == -self.__controller:
                 break
 
-            self.__swap_elements(index, child_min_index)
-            index = child_min_index
+            items[index], items[j] = items[j], items[index]
+            index = j
 
     def __swap_elements(self, first, second):
         items = self.__items
@@ -108,7 +91,7 @@ class BinaryHeap:
 if __name__ == '__main__':
     HEAP_ITEMS_QUANTITY = 10
 
-    binary_heap = BinaryHeap(return_max=True)
+    binary_heap = BinaryHeap(is_reverse_order=True)
 
     for i in range(1, HEAP_ITEMS_QUANTITY):
         binary_heap.insert(i)
@@ -125,7 +108,7 @@ if __name__ == '__main__':
         print(element)
     print()
 
-    binary_heap = BinaryHeap(return_max=False)
+    binary_heap = BinaryHeap(is_reverse_order=False)
 
     for i in range(1, HEAP_ITEMS_QUANTITY):
         binary_heap.insert(i)
