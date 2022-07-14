@@ -82,14 +82,17 @@ class BinaryHeap:
 
 if __name__ == '__main__':
     HEAP_ITEMS_QUANTITY = 10
-    bh = BinaryHeap(return_max=True)
+
+    binary_heap = BinaryHeap(return_max=True)
+
     for i in range(1, HEAP_ITEMS_QUANTITY):
-        bh.insert(i)
+        binary_heap.insert(i)
 
-    bh.insert(132)
-    bh.insert(74)
-    bh.insert(282)
-    bh.insert(0)
+    binary_heap.insert(132)
+    binary_heap.insert(74)
+    binary_heap.insert(282)
+    binary_heap.insert(0)
+    binary_heap.insert(-1)
 
-    for element in bh:
+    for element in binary_heap:
         print(element)
