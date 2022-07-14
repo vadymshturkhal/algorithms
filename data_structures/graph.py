@@ -33,28 +33,28 @@ class Graph:
             if len(edge) != 2:
                 raise StopIteration(f'Can\'t parse the edge {edge}')
 
-            from_, to_ = edge
-            self.__guarantee_vertex(from_)
-            self.add_vertex(from_)
-
-            is_compact_neighbours = type(to_) == list
+            vertex, neighbours = edge
+    
+            is_compact_neighbours = type(neighbours) == list
 
             if is_compact_neighbours:
-                for neighbour in to_:
-                    self.__edges[from_][neighbour]= None
-                    self.add_vertex(neighbour)
-
-                    if not self.is_directed:
-                        self.__guarantee_vertex(neighbour)
-                        self.__edges[neighbour][from_]= None
+                for neighbour in neighbours:
+                    self.add_edge((vertex, neighbour))
                 continue
 
-            self.__edges[from_][to_]= None
-            self.add_vertex(to_)
+            self.add_edge((vertex, neighbours))
 
-            if not self.is_directed:
-                self.__guarantee_vertex(to_)
-                self.__edges[to_][from_]= None
+    def add_edge(self, edge, data=None):
+        from_, to_ = edge
+        self.__guarantee_vertex(from_)
+        self.add_vertex(from_)
+
+        self.__edges[from_][to_]= data
+        self.add_vertex(to_)
+
+        if not self.is_directed:
+            self.__guarantee_vertex(to_)
+            self.__edges[to_][from_]= self.__edges[to_].get(from_)
 
     def add_vertex(self, vertex, value=None):
         if vertex in self.__vertices:
