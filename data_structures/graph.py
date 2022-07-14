@@ -71,6 +71,9 @@ class Graph:
     def update_vertex_value(self, vertex_key, new_vertex_value):
         if vertex_key in self.__vertices:
             self.__vertices[vertex_key] = new_vertex_value
+    
+    def is_vertex_exist(self, vertex_id):
+        return vertex_id in self.__vertices
 
     def get_neighbours(self, vertex: int) -> list:
         """Returned copy of vertices"""
