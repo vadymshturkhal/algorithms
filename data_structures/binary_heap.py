@@ -71,6 +71,14 @@ class BinaryHeap:
     def __len__(self):
         return len(self.__items) - 1
 
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        while len(self.__items) > 1:
+            return self.del_element()
+        raise StopIteration
+
 
 if __name__ == '__main__':
     HEAP_ITEMS_QUANTITY = 10
@@ -83,7 +91,5 @@ if __name__ == '__main__':
     bh.insert(282)
     bh.insert(0)
 
-    for i in range(HEAP_ITEMS_QUANTITY + 4):
-        x = bh.del_element()
-        print(x)
-        # print()
+    for element in bh:
+        print(element)
