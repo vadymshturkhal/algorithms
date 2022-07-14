@@ -5,9 +5,32 @@ from data_structures.binary_heap import BinaryHeap
 def get_min_spanning_tree(graph: Graph) -> Graph:
     min_span_tree = Graph()
 
+    weight_binary_heap = create_weight_binary_heap_with(graph)
 
+    for edge in weight_binary_heap:
+        print(edge)
 
     return min_span_tree
+
+def create_weight_binary_heap_with(graph: Graph):
+    all_edges = graph.get_all_edges()
+
+    def edge_weight_comparator(first_edge, second_edge):
+        first_weigth = graph.get_edge_value(first_edge)['weight']
+        second_weight = graph.get_edge_value(second_edge)['weight']
+
+        if first_weigth < second_weight:
+            return -1
+        if first_weigth < second_weight:
+            return 1
+        return 0
+    
+    binary_heap = BinaryHeap(comparator=edge_weight_comparator)
+
+    for edge in all_edges:
+        binary_heap.insert(edge)
+
+    return binary_heap
 
 
 if __name__ == '__main__':
@@ -36,8 +59,8 @@ if __name__ == '__main__':
         vertices, data = edge
         dir_graph.add_edge(vertices, data=data)
 
-    dir_graph.show_graph()
-    print()
+    # dir_graph.show_graph()
+    # print()
 
     min_span_tree = get_min_spanning_tree(dir_graph)
     min_span_tree.show_graph()
