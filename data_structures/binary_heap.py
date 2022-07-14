@@ -2,7 +2,7 @@ from typing import Any, Union
 
 
 class BinaryHeap:
-    def __init__(self, *, return_max=False, comparator = None):
+    def __init__(self, *, return_max=False, comparator=None):
         self.__items = [None]
         self.__return_max = return_max
 
