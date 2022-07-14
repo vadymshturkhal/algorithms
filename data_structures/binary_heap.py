@@ -16,7 +16,7 @@ class BinaryHeap:
         if len(items) == 2:
             return items.pop()
 
-        if len(items) < 2:
+        if len(items) <= 1:
             return
 
         items[1], items[len(items) - 1] = items[len(items) - 1], items[1]
@@ -27,53 +27,63 @@ class BinaryHeap:
 
     def __swim(self, index):
         items = self.__items
-        a = items[index // 2]
-        b = items[index]
+        first_child = items[index // 2]
+        second_child = items[index]
 
         if not self.__return_max:
-            a, b = b, a
+            first_child, second_child = second_child, first_child
 
-        while index > 1 and a < b:
-            items[index], items[index // 2] = items[index // 2], items[index]
+        while index > 1 and first_child < second_child:
+            self.__swap_elements(index, index // 2)
 
             index //= 2
-            a = items[index // 2]
-            b = items[index]
+            first_child = items[index // 2]
+            second_child = items[index]
 
             if not self.__return_max:
-                a, b = b, a
+                first_child, second_child = second_child, first_child
 
     def __sink(self, index) -> None:
         items = self.__items
 
-        while 2 * index < len(items) - 1:
-            j = 2 * index
+        while 2 * index < len(items):
+            child_min_index = 2 * index
 
-            a = items[j]
-            b = items[j + 1]
+            first_child = items[child_min_index]
+
+            if child_min_index == len(items) - 1:
+                second_child = first_child
+            else:
+                second_child = items[child_min_index + 1]
+
             if not self.__return_max:
-                a, b = b, a
+                first_child, second_child = second_child, first_child
 
-            if j < len(items) - 1 and a < b:
-                j += 1
+            if (child_min_index < len(items) - 1) and first_child < second_child:
+                child_min_index += 1
 
-            a = items[index]
-            b = items[j]
+            first_child = items[index]
+            second_child = items[child_min_index]
+
             if not self.__return_max:
-                a, b = b, a
+                first_child, second_child = second_child, first_child
 
-            if a >= b:
+            if first_child >= second_child:
                 break
 
-            items[index], items[j] = items[j], items[index]
-            index = j
+            self.__swap_elements(index, child_min_index)
+            index = child_min_index
+
+    def __swap_elements(self, first, second):
+        items = self.__items
+        items[first], items[second] = items[second], items[first]
 
     def __len__(self):
         return len(self.__items) - 1
 
     def __iter__(self):
         return self
-    
+
     def __next__(self):
         while len(self.__items) > 1:
             return self.del_element()
@@ -93,6 +103,25 @@ if __name__ == '__main__':
     binary_heap.insert(282)
     binary_heap.insert(0)
     binary_heap.insert(-1)
+    binary_heap.insert(100)
 
+    print('Binary heap max order:')
+    for element in binary_heap:
+        print(element)
+    print()
+
+    binary_heap = BinaryHeap(return_max=False)
+
+    for i in range(1, HEAP_ITEMS_QUANTITY):
+        binary_heap.insert(i)
+
+    binary_heap.insert(132)
+    binary_heap.insert(74)
+    binary_heap.insert(282)
+    binary_heap.insert(0)
+    binary_heap.insert(-1)
+    binary_heap.insert(100)
+
+    print('Binary heap min order:')
     for element in binary_heap:
         print(element)
