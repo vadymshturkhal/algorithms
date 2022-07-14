@@ -3,8 +3,23 @@ class UnionQuick:
     def __init__(self):
         self.__elements_id = {}
 
+    # O(Vertices)
     def union(self, edge):
-        pass
+        """Change all entries with start_id to end_id"""
+
+        if len(edge) != 2:
+            return
+
+        self.__ensure_edge_vertices(edge)
+        start, end = edge
+
+        start_id = self.__elements_id[start]
+        end_id = self.__elements_id[end]
+
+        while start_id != self.__elements_id[start_id]:
+            start_id = self.__elements_id[start_id]
+
+        self.__elements_id[start_id] = self.__elements_id[end_id]
 
     # O(1)
     def is_connected(self, edge) -> bool:
@@ -28,15 +43,15 @@ class UnionQuick:
 
 if __name__ == '__main__':
     to_union = [
-        [3, 4],
+        [4, 3],
         [3, 8],
         [6, 5],
         [9, 4],
         [2, 1],
-        [8, 9],
         [5, 0],
         [7, 2],
         [6, 1],
+        [7, 3],
     ]
 
     union_find_quick = UnionQuick()
