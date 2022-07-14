@@ -2,9 +2,14 @@ from typing import Any, Union
 
 
 class BinaryHeap:
-    def __init__(self, *, return_max=False):
+    def __init__(self, *, return_max=False, comparator = None):
         self.__items = [None]
         self.__return_max = return_max
+
+        if comparator is None:
+            comparator = self.__create_comparator()
+
+        self.__comparator = comparator
 
     def insert(self, item: Any) -> None:
         self.__items.append(item)
@@ -33,7 +38,7 @@ class BinaryHeap:
         if not self.__return_max:
             first_child, second_child = second_child, first_child
 
-        while index > 1 and first_child < second_child:
+        while index > 1 and self.__comparator(first_child, second_child) == -1:
             self.__swap_elements(index, index // 2)
 
             index //= 2
@@ -59,7 +64,7 @@ class BinaryHeap:
             if not self.__return_max:
                 first_child, second_child = second_child, first_child
 
-            if (child_min_index < len(items) - 1) and first_child < second_child:
+            if (child_min_index < len(items) - 1) and self.__comparator(first_child, second_child) == -1:
                 child_min_index += 1
 
             first_child = items[index]
@@ -77,6 +82,16 @@ class BinaryHeap:
     def __swap_elements(self, first, second):
         items = self.__items
         items[first], items[second] = items[second], items[first]
+
+    def __create_comparator(self):
+        def default_comparator(a, b):
+            if a > b:
+                return 1
+            if a < b:
+                return -1
+            return 0
+
+        return default_comparator
 
     def __len__(self):
         return len(self.__items) - 1
