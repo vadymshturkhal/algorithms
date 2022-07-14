@@ -56,7 +56,7 @@ class Graph:
             self.__guarantee_vertex(to_)
             self.__edges[to_][from_]= self.__edges[to_].get(from_)
 
-    def add_vertex(self, vertex, value=None):
+    def add_vertex(self, vertex, *, value=None):
         if vertex in self.__vertices:
             return
         self.__vertices[vertex] = value
@@ -91,7 +91,7 @@ class Graph:
 
         a, b = edge
         if a in self.__edges:
-            return self.__edges[a].get(b)
+            return deepcopy(self.__edges[a].get(b))
 
     def update_edge_value(self, edge, new_value):
         if len(edge) != 2:
