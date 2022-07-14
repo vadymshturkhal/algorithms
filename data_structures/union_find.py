@@ -1,40 +1,63 @@
-class UnionFind:
-    # O(N)
-    def __init__(self, length):
-        # Set id of each object to itself
-        self.__elements_id = [_ for _ in range(length)]
+class UnionFindQuick:
+    # O(1)
+    def __init__(self):
+        self.__elements_id = {}
 
-    # O(N)
-    # Change all entries with p_id to q_id
-    def union(self, p, q):
-        p_id = self.__elements_id[p]
-        q_id = self.__elements_id[q]
+    # O(Vertices)
+    def union(self, edge):
+        """Change all entries with start_id to end_id"""
 
-        for i in range(len(self.__elements_id)):
-            if self.__elements_id[i] == p_id:
-                self.__elements_id[i] = q_id
+        if len(edge) != 2:
+            return
 
-    def is_connected(self, p, q) -> bool:
-        return self.__elements_id[p] == self.__elements_id[q]
+        self.__ensure_edge_vertices(edge)
+        start, end = edge
+
+        start_id = self.__elements_id[start]
+        end_id = self.__elements_id[end]
+
+        for key in self.__elements_id.keys():
+            if self.__elements_id[key] == start_id:
+                self.__elements_id[key] = end_id
+
+    # O(1)
+    def is_connected(self, edge) -> bool:
+        start, end = edge
+        return self.__elements_id.get(start, start) == self.__elements_id.get(end, end)
+
+    def show_union(self):
+        for vertex, id in self.__elements_id.items():
+            print(vertex, id)
+
+    def __ensure_edge_vertices(self, edge):
+        """Set id of each object to itself"""
+
+        start, end = edge
+        if start not in self.__elements_id:
+            self.__elements_id[start] = start
+
+        if end not in self.__elements_id:
+            self.__elements_id[end] = end
 
 
 if __name__ == '__main__':
-    UNION_LENGTH = 10
-    uf = UnionFind(UNION_LENGTH)
     to_union = [
-        [0, 5],
-        [5, 6],
-        [6, 1],
-        [1, 2],
-        [2, 7],
-
-        [8, 3],
         [3, 4],
-        [4, 9]
+        [3, 8],
+        [6, 5],
+        [9, 4],
+        [2, 1],
+        [8, 9],
+        [5, 0],
+        [7, 2],
+        [6, 1],
     ]
 
-    for p, q in to_union:
-        uf.union(p, q)
+    union_find_quick = UnionFindQuick()
 
-    print(uf.is_connected(0, 9))
-    print(uf.is_connected(8, 9))
+    for edge in to_union:
+        union_find_quick.union(edge)
+
+    print(union_find_quick.is_connected((3, 8)))  # must be True
+    print(union_find_quick.is_connected((1, 8)))  # must be False
+    union_find_quick.show_union()
