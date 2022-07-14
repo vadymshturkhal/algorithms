@@ -44,7 +44,7 @@ class Graph:
 
             self.add_edge((vertex, neighbours))
 
-    def add_edge(self, edge, data=None):
+    def add_edge(self, edge, *, data=None):
         from_, to_ = edge
         self.__guarantee_vertex(from_)
         self.add_vertex(from_)
