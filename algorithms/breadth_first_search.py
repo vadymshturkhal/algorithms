@@ -1,4 +1,3 @@
-from operator import ne
 from data_structures.graph import Graph
 from queue import SimpleQueue
 
