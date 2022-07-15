@@ -35,10 +35,10 @@ class UnionQuick:
             self.__sizes[self.__elements_id[start_parent]] += self.__sizes[self.__elements_id[end_parent]]
             self.__elements_id[end_parent] = self.__elements_id[start_parent]
 
-    # O(1)
+    # O(log V)
     def is_connected(self, edge) -> bool:
         start, end = edge
-        return self.__elements_id.get(start, start) == self.__elements_id.get(end, end)
+        return self.__get_root(start) == self.__get_root(end)
 
     def show_union(self):
         for vertex, id in self.__elements_id.items():
@@ -48,7 +48,7 @@ class UnionQuick:
         print(self.__sizes)
 
     def __get_root(self, vertex):
-        while vertex != self.__elements_id[vertex]:
+        while vertex != self.__elements_id.get(vertex, vertex):
             self.__elements_id[vertex] = self.__elements_id[self.__elements_id[vertex]]
             vertex = self.__elements_id[vertex]
 
@@ -90,3 +90,6 @@ if __name__ == '__main__':
 
     union_find_quick.show_union()
     union_find_quick.show_sizes()
+
+    print(union_find_quick.is_connected((7, 8)))
+    print(union_find_quick.is_connected((17, 8)))
