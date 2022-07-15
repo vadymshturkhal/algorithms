@@ -1,11 +1,12 @@
 from data_structures.graph import Graph
-from queue import SimpleQueue
 from math import inf
+from data_structures.binary_heap import BinaryHeap
+
 
 
 def dijkstra_shortest_path(directed_graph: Graph, start_vertex) -> Graph:
-    queue_ = SimpleQueue()
     shortest_path_graph = Graph()
+    binary_heap = BinaryHeap(comparator=edge_weight_comparator)
     neighbour_edges = {}
     is_seen = {}
 
@@ -15,16 +16,16 @@ def dijkstra_shortest_path(directed_graph: Graph, start_vertex) -> Graph:
     if directed_graph.get_vertex(start_vertex) is None:
         directed_graph.update_vertex_value(start_vertex, {'weight': 0})
 
-    queue_.put(start_vertex)
-    while not queue_.empty() :
-        to_see = queue_.get()
+    start_vertex = (start_vertex, 0)
+    binary_heap.insert(start_vertex)
+    while len(binary_heap):
+        to_see = binary_heap.del_element()
+        to_see = to_see[0]
         is_seen[to_see] = True
 
         for neigbour in directed_graph.get_neighbours(to_see):
             if neigbour in is_seen:
                 continue
-
-            queue_.put(neigbour)
 
             edge = (to_see, neigbour)
             edge_weight = directed_graph.get_edge_value(edge)['weight']
@@ -40,12 +41,28 @@ def dijkstra_shortest_path(directed_graph: Graph, start_vertex) -> Graph:
                 directed_graph.update_vertex_value(neigbour, {'weight': current_path_weight_to_neighbour})
                 neighbour_edges[neigbour] = edge
 
+                to_insert = (neigbour, current_path_weight_to_neighbour)
+                binary_heap.insert(to_insert)
+
     for edge in neighbour_edges.values():
         shortest_path_graph.add_edge(edge, data=directed_graph.get_edge_value(edge))
     
     return shortest_path_graph
 
+def edge_weight_comparator(first_vertex, second_vertex):
+    first_vertex, first_weigth = first_vertex
+    second_vertex, second_weight = second_vertex
 
+    if first_weigth < second_weight:
+        returned_value = -1
+    elif first_weigth > second_weight:
+        returned_value = 1
+    else:
+        returned_value = 0
+    
+    return returned_value
+
+    
 if __name__ == '__main__':
     edges = [
         [(0, 1), {'weight': 5}],
