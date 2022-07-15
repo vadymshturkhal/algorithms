@@ -4,6 +4,7 @@ class UnionQuick:
         self.__elements_id = {}
         self.__sizes = {}
 
+    # O(log V)
     def union(self, edge):
         """The smaller tree goes below"""
         if len(edge) != 2:
@@ -35,7 +36,7 @@ class UnionQuick:
             self.__sizes[self.__elements_id[start_parent]] += self.__sizes[self.__elements_id[end_parent]]
             self.__elements_id[end_parent] = self.__elements_id[start_parent]
 
-    # O(1)
+    # O(log V)
     def is_connected(self, edge) -> bool:
         start, end = edge
         return self.__get_root(start) == self.__get_root(end)

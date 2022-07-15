@@ -20,15 +20,17 @@ class UnionQuick:
     # O(1)
     def is_connected(self, edge) -> bool:
         start, end = edge
-        return self.__elements_id.get(start, start) == self.__elements_id.get(end, end)
+        return self.__get_root(start) == self.__get_root(end)
 
     def show_union(self):
         for vertex, id in self.__elements_id.items():
             print(vertex, id)
 
     def __get_root(self, vertex):
-        while vertex != self.__elements_id[vertex]:
+        while vertex != self.__elements_id.get(vertex, vertex):
+            self.__elements_id[vertex] = self.__elements_id[self.__elements_id[vertex]]
             vertex = self.__elements_id[vertex]
+
         return vertex
 
     def __ensure_edge_vertices(self, edge):
@@ -60,6 +62,6 @@ if __name__ == '__main__':
     for edge in to_union:
         union_find_quick.union(edge)
 
-    print(union_find_quick.is_connected((3, 8)))  # must be True
-    print(union_find_quick.is_connected((1, 8)))  # must be False
     union_find_quick.show_union()
+    print(union_find_quick.is_connected((7, 8)))
+    print(union_find_quick.is_connected((17, 8)))
