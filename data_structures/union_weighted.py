@@ -24,12 +24,15 @@ class UnionQuick:
         end_income = self.__sizes[self.__elements_id[end_parent]]
 
         if start_income < end_income:
-            self.__sizes[self.__elements_id[end_parent]] += 1
-            self.__sizes[self.__elements_id[start_parent]] -= 1
+            self.__sizes
+            # self.__sizes[self.__elements_id[end_parent]] += 1
+            # self.__sizes[self.__elements_id[start_parent]] -= 1
+            self.__sizes[self.__elements_id[end_parent]] += self.__sizes[self.__elements_id[start_parent]]
             self.__elements_id[start_parent] = self.__elements_id[end_parent]
         else:
-            self.__sizes[self.__elements_id[end_parent]] -= 1
-            self.__sizes[self.__elements_id[start_parent]] += 1
+            # self.__sizes[self.__elements_id[end_parent]] -= 1
+            # self.__sizes[self.__elements_id[start_parent]] += 1
+            self.__sizes[self.__elements_id[start_parent]] += self.__sizes[self.__elements_id[end_parent]]
             self.__elements_id[end_parent] = self.__elements_id[start_parent]
 
     # O(1)
