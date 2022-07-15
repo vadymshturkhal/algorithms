@@ -5,6 +5,7 @@ class UnionQuick:
         self.__sizes = {}
 
     def union(self, edge):
+        """The smaller tree goes below"""
         if len(edge) != 2:
             return
 
@@ -14,12 +15,22 @@ class UnionQuick:
         start_parent = self.__get_root(start)
         end_parent = self.__get_root(end)
 
+        if start_parent == end_parent:
+            return
+
         self.__ensure_sizes(start_parent, end_parent)
 
-        self.__sizes[self.__elements_id[end_parent]] += 1
-        self.__sizes[self.__elements_id[start_parent]] -= 1
+        start_income = self.__sizes[self.__elements_id[start_parent]]
+        end_income = self.__sizes[self.__elements_id[end_parent]]
 
-        self.__elements_id[start_parent] = self.__elements_id[end_parent]
+        if start_income < end_income:
+            self.__sizes[self.__elements_id[end_parent]] += 1
+            self.__sizes[self.__elements_id[start_parent]] -= 1
+            self.__elements_id[start_parent] = self.__elements_id[end_parent]
+        else:
+            self.__sizes[self.__elements_id[end_parent]] -= 1
+            self.__sizes[self.__elements_id[start_parent]] += 1
+            self.__elements_id[end_parent] = self.__elements_id[start_parent]
 
     # O(1)
     def is_connected(self, edge) -> bool:
