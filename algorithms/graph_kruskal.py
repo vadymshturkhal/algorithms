@@ -1,18 +1,26 @@
 from data_structures.graph import Graph
 from data_structures.binary_heap import BinaryHeap
+from data_structures.union_weighted_improved import UnionWeightedImproved
 
 
-def get_min_spanning_tree(graph: Graph) -> Graph:
-    min_span_tree = Graph()
+def get_min_spanning_tree(graph: Graph):
+    min_span_tree = Graph(is_directed=False)
 
     weight_binary_heap = create_weight_binary_heap_with(graph)
+    union_weighted = UnionWeightedImproved()
 
-    for edge in weight_binary_heap:
-        print(edge)
+    total_span_tree_weight = 0
+    for edge, weight in weight_binary_heap:
+        if union_weighted.is_connected(edge):
+            continue
 
-    return min_span_tree
+        total_span_tree_weight += weight
+        min_span_tree.add_edge(edge, data={'weight': weight})
+        union_weighted.union(edge)
 
-def create_weight_binary_heap_with(graph: Graph):
+    return min_span_tree, total_span_tree_weight
+
+def create_weight_binary_heap_with(graph: Graph) -> BinaryHeap:
     all_edges = graph.get_all_edges()
 
     def edge_weight_comparator(first_edge, second_edge):
@@ -66,5 +74,6 @@ if __name__ == '__main__':
     # dir_graph.show_graph()
     # print()
 
-    min_span_tree = get_min_spanning_tree(dir_graph)
+    min_span_tree, min_weight = get_min_spanning_tree(dir_graph)
     min_span_tree.show_graph()
+    print(min_weight)
