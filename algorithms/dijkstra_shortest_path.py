@@ -1,36 +1,34 @@
 from data_structures.graph import Graph
 
 
-def dijkstra_shortest_path(graph):
+def dijkstra_shortest_path(oriented_graph, start_vertex):
     pass
 
 
 if __name__ == '__main__':
     edges = [
-        (1, 2),
-        (2, [3, 4, 6]),
-        (3, 6),
-        (4, [3, 5]),
-        (5, 4),
-        (6, 5),
+        [(0, 7), {'weight': 0.16}],
+        [(2, 3), {'weight': 0.17}],
+        [(1, 7), {'weight': 0.19}],
+        [(0, 2), {'weight': 0.26}],
+        [(5, 7), {'weight': 0.28}],
+        [(1, 3), {'weight': 0.29}],
+        [(1, 5), {'weight': 0.32}],
+        [(2, 7), {'weight': 0.34}],
+        [(4, 5), {'weight': 0.35}],
+        [(1, 2), {'weight': 0.36}],
+        [(4, 7), {'weight': 0.37}],
+        [(0, 4), {'weight': 0.38}],
+        [(6, 2), {'weight': 0.40}],
+        [(3, 6), {'weight': 0.52}],
+        [(6, 0), {'weight': 0.58}],
+        [(6, 4), {'weight': 0.93}],
     ]
 
-    or_graph = Graph(edges)
-    or_graph.show_graph()
+    dir_graph = Graph(is_directed=True)
 
-    weights = [
-        ((1, 2), 1),
-        ((2, 3), 5),
-        ((2, 4), 2),
-        ((2, 6), 7),
-        ((3, 6), 1),
-        ((4, 3), 1),
-        ((4, 5), 4),
-        ((5, 4), 3),
-        ((6, 5), 1),
-    ]
+    for edge in edges:
+        vertices, data = edge
+        dir_graph.add_edge(vertices, data=data)
 
-    for edge, weight in weights:
-        or_graph.update_edge_value(edge, {'weight': weight})
-
-    or_graph.show_graph()
+    dir_graph.show_graph()
