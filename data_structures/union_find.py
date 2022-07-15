@@ -53,11 +53,11 @@ if __name__ == '__main__':
         [6, 1],
     ]
 
-    union_find_quick = UnionFind()
+    union_find = UnionFind()
 
     for edge in to_union:
-        union_find_quick.union(edge)
+        union_find.union(edge)
 
-    print(union_find_quick.is_connected((3, 8)))  # must be True
-    print(union_find_quick.is_connected((1, 8)))  # must be False
-    union_find_quick.show_union()
+    print(union_find.is_connected((3, 8)))  # must be True
+    print(union_find.is_connected((1, 8)))  # must be False
+    union_find.show_union()

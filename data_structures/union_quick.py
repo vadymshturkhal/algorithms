@@ -57,11 +57,11 @@ if __name__ == '__main__':
         [7, 3],
     ]
 
-    union_find_quick = UnionQuick()
+    union_quick = UnionQuick()
 
     for edge in to_union:
-        union_find_quick.union(edge)
+        union_quick.union(edge)
 
-    union_find_quick.show_union()
-    print(union_find_quick.is_connected((7, 8)))
-    print(union_find_quick.is_connected((17, 8)))
+    union_quick.show_union()
+    print(union_quick.is_connected((7, 8)))
+    print(union_quick.is_connected((17, 8)))

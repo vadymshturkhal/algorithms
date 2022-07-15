@@ -1,4 +1,4 @@
-class UnionQuick:
+class UnionWeighted:
     # O(1)
     def __init__(self):
         self.__elements_id = {}
@@ -84,13 +84,13 @@ if __name__ == '__main__':
         [7, 3],
     ]
 
-    union_find_quick = UnionQuick()
+    union_weighted = UnionWeighted()
 
     for edge in to_union:
-        union_find_quick.union(edge)
+        union_weighted.union(edge)
 
-    union_find_quick.show_union()
-    union_find_quick.show_sizes()
+    union_weighted.show_union()
+    union_weighted.show_sizes()
 
-    print(union_find_quick.is_connected((7, 8)))
-    print(union_find_quick.is_connected((17, 8)))
+    print(union_weighted.is_connected((7, 8)))
+    print(union_weighted.is_connected((17, 8)))
