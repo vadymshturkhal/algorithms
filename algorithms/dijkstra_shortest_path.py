@@ -19,8 +19,8 @@ def dijkstra_shortest_path(directed_graph: Graph, start_vertex) -> Graph:
     start_vertex = (start_vertex, 0)
     binary_heap.insert(start_vertex)
     while len(binary_heap):
-        to_see = binary_heap.del_element()
-        to_see = to_see[0]
+        to_see, to_see_weight = binary_heap.del_element()
+
         is_seen[to_see] = True
 
         for neigbour in directed_graph.get_neighbours(to_see):
@@ -33,7 +33,6 @@ def dijkstra_shortest_path(directed_graph: Graph, start_vertex) -> Graph:
             if directed_graph.get_vertex(neigbour) is None:
                 directed_graph.update_vertex_value(neigbour, {'weight': inf})
 
-            to_see_weight = directed_graph.get_vertex(to_see)['weight']
             neighbour_weight = directed_graph.get_vertex(neigbour)['weight']
             current_path_weight_to_neighbour = to_see_weight + edge_weight
 
