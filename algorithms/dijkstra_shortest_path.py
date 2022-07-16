@@ -3,18 +3,15 @@ from math import inf
 from data_structures.binary_heap import BinaryHeap
 
 
-
 def dijkstra_shortest_path(directed_graph: Graph, start_vertex) -> Graph:
-    shortest_path_graph = Graph()
+    if not directed_graph.is_vertex_exist(start_vertex):
+        return
+
     binary_heap = BinaryHeap(comparator=edge_weight_comparator)
     neighbour_edges = {}
     is_seen = {}
 
-    if not directed_graph.is_vertex_exist(start_vertex):
-        return
-
-    if directed_graph.get_vertex(start_vertex) is None:
-        directed_graph.update_vertex_value(start_vertex, {'weight': 0})
+    shortest_path_graph = init_all_vertices_with_inf_weight(directed_graph, start_vertex)
 
     start_vertex = (start_vertex, 0)
     binary_heap.insert(start_vertex)
@@ -23,29 +20,26 @@ def dijkstra_shortest_path(directed_graph: Graph, start_vertex) -> Graph:
 
         is_seen[to_see] = True
 
-        for neigbour in directed_graph.get_neighbours(to_see):
-            if neigbour in is_seen:
+        for neighbour in directed_graph.get_neighbours(to_see):
+            if neighbour in is_seen:
                 continue
 
-            edge = (to_see, neigbour)
+            edge = (to_see, neighbour)
             edge_weight = directed_graph.get_edge_value(edge)['weight']
 
-            if directed_graph.get_vertex(neigbour) is None:
-                directed_graph.update_vertex_value(neigbour, {'weight': inf})
-
-            neighbour_weight = directed_graph.get_vertex(neigbour)['weight']
+            neighbour_weight = shortest_path_graph.get_vertex(neighbour)['weight']
             current_path_weight_to_neighbour = to_see_weight + edge_weight
 
             if current_path_weight_to_neighbour < neighbour_weight:
-                directed_graph.update_vertex_value(neigbour, {'weight': current_path_weight_to_neighbour})
-                neighbour_edges[neigbour] = edge
+                shortest_path_graph.update_vertex_value(neighbour, {'weight': current_path_weight_to_neighbour})
+                neighbour_edges[neighbour] = edge
 
-                to_insert = (neigbour, current_path_weight_to_neighbour)
+                to_insert = (neighbour, current_path_weight_to_neighbour)
                 binary_heap.insert(to_insert)
 
     for edge in neighbour_edges.values():
         shortest_path_graph.add_edge(edge, data=directed_graph.get_edge_value(edge))
-    
+
     return shortest_path_graph
 
 def edge_weight_comparator(first_vertex, second_vertex):
@@ -61,7 +55,20 @@ def edge_weight_comparator(first_vertex, second_vertex):
     
     return returned_value
 
-    
+def init_all_vertices_with_inf_weight(graph: Graph, source_vertex) -> Graph:
+    shortest_path_graph = Graph()
+
+    for vertex in graph.get_all_vertices():
+        shortest_path_graph.add_vertex(vertex)
+        if vertex == source_vertex:
+            shortest_path_graph.update_vertex_value(vertex, {'weight': 0})
+            continue
+
+        shortest_path_graph.update_vertex_value(vertex, {'weight': inf})
+
+    return shortest_path_graph
+
+
 if __name__ == '__main__':
     edges = [
         [(0, 1), {'weight': 5}],
@@ -90,3 +97,9 @@ if __name__ == '__main__':
 
     shortest_graph = dijkstra_shortest_path(dir_graph, 0)
     shortest_graph.show_graph()
+
+    for vertex in shortest_graph.get_all_vertices():
+        print(vertex, shortest_graph.get_vertex(vertex))
+
+    for edge in shortest_graph.get_all_edges():
+        print(edge, shortest_graph.get_edge_value(edge))
