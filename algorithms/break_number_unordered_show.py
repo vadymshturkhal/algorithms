@@ -45,9 +45,7 @@ def get_terms(unique_terms, times_appear):
 
         for j in range(times):
             terms.append(unique_terms[i])
-    
     return terms
-
 
 def update_at_cursor(members, cursor, to_add):
     if len(members) <= cursor:
