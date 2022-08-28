@@ -1,4 +1,4 @@
-def number_to_limited_sum_of_terms(number: int, terms: list, is_filtered=False):
+def number_to_limited_sum_of_terms(number: int, terms: list):
     """
     Theorem:
         F(N: [n1, n2,...,nk]) = F(N - nk: [n1, n2,...,nk - 1]) + F(N: [n1, n2,...,nk - 1])
@@ -6,8 +6,7 @@ def number_to_limited_sum_of_terms(number: int, terms: list, is_filtered=False):
         if N > sum([[n1, n2,...,nk]]): F(N: [n1, n2,...,nk]) = 0
         F(-n: [n1, n2,...,nk]) = 0.
     """
-    if not is_filtered:
-        terms = list(filter(lambda x: x < number, terms))
+    terms = list(filter(lambda x: x <= number, terms))
 
     if number == 0:
         return 1
@@ -21,7 +20,7 @@ def number_to_limited_sum_of_terms(number: int, terms: list, is_filtered=False):
     F = number_to_limited_sum_of_terms
     last_term = terms[-1]
 
-    res = F(number - last_term, terms[:-1], is_filtered=True) + F(number, terms[:-1], is_filtered=True)
+    res = F(number - last_term, terms[:-1]) + F(number, terms[:-1])
     return res
 
 
